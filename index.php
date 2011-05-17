@@ -1,8 +1,8 @@
 <?php
 // 1-1. phar が利用できる環境の場合は silex.phar を読み込み
-//require_once __DIR__.'/silex.phar';
+require_once __DIR__.'/silex.phar';
 // 1-2. phar が利用できない環境の場合は ソースを直接読み込み
-require_once __DIR__.'/Silex.git/autoload.php';
+//require_once __DIR__.'/Silex.git/autoload.php';
 
 $app = new Silex\Application();
 
