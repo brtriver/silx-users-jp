@@ -1,0 +1,147 @@
+{% set jpdoc = "http://docs.symfony.gr.jp/silex" %}
+{% set jpdoc = "doc/html" %}
+
+{% extends "base.twig" %}
+{% block title %}TOPページ{% endblock %}
+{% block content %}
+<h1>　Silex ユーザーガイド</h1>
+<p>　PHPマイクロフレームワークである Silex のまとめサイト</p>
+<table cellpadding="0" cellspacing="10" border="0" width="100%">
+<tr>
+<td valign="top" width="25%">
+
+<h3>基本情報</h3>
+<ul>
+	<li><a href="http://silex-project.org/">Silex 公式サイト</a></li>
+	<li><a href="http://silex-project.org/documentation">Silex ドキュメント (英語)</a></li>
+	<li><a href="{{jpdoc}}">Silex ドキュメント (日本語)</a></li>
+</ul>
+
+<h3> silex.pharが動作しない場合</h3>
+<ul>
+	<li><a href="{{jpdoc}}/usage.html#php"> PHPの設定(公式ドキュメント)</a></li>
+	<li><a href="http://groups.google.com/group/symfony-users-ja/browse_thread/thread/aa92681ee68f7fa8"> Suhosin適用済みのPHPでSilexを動かすと真っ白なページが返される場合の対処法 </a></li>
+	<li><a href="http://d.hatena.ne.jp/brtRiver/20101029/1288342181"> Pharは便利だけど `--enalbe-zend-multibyte`が有効だと文字化けしてしまう</a></li>
+
+</ul>
+
+<h3>公式ドキュメント</h3>
+<ul>
+	<li><a href="{{jpdoc}}/intro.html"> Silex って何？</a></li>
+	<li><a href="{{jpdoc}}/usage.html"> 使い方</a></li>
+	<li><a href="{{jpdoc}}/service.html"> サービスコンテナ</a></li>
+	<li><a href="{{jpdoc}}/extensions.html"> エクステンションの仕組み</a></li>
+	<li><a href="{{jpdoc}}/testing.html"> テスト</a></li>
+	<li><a href="{{jpdoc}}/internals.html"> 内部の仕組み</a></li>
+	<li><a href="{{jpdoc}}/extensions/index.html"> 標準のエクステンション一覧</a></li>
+</ul>
+
+<h3>ダウンロード</h3>
+<ul>
+	<li><a href="http://silex-project.org/get/silex.phar"> silex.phar</a></li>
+	<li><a href="http://github.com/fabpot/Silex"> fabpot/Silex - github</a></li>
+</ul>
+
+</td>
+<td valign="top" width="25%">
+
+<h3>使い方</h3>
+<ul>
+    {% set base = "/usage.html#" %}
+    <li><a href="{{jpdoc}}{{base}}bootstrap"> Silexの読み込み処理と.htaccess</a></li>
+    <li><a href="{{jpdoc}}{{base}}routing"> ルーティングの書き方</a></li>
+    <li><a href="{{jpdoc}}{{base}}route-variables"> ルーティングから変数を取得</a></li>
+    <li><a href="{{jpdoc}}{{base}}named-routes"> ルーティングに名前をつける</a></li>
+    <li><a href="{{jpdoc}}{{base}}before-and-after-filters"> 前処理と後処理</a></li>
+    <li><a href="{{jpdoc}}{{base}}error-handlers"> エラーハンドリング</a></li>
+    <li><a href="{{jpdoc}}{{base}}redirects"> リダイレクト処理</a></li>
+    <li><a href="{{jpdoc}}{{base}}escaping"> エスケープ処理(XSS対策)</a></li>
+    <li><a href="{{jpdoc}}{{base}}reusing-applications"> アプリケーションの外部化</a></li>
+    {% set base = "/services.html#" %}
+    <li><a href="{{jpdoc}}{{base}}parameters"> サービスコンテナに変数をセット(define)</a></li>
+    <li><a href="{{jpdoc}}{{base}}service-definitions"> サービスの定義(遅延読み込み)</a></li>
+    <li><a href="{{jpdoc}}{{base}}shared-services"> 共有サービスの定義(shared service)</a></li>
+    <li><a href="{{jpdoc}}{{base}}protected-closures"> パラメータとしてクロージャを保存(Protected closures)</a></li>
+    <li><a href="{{jpdoc}}{{base}}core-services"> パラメータにアクセス(Request サービス)</a></li>
+    {% set base = "/extensions.html#" %}
+    <li><a href="{{jpdoc}}{{base}}loading-extensions"> エクステンションの読み込み</a></li>
+    {% set base = "/testing.html#" %}
+    <li><a href="{{jpdoc}}{{base}}phpunit-test"> PHPUnit</a></li>
+    <li><a href="{{jpdoc}}{{base}}web"> Webテストケース</a></li>
+    {% set base = "/internals.html#" %}
+    <li><a href="{{jpdoc}}{{base}}symfony2"> Silex が利用している Symfony2 のコンポーネント</a></li>
+
+</ul>
+
+</td>
+<td valign="top" width="25%">
+
+<h3>エクステンション</h3>
+<ul>
+	<li><a href="{{jpdoc}}/extensions.html"> エクステンションの仕組み</a></li>
+    {% set base = "/extensions/" %}
+    <li><a href="{{jpdoc}}{{base}}doctrine.html"> DoctrineExtension(データベースアクセス)</a></li>
+    <li><a href="{{jpdoc}}{{base}}monolog.html"> MonologExtension(ロガー)</a></li>
+    <li><a href="{{jpdoc}}{{base}}session.html"> SessionExtension(セッション)</a></li>
+    <li><a href="{{jpdoc}}{{base}}twig.html"> TwigExtension(テンプレート)</a></li>
+    <li><a href="{{jpdoc}}{{base}}translation.html"> TranslationExtension(国際化)</a></li>
+    <li><a href="{{jpdoc}}{{base}}url_generator.html"> UrlGeneratorExtension(ルーティング)</a></li>
+    <li><a href="{{jpdoc}}{{base}}validator.html"> validatorExtension(バリダーター)</a></li>
+    <li><a href="{{jpdoc}}{{base}}http_cache.html"> HttpCacheExtension(キャッシュ)</a></li>
+</ul>
+<ul>
+    <p>以下は 非公式エクステンション</p>
+    <li><a href="https://github.com/flintstones/Rest"> RestExtension</a></li>
+    <li><a href="http://d.hatena.ne.jp/brtRiver/20110417/1303005850"> PHPTALExtension</a></li>
+    <li><a href="https://github.com/FractalizeR/Silex/compare/SmartyExtension"> SmartyExtension</a></li>
+    <li><a href="https://github.com/flintstones/DoctrineOrm"> DoctrineOrmExtension</a></li>
+    <li><a href="https://github.com/docteurklein/SilexExtensions"> DoctrineOrmExtension(その2)</a></li>
+    <li><a href="https://github.com/awildeep/Silex-DoctrineMultiDbExtension"> DoctrineMultiDb</a></li>
+    <li><a href="https://github.com/madiedinro/MongoExtension"> MongoExtension</a></li>
+    <li><a href="https://github.com/RafalFilipek/ActiveRecordExtension"> ActiveRecordExtension</a></li>
+    <li><a href="https://github.com/nrk/PredisExtension"> PredisExtension</a></li>
+    <li><a href="https://github.com/redpanda/silex-gravatar"> GravatarExtension</a></li>
+</ul>
+
+</td>
+<td valign="top" width="25%">
+
+<h3>サンプル</h3>
+<ul>
+	<li><a href="https://github.com/77web/my-silex-examples">サンプルコード色々 (@77web)</a></li>
+	<li><a href="https://github.com/igorw/silex-examples">エクステンションのサンプルコード (@igorwesome)</a></li>
+	<li><a href="https://github.com/brtriver/MameForm">サンプル問い合わせフォーム(MameForm)</a></li>
+</ul>
+
+
+<h3>より理解するために</h3>
+<ul>
+    <li><a href="http://php.net/manual/ja/index.php">PHP マニュアル TOP</a></li>
+    <li><a href="http://www.php.net/manual/ja/language.namespaces.php">PHP マニュアル 名前空間</a></li>
+    <li><a href="http://www.php.net/manual/ja/functions.anonymous.php">PHP マニュアル 無名関数</a></li>
+    <li><a href="http://jp2.php.net/manual/ja/intro.phar.php">PHP マニュアル phar</a></li>
+    <li><a href="https://github.com/fabpot/Pimple">Pimple (DI)</a></li>
+	<li><a href="http://symfony.com/doc/current/book/index.html"> Symfony2ドキュメント</a><a href="http://docs.symfony.gr.jp/symfony2/">(日本語)</a></li>
+	<li><a href="http://www.twig-project.org/documentation"> Twigドキュメント</a><a href="https://github.com/masakielastic/twig-ja">(日本語)</a></li>
+</ul>
+
+<h3>API リファレンス</h3>
+<ul>
+    <p>Symfony2 Component</p>
+    <li><a href="http://api.symfony.com/2.0/Symfony/Component/ClassLoader.html">ClassLoader</a></li>
+    <li><a href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation.html">HttpFoundation</a></li>
+    <li><a href="http://api.symfony.com/2.0/Symfony/Component/HttpKernel.html">HttpKernel</a></li>
+    <li><a href="http://api.symfony.com/2.0/Symfony/Component/Routing.html">Routing</a></li>
+    <li><a href="http://api.symfony.com/2.0/Symfony/Component/EventDispatcher.html">EventDispatcher</a></li>
+</ul>
+
+<h3>Google グループ</h3>
+<ul>
+    <li><a href="http://groups.google.com/group/silex-php">Silex PHP Microframework (公式)</a></li>
+    <li><a href="http://groups.google.com/group/silex-ja">Silex ja (日本語)</a></li>
+</ul>
+
+</td>
+</tr>
+</table>
+{% endblock %}

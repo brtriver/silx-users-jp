@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="ja">
+<head>
+  {% block head %}
+    <title>{% block title %}{% endblock %} - Silex ユーザーガイド</title>
+  {% endblock %}
+  <link rel='stylesheet' type='text/css' media='all' href='css/basic.css' />
+</head>
+<body>
+  <div id="content">{% block content %}{% endblock %}</div>
+  <hr>
+  <div id="footer">
+    {% block footer %}
+      <p>このサイトに関するお問い合わせ先:<a href="http://twitter.com/brtriver">@brtriver</a></p>
+      silex-users-jp is powered by <a href="http://silex-project.org/">Silex</a> and <a href="http://www.twig-project.org/">Twig</a> and inspired by <a href="http://codeigniter.com/user_guide/">CodeIgniter User Guide Site</a>
+    {% endblock %}
+  </div>
+</body>
+</html>
