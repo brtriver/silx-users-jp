@@ -1,9 +1,3 @@
-[submodule "Silex.git"]
-	path = Silex.git
-	url = https://github.com/fabpot/Silex.git
-[submodule "vendor/Twig.git"]
-	path = vendor/Twig.git
-	url = https://github.com/fabpot/Twig.git
 [submodule "silex-doc-ja.git"]
 	path = silex-doc-ja.git
 	url = git@github.com:brtriver/silex-doc-ja.git
