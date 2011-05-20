@@ -71,6 +71,26 @@
     <li><a href="{{jpdoc}}{{base}}symfony2"> Silex が利用している Symfony2 のコンポーネント</a></li>
 
 </ul>
+<h3>
+    よく使うメソッド
+</h3>
+<ul>
+    {% set base = "/usage.html#" %}
+    <li><a href="{{jpdoc}}{{base}}get"> $app->get()</a></li>
+    <li><a href="{{jpdoc}}{{base}}post"> $app->post()</a></li>
+    <li><a href="{{jpdoc}}{{base}}id2"> $app->match() ..他</a></li>
+    <li><a href="{{jpdoc}}{{base}}id3"> $app->convert()</a></li>
+    <li><a href="{{jpdoc}}{{base}}id4"> $app->asset()</a></li>
+    <li><a href="{{jpdoc}}{{base}}id5"> $app->value()</a></li>
+    <li><a href="{{jpdoc}}{{base}}named-routes"> $app->bind()</a></li>
+    <li><a href="{{jpdoc}}{{base}}before-and-after-filters"> $app->before(), $app->after()</a></li>
+    <li><a href="{{jpdoc}}{{base}}error-handlers"> $app->error()</a></li>
+    <li><a href="{{jpdoc}}{{base}}reusing-applications"> $app->mount()</a></li>
+    {% set base = "/services.html#" %}
+    <li><a href="{{jpdoc}}{{base}}shared-services"> $app->share()</a></li>
+    <li><a href="{{jpdoc}}{{base}}protected-closures"> $app->protect()</a></li>
+    <li><a href="{{jpdoc}}{{base}}core-services"> $app['request']->get()</a></li>
+</ul>
 </td>
 <td valign="top" width="25%">
 
@@ -100,6 +120,21 @@
     <li><a href="https://github.com/nrk/PredisExtension"> PredisExtension</a></li>
     <li><a href="https://github.com/redpanda/silex-gravatar"> GravatarExtension</a></li>
     <li><a href="https://github.com/heavenshell/php-silex-zf-validate">ValidateExtension(Zend_Validate)</a></li>
+    <li><p><a href="https://github.com/fate/Silex-Extensions">Silex-Extensions (@hahaitsfate)</a></p></li>
+    <p>
+        以下のエクステンションを含む
+    </p>
+
+    <ul>
+        <li>AsseticExtension</li>
+        <li>EmbedlyExtension</li>
+        <li>GravatarExtension</li>
+        <li>MandangoExtension</li>
+        <li>MarkdownExtension</li>
+        <li>MemcacheExtension</li>
+        <li>MongoDbExtension</li>
+        <li>PredisExtension</li>
+    </ul>
 </ul>
 
 </td>
