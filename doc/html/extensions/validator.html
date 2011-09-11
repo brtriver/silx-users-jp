@@ -92,7 +92,7 @@
 <div class="section" id="id3">
 <h2>登録<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Symfony2 Validator　バリデーターのコピーを <tt class="docutils literal"><span class="pre">vendor/symfony/src</span></tt> にあることを確認してください。
-Symfony2 全体を vendor ディレクトリにコピーするだけです。</p>
+Symfony2 全体を vendor ディレクトリにコピーするだけです:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\ValidatorExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;validator.class_path&#39;</span>    <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/symfony/src&#39;</span><span class="p">,</span>
 <span class="p">));</span>
@@ -104,7 +104,7 @@ Symfony2 全体を vendor ディレクトリにコピーするだけです。</p
 <p>Validator エクステンションは <tt class="docutils literal"><span class="pre">validator</span></tt> サービスを提供しまうs。</p>
 <div class="section" id="id5">
 <h3>値のバリデーション<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>直接 <tt class="docutils literal"><span class="pre">validateValue</span></tt> バリデーターメソッドを使うことで値の検証が行えます。</p>
+<p>直接 <tt class="docutils literal"><span class="pre">validateValue</span></tt> バリデーターメソッドを使うことで値の検証が行えます:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/validate-url&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -119,7 +119,7 @@ Symfony2 全体を vendor ディレクトリにコピーするだけです。</p
 <h3>オブジェクトのプロパティのバリデーション<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>もしクラスにバリデーションを追加したいなら、 <em>Services</em> よりも下層に静的な <tt class="docutils literal"><span class="pre">loadValidatorMetadata</span></tt> メソッドを書くことで実装することができます。
 こうすることでオブジェクトのパラメーターに制約を定義することができます。
-また、 getter メソッドとしても動作します。</p>
+また、 getter メソッドとしても動作します:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Mapping\ClassMetadata</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span><span class="p">;</span>
 

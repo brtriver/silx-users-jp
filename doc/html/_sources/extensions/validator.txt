@@ -32,9 +32,7 @@ ValidatorExtension
 -----------
 
 Symfony2 Validator　バリデーターのコピーを ``vendor/symfony/src`` にあることを確認してください。
-Symfony2 全体を vendor ディレクトリにコピーするだけです。 
-
-::
+Symfony2 全体を vendor ディレクトリにコピーするだけです::
 
     $app->register(new Silex\Extension\ValidatorExtension(), array(
         'validator.class_path'    => __DIR__.'/vendor/symfony/src',
@@ -48,9 +46,7 @@ Validator エクステンションは ``validator`` サービスを提供しま�
 値のバリデーション
 ~~~~~~~~~~~~~~~~~~~
 
-直接 ``validateValue`` バリデーターメソッドを使うことで値の検証が行えます。
-
-::
+直接 ``validateValue`` バリデーターメソッドを使うことで値の検証が行えます::
 
     use Symfony\Component\Validator\Constraints;
 
@@ -67,9 +63,7 @@ Validator エクステンションは ``validator`` サービスを提供しま�
 
 もしクラスにバリデーションを追加したいなら、 *Services* よりも下層に静的な ``loadValidatorMetadata`` メソッドを書くことで実装することができます。
 こうすることでオブジェクトのパラメーターに制約を定義することができます。
-また、 getter メソッドとしても動作します。
-
-::
+また、 getter メソッドとしても動作します::
 
     use Symfony\Component\Validator\Mapping\ClassMetadata;
     use Symfony\Component\Validator\Constraints;

@@ -26,7 +26,7 @@ MonologExtension
 
 * **monolog**: monolog のログインスタンス。
 
-  利用方法 ::
+  利用方法::
 
     $app['monolog']->addDebug('Testing the Monolog logging.');
 
@@ -35,11 +35,32 @@ MonologExtension
 登録
 -----------
 
-``vendor/monolog`` ディレクトリに *Monolog* のコピーを置いていることを確認してください。
-
-::
+``vendor/monolog`` ディレクトリに *Monolog* のコピーを置いていることを確認してください::
 
     $app->register(new Silex\Extension\MonologExtension(), array(
         'monolog.logfile'       => __DIR__.'/development.log',
         'monolog.class_path'    => __DIR__.'/vendor/monolog/src',
     ));
+
+.. note::
+
+    Monolog は ``silex.phar`` ファイルの中にコンパイルされていません。自分自身でアプリケーションに Monolog のコピーを追加する必要があります。
+
+Usage
+-----
+
+MonologExtension は ``monolog`` サービスを提供します。
+このサービスはどんなエラーレベルも ``addDebug()``,``addInfo()``, ``addWarning()`` そして ``addError()`` を通してログを追加することができます::
+
+    use Symfony\Component\HttpFoundation\Response;
+
+    $app->post('/user', function () use ($app) {
+        // ...
+
+        $app['monolog']->addInfo(sprintf("User '%s' registered.", $username));
+
+        return new Response('', 201);
+    });
+
+より詳しい情報については、    `Monolog ドキュメント
+<https://github.com/Seldaek/monolog>`_ を参照してください.

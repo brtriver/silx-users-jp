@@ -87,7 +87,7 @@
 <div class="section" id="id3">
 <h2>登録<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Symfony2 Translation コンポーネントのコピーがが <tt class="docutils literal"><span class="pre">vendor/symfony/src</span></tt> に配置されていることを確認してください。
-一番簡単な方法は Symfony2 全体を　vendor 内に置いてしまうことです。</p>
+一番簡単な方法は Symfony2 全体を　vendor 内に置いてしまうことです:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\TranslationExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;locale_fallback&#39;</span>           <span class="o">=&gt;</span> <span class="s1">&#39;en&#39;</span><span class="p">,</span>
     <span class="s1">&#39;translation.class_path&#39;</span>    <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/symfony/src&#39;</span><span class="p">,</span>
@@ -97,7 +97,7 @@
 </div>
 <div class="section" id="id4">
 <h2>使い方<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>Translation エクステンションは <tt class="docutils literal"><span class="pre">translator</span></tt> サービスを提供し、 <tt class="docutils literal"><span class="pre">translator.messages</span></tt> パラメーターを利用します。</p>
+<p>Translation エクステンションは <tt class="docutils literal"><span class="pre">translator</span></tt> サービスを提供し、 <tt class="docutils literal"><span class="pre">translator.messages</span></tt> パラメーターを利用します:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;translator.messages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;en&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;hello&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;Hello %name%&#39;</span><span class="p">,</span>
@@ -140,7 +140,7 @@
 このレシピで外部に用意したYAMLファイルから翻訳データを読み込む方法について説明します。</p>
 <p>まず最初に Symfony2 にある <tt class="docutils literal"><span class="pre">Config</span></tt> と <tt class="docutils literal"><span class="pre">Yaml</span></tt> コンポーネントが必要です。
 オートローダーでこれらのコンポーネントが登録されるようにします。
-そのために Symfony2 全体のリポジトリを <tt class="docutils literal"><span class="pre">vendor/symfony</span></tt> ディレクトリにクローンしてしまいます。</p>
+そのために Symfony2 全体のリポジトリを <tt class="docutils literal"><span class="pre">vendor/symfony</span></tt> ディレクトリにクローンしてしまいます:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;autoloader&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">registerNamespace</span><span class="p">(</span><span class="s1">&#39;Symfony&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/symfony/src&#39;</span><span class="p">);</span>
 </pre></div>
 </div>

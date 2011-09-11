@@ -62,12 +62,12 @@
             
   <div class="section" id="twigextension">
 <h1>TwigExtension<a class="headerlink" href="#twigextension" title="Permalink to this headline">¶</a></h1>
-<p><em>TwigExtension</em> を利用すれば <a class="reference external" href="http://www.twig-project.org/">Twig</a> テンプレートエンジンを使うことができます。</p>
+<p><em>TwigExtension</em> を利用すれば <a class="reference external" href="http://twig.sensiolabs.org/">Twig</a> テンプレートエンジンを使うことができます。</p>
 <div class="section" id="id1">
 <h2>設定パラメータ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>twig.path</strong>: twig のテンプレートファイルが入っているディレクトリへのパスです。</li>
-<li><strong>twig.templates</strong> (オプション):このオプションを設定すると <tt class="docutils literal"><span class="pre">twig.path</span></tt> を設定する必要はなくなります。テンプレート名とテンプレート内容の連想配列で設定します。テンプレートをインラインで書きたい場合に使用します。</li>
+<li><strong>twig.path</strong> (オプション): twig のテンプレートファイルが入っているディレクトリへのパスです(パスの配列でなければなりません)。</li>
+<li><strong>twig.templates</strong> (optional): テンプレートの名前とテンプレートのコンテンツの連想配列です。 テンプレートをインラインで定義したいときに利用できます。</li>
 <li><strong>twig.options</strong> (オプション): twig オプションの連想配列です。詳細な設定内容は twig のドキュメントを参照してください。</li>
 <li><strong>twig.class_path</strong> (オプション): twig のライブラリが入っているディレクトリへのパスです。</li>
 </ul>
@@ -82,7 +82,7 @@
 </div>
 <div class="section" id="id3">
 <h2>登録<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><em>Twig</em> のライブラリのコピーが <tt class="docutils literal"><span class="pre">vendor/twig</span></tt> にある場合の書き方です。</p>
+<p><em>Twig</em> のライブラリのコピーが <tt class="docutils literal"><span class="pre">vendor/twig</span></tt> にある場合の書き方です:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\TwigExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;twig.path&#39;</span>       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/views&#39;</span><span class="p">,</span>
     <span class="s1">&#39;twig.class_path&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/twig/lib&#39;</span><span class="p">,</span>
@@ -96,7 +96,7 @@
 </div>
 <div class="section" id="id4">
 <h2>使い方<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>Twig extension は <tt class="docutils literal"><span class="pre">twig</span></tt> サービスを提供します。</p>
+<p>Twig extension は <tt class="docutils literal"><span class="pre">twig</span></tt> サービスを提供します:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello/{name}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;twig&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;hello.twig&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
@@ -105,11 +105,16 @@
 </pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">views/hello.twig</span></tt> を使って描画します。</p>
-<p>$appは <tt class="docutils literal"><span class="pre">app</span></tt> という名前のグローバル変数として登録されるので、ビューから全てのサービスを利用することができます。
-例えば <tt class="docutils literal"><span class="pre">$app['request']-&gt;getHost()</span></tt> に（ビューから）アクセスするためには、テンプレートに下記のように書くだけです。</p>
-<div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">app.request.host</span> <span class="cp">}}</span><span class="x"></span>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>TwigExtensionは <tt class="docutils literal"><span class="pre">app</span></tt> というグローバルに登録されます。
+そのため、 View からはどこからでもサービスにアクセスすることができます。
+たとえば、 <tt class="docutils literal"><span class="pre">$app['request']-&gt;getHost()</span></tt> にアクセスするためには、テンプレートは次のように書くだけです:</p>
+<div class="last highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">app.request.host</span> <span class="cp">}}</span><span class="x"></span>
 </pre></div>
 </div>
+</div>
+<p>より詳しい情報については、 <a class="reference external" href="http://twig.sensiolabs.org">Twig ドキュメント</a> を参照してください.</p>
 </div>
 </div>
 

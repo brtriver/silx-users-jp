@@ -100,7 +100,7 @@
 </div>
 <div class="section" id="id4">
 <h2>登録<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p><em>Doctrine DBAL</em> が <tt class="docutils literal"><span class="pre">vendor/doctrine-dbal</span></tt> に、そして <em>Doctrine Common</em> が <tt class="docutils literal"><span class="pre">vendor/doctrine-common</span></tt> にコピーされているかを確認してください。</p>
+<p><em>Doctrine DBAL</em> が <tt class="docutils literal"><span class="pre">vendor/doctrine-dbal</span></tt> に、そして <em>Doctrine Common</em> が <tt class="docutils literal"><span class="pre">vendor/doctrine-common</span></tt> にコピーされているかを確認してください:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\DoctrineExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;db.options&#39;</span>            <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;pdo_sqlite&#39;</span><span class="p">,</span>
@@ -118,6 +118,55 @@
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM posts WHERE id = ?&quot;</span><span class="p">;</span>
     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="k">array</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$id</span><span class="p">));</span>
+
+    <span class="k">return</span>  <span class="s2">&quot;&lt;h1&gt;</span><span class="si">{</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/h1&gt;&quot;</span><span class="o">.</span>
+            <span class="s2">&quot;&lt;p&gt;</span><span class="si">{</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>複数のデータベースの利用<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>Doctrine エクステンションを使うと複数のデータベースへアクセスすることができます。
+データソースを指定するためにはエクステンションの登録から <strong>db.options</strong> を、 <strong>dbs.options</strong> という名前の配列で置き換える必要があります。</p>
+<p>dbs 配列の各キーはオプションの設定を含んでいなければなりません。</p>
+<p>複数のデータベース接続を登録するためには次のようにします:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\DoctrineExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;dbs.options&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span> <span class="p">(</span>
+        <span class="s1">&#39;mysql_read&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;pdo_mysql&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;host&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;mysql_read.someplace.tld&#39;</span>
+            <span class="s1">&#39;dbname&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;my_database&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;user&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;my_username&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;my_password&#39;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="s1">&#39;mysql_write&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">&#39;driver&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;pdo_mysql&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;host&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;mysql_write.someplace.tld&#39;</span>
+            <span class="s1">&#39;dbname&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;my_database&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;user&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;my_username&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;my_password&#39;</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">),</span>
+    <span class="s1">&#39;db.dbal.class_path&#39;</span>    <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/doctrine-dbal/lib&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;db.common.class_path&#39;</span>  <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/doctrine-common/lib&#39;</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+<p>標準では、最初に登録された接続がデフォルトになります。つまり1つしか接続先を登録していないときと同じようにアクセスされます。さきほど書いた設定では以下の2行は同意です:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbal&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbal.connection.sqlite&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>標準の接続先は <strong>default</strong> オプションを設定することによって洗濯されます。</p>
+<p>複数接続を使った例:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM posts WHERE id = ?&quot;</span><span class="p">;</span>
+    <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbs&#39;</span><span class="p">][</span><span class="s1">&#39;mysql_read&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="nv">$mysqlQuery</span><span class="p">,</span> <span class="k">array</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$id</span><span class="p">));</span>
+
+    <span class="nv">$mysqlUpdate</span> <span class="o">=</span> <span class="s2">&quot;UPDATE posts SET value = ? WHERE id = ?&quot;</span><span class="p">;</span>
+    <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbs&#39;</span><span class="p">][</span><span class="s1">&#39;mysql_write&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="nv">$mysqlUpdate</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;newValue&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$id</span><span class="p">));</span>
 
     <span class="k">return</span>  <span class="s2">&quot;&lt;h1&gt;</span><span class="si">{</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/h1&gt;&quot;</span><span class="o">.</span>
             <span class="s2">&quot;&lt;p&gt;</span><span class="si">{</span><span class="nv">$post</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="p">;</span>
@@ -158,6 +207,7 @@
 <li><a class="reference internal" href="#id3">サービス</a></li>
 <li><a class="reference internal" href="#id4">登録</a></li>
 <li><a class="reference internal" href="#id5">使い方</a></li>
+<li><a class="reference internal" href="#id6">複数のデータベースの利用</a></li>
 </ul>
 </li>
 </ul>

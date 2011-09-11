@@ -27,9 +27,7 @@ UrlGeneratorExtension
 使い方
 ------
 
-UrlGenerator エクステンションは ``url_generator`` サービスを提供します。
-
-::
+UrlGenerator エクステンションは ``url_generator`` サービスを提供します::
 
     $app->get('/', function () {
         return 'welcome to the homepage';

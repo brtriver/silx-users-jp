@@ -47,9 +47,7 @@ DoctrineExtension
 登録
 -----------
 
-*Doctrine DBAL* が ``vendor/doctrine-dbal`` に、そして *Doctrine Common* が ``vendor/doctrine-common`` にコピーされているかを確認してください。
-
-::
+*Doctrine DBAL* が ``vendor/doctrine-dbal`` に、そして *Doctrine Common* が ``vendor/doctrine-common`` にコピーされているかを確認してください::
 
     $app->register(new Silex\Extension\DoctrineExtension(), array(
         'db.options'            => array(
@@ -72,6 +70,60 @@ Doctrine のエクションテンションで ``db`` サービスを使うこと
         return  "<h1>{$post['title']}</h1>".
                 "<p>{$post['body']}</p>";
     });
+
+複数のデータベースの利用
+------------------------
+
+Doctrine エクステンションを使うと複数のデータベースへアクセスすることができます。
+データソースを指定するためにはエクステンションの登録から **db.options** を、 **dbs.options** という名前の配列で置き換える必要があります。
+
+dbs 配列の各キーはオプションの設定を含んでいなければなりません。
+
+複数のデータベース接続を登録するためには次のようにします::
+
+    $app->register(new Silex\Extension\DoctrineExtension(), array(
+        'dbs.options' => array (
+            'mysql_read' => array(
+                'driver'    => 'pdo_mysql',
+                'host'      => 'mysql_read.someplace.tld'
+                'dbname'    => 'my_database',
+                'user'      => 'my_username',
+                'password'  => 'my_password',
+            ),
+            'mysql_write' => array(
+                'driver'    => 'pdo_mysql',
+                'host'      => 'mysql_write.someplace.tld'
+                'dbname'    => 'my_database',
+                'user'      => 'my_username',
+                'password'  => 'my_password',
+            ),
+        ),
+        'db.dbal.class_path'    => __DIR__.'/vendor/doctrine-dbal/lib',
+        'db.common.class_path'  => __DIR__.'/vendor/doctrine-common/lib',
+    ));
+
+標準では、最初に登録された接続がデフォルトになります。つまり1つしか接続先を登録していないときと同じようにアクセスされます。さきほど書いた設定では以下の2行は同意です::
+
+    $app['dbal']->fetchAssoc('SELECT * FROM table');
+       
+    $app['dbal.connection.sqlite']->fetchAssoc('SELECT * FROM table');
+
+
+標準の接続先は **default** オプションを設定することによって洗濯されます。
+
+複数接続を使った例::
+
+    $app->get('/blog/show/{id}', function ($id) use ($app) {
+        $sql = "SELECT * FROM posts WHERE id = ?";
+        $post = $app['dbs']['mysql_read']->fetchAssoc($mysqlQuery, array((int) $id));
+
+        $mysqlUpdate = "UPDATE posts SET value = ? WHERE id = ?";
+        $app['dbs']['mysql_write']->execute($mysqlUpdate, array('newValue', (int) $id));
+
+        return  "<h1>{$post['title']}</h1>".
+                "<p>{$post['body']}</p>";
+    });
+ 
 
 より詳細については、 `Doctrine DBAL documentation
 <http://www.doctrine-project.org/docs/dbal/2.0/en/>`_

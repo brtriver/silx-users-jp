@@ -82,7 +82,7 @@
 <h2>サービス<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first"><strong>monolog</strong>: monolog のログインスタンス。</p>
-<p>利用方法</p>
+<p>利用方法:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">addDebug</span><span class="p">(</span><span class="s1">&#39;Testing the Monolog logging.&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -93,13 +93,34 @@
 </div>
 <div class="section" id="id3">
 <h2>登録<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">vendor/monolog</span></tt> ディレクトリに <em>Monolog</em> のコピーを置いていることを確認してください。</p>
+<p><tt class="docutils literal"><span class="pre">vendor/monolog</span></tt> ディレクトリに <em>Monolog</em> のコピーを置いていることを確認してください:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Extension\MonologExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;monolog.logfile&#39;</span>       <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/development.log&#39;</span><span class="p">,</span>
     <span class="s1">&#39;monolog.class_path&#39;</span>    <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/monolog/src&#39;</span><span class="p">,</span>
 <span class="p">));</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Monolog は <tt class="docutils literal"><span class="pre">silex.phar</span></tt> ファイルの中にコンパイルされていません。自分自身でアプリケーションに Monolog のコピーを追加する必要があります。</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>MonologExtension は <tt class="docutils literal"><span class="pre">monolog</span></tt> サービスを提供します。
+このサービスはどんなエラーレベルも <tt class="docutils literal"><span class="pre">addDebug()</span></tt>,``addInfo()``, <tt class="docutils literal"><span class="pre">addWarning()</span></tt> そして <tt class="docutils literal"><span class="pre">addError()</span></tt> を通してログを追加することができます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/user&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">addInfo</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s2">&quot;User &#39;%s&#39; registered.&quot;</span><span class="p">,</span> <span class="nv">$username</span><span class="p">));</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">201</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>より詳しい情報については、    <a class="reference external" href="https://github.com/Seldaek/monolog">Monolog ドキュメント</a> を参照してください.</p>
 </div>
 </div>
 
@@ -131,6 +152,7 @@
 <li><a class="reference internal" href="#id1">パラメーター</a></li>
 <li><a class="reference internal" href="#id2">サービス</a></li>
 <li><a class="reference internal" href="#id3">登録</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 </ul>

@@ -80,7 +80,7 @@
 <p><a class="reference external" href="https://github.com/sebastianbergmann/phpunit">PHPUnit</a>
 はデファクトスタンダードなPHPのためのテストフレームワークです。そして単体テストだけでなく機能テストも書くことができます。
 新しいクラスを用意することでテストを書くことができます。そしてこの用意するクラスは <tt class="docutils literal"><span class="pre">PHPUnit_Framework_TestCase</span></tt> を拡張するようにします。
-そして、テストケースのメソッド名の先頭に <tt class="docutils literal"><span class="pre">test</span></tt> を付けるようにします。</p>
+そして、テストケースのメソッド名の先頭に <tt class="docutils literal"><span class="pre">test</span></tt> を付けるようにします:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ContactFormTest</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">testInitialPage</span><span class="p">()</span>
@@ -91,7 +91,7 @@
 </pre></div>
 </div>
 <p>テストケースにおいて、あなたがテスト時に期待する条件(アサーション)を書いておきます。
-今回は問い合わせフォームをテストする場合を想定しているので、ページが正しく読み込まれ、表示されたコンテンツにフォームが含まれているかを確認しています。</p>
+今回は問い合わせフォームをテストする場合を想定しているので、ページが正しく読み込まれ、表示されたコンテンツにフォームが含まれているかを確認しています:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testInitialPage</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="nv">$statusCode</span> <span class="o">=</span> <span class="o">...</span>
@@ -118,7 +118,7 @@ Silex のために用意したバージョンは <tt class="docutils literal"><s
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>アプリケーションのテストを行えるようにするために、次のような <a class="reference internal" href="usage.html"><em>使用方法</em></a> にある &#8220;アプリケーションの再利用性&#8221; の部分に書かれているようにしましょう。</p>
+<p>アプリケーションのテストを行えるようにするために、 aaaaa次のような <a class="reference internal" href="usage.html"><em>使用方法</em></a> にある &#8220;アプリケーションの再利用性&#8221; の部分に書かれているようにしましょう。</p>
 <p>WebTestCase のために、 <tt class="docutils literal"><span class="pre">createApplication</span></tt> メソッドを実装することになるでしょう。このメソッドはアプリケーションを返却します。
 次のようなコードになります:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">createApplication</span><span class="p">()</span>
@@ -127,8 +127,24 @@ Silex のために用意したバージョンは <tt class="docutils literal"><s
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>ここで決して <tt class="docutils literal"><span class="pre">require_once</span></tt> を <strong>使わない</strong> という点に注意してください。なぜなら、このメソッドは各テストの前に実行されるからです。
-こうすることでアプリケーションとやりとりすることができるようになります。以下でどのように動作しているかをみてみましょう:</p>
+<p>ここで決して <tt class="docutils literal"><span class="pre">require_once</span></tt> を <strong>使わない</strong> という点に注意してください。なぜなら、このメソッドは各テストの前に実行されるからです。</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>標準で、アプリケーションはブラウザから使っているときと同じように動作します。
+しかし、エラーが発生したとき、HTMLでレンダリングされたページではなく直接エラーメッセージを簡単に取得することができます。
+次のコードのように <tt class="docutils literal"><span class="pre">createApplication()</span></tt> をアプリケーションの設定で調整しておけばより簡単です:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">createApplication</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$app</span> <span class="o">=</span> <span class="k">require</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/path/to/app.php&#39;</span><span class="p">;</span>
+    <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="nb">unset</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;exception_handler&#39;</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="nv">$app</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>WebTestCase は　``createClient`` メソッドがあります。クライアントはブラウザのようなものであり、アプリケーションと対話することができるようになります。以下にどのように動作しているかみてみましょう:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testInitialPage</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createClient</span><span class="p">();</span>

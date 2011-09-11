@@ -66,14 +66,14 @@
 エクステンションはアプリケーション上にサービスとして定義します。</p>
 <div class="section" id="loading-extensions">
 <h2>エクステンションの読み込み (Loading extensions)<a class="headerlink" href="#loading-extensions" title="Permalink to this headline">¶</a></h2>
-<p>エクステンションを読み込んで使うためには、アプリケーションにそのエクステンションを登録しなければなりません</p>
+<p>エクステンションを読み込んで使うためには、アプリケーションにそのエクステンションを登録しなければなりません:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Silex\Application</span><span class="p">();</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Acme\DatabaseExtension</span><span class="p">());</span>
 </pre></div>
 </div>
 <p>第２引数としてパラメーターを提供することもできます。
-この作業はエクステンションが登録される <strong>前</strong> に行う必要があります。</p>
+この作業はエクステンションが登録される <strong>前</strong> に行う必要があります:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Acme\DatabaseExtension</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;database.dsn&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;mysql:host=localhost;dbname=myapp&#39;</span><span class="p">,</span>
     <span class="s1">&#39;database.user&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
@@ -118,7 +118,7 @@
 </div>
 <div class="section" id="id3">
 <h2>エクステンションの作成<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>エクステンションは <tt class="docutils literal"><span class="pre">Silex\ExtensionInterface</span></tt> を実装しなければなりません。</p>
+<p>エクステンションは <tt class="docutils literal"><span class="pre">Silex\ExtensionInterface</span></tt> を実装しなければなりません:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">interface</span> <span class="nx">ExtensionInterface</span>
 <span class="p">{</span>
     <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">);</span>
@@ -138,9 +138,10 @@
     <span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">protect</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$default</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello.default_name&#39;</span><span class="p">])</span> <span class="o">?</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello.default_name&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+            <span class="nv">$default</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello.default_name&#39;</span><span class="p">]</span> <span class="o">?</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello.default_name&#39;</span><span class="p">]</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
             <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$name</span> <span class="o">?:</span> <span class="nv">$default</span><span class="p">;</span>
-            <span class="k">return</span> <span class="s2">&quot;Hello </span><span class="si">$name</span><span class="s2">&quot;</span><span class="p">;</span>
+
+            <span class="k">return</span> <span class="s1">&#39;Hello &#39;</span><span class="o">.</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
         <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -158,6 +159,7 @@ $name を引数として取り、 <tt class="docutils literal"><span class="pre"
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+
     <span class="k">return</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;hello&#39;</span><span class="p">](</span><span class="nv">$name</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>

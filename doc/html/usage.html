@@ -76,7 +76,6 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">Silex\Application</span></tt> のエイリアスとして <tt class="docutils literal"><span class="pre">Application</span></tt> が利用できます。</p>
 <p>もうひとつあなたがやらなければならないことは、サーバーの設定を行うことです。
 もしApacheを使っていて <tt class="docutils literal"><span class="pre">.htaccess</span></tt> を利用することができるのならば次のように設定してください。</p>
 <div class="highlight-apache"><div class="highlight"><pre><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
@@ -85,7 +84,7 @@
     <span class="nb">RewriteEngine</span> <span class="k">On</span>
     <span class="c">#RewriteBase /path/to/app</span>
     <span class="nb">RewriteCond</span> %{REQUEST_FILENAME} !-f
-    <span class="nb">RewriteRule</span> ^(.*)$ index.php [QSA,L]
+    <span class="nb">RewriteRule</span> ^ index.php [L]
 <span class="nt">&lt;/IfModule&gt;</span>
 </pre></div>
 </div>
@@ -93,6 +92,13 @@
 <p class="first admonition-title">Note</p>
 <p class="last">もし、 Silex を配置するディレクトリが Webのドキュメントルートでない場合は、 <tt class="docutils literal"><span class="pre">RewriteBase</span></tt> のコメントを外し
 Webのドキュメントルートからの相対パスであなたのディレクトリ構造に合わせたパスを指定するようにしてください。</p>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>ウェブサイトを開発中のときは、デバッグしやすくするためにデバッグモードを有効にすることもできます:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="routing">
@@ -154,11 +160,9 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 <div class="section" id="dynamic-routing">
 <h3>動的ルーティング (Dynamic routing)<a class="headerlink" href="#dynamic-routing" title="Permalink to this headline">¶</a></h3>
 <p>さて、ブログの個々の記事を閲覧するためのもう1つ別のコントローラーを用意してみましょう:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\NotFoundHttpException</span><span class="p">;</span>
-
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$blogPosts</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">,</span> <span class="nv">$blogPosts</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$blogPosts</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nx">NotFoundHttpException</span><span class="p">();</span>
+        <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s2">&quot;Post </span><span class="si">$id</span><span class="s2"> does not exist.&quot;</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$blogPosts</span><span class="p">[</span><span class="nv">$id</span><span class="p">];</span>
@@ -169,8 +173,7 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 </pre></div>
 </div>
 <p>ルーティングはクロージャーに渡される <tt class="docutils literal"><span class="pre">{id}</span></tt> という変数を定義しています。</p>
-<p>見てわかるように、 もし記事が存在しない場合は <tt class="docutils literal"><span class="pre">NotFoundHttpException</span></tt> を投げます。
-後ほど、どのようにハンドリングしているかを説明します。</p>
+<p>POSTされた値がなかったとき、より早い段階でリクエストを停止するために <tt class="docutils literal"><span class="pre">abort()</span></tt> を使います。実際には例外を投げていますが、どのように扱っているかは後ほど説明します。</p>
 </div>
 <div class="section" id="post">
 <h3>POST ルーティングの例<a class="headerlink" href="#post" title="Permalink to this headline">¶</a></h3>
@@ -179,10 +182,10 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 ここでは <a class="reference external" href="http://swiftmailer.org/">Swift Mailer</a> を使うので <tt class="docutils literal"><span class="pre">Swift</span> <span class="pre">Mailer</span></tt> のコピーが <tt class="docutils literal"><span class="pre">vendor/swiftmailer</span></tt> に置かれているとします。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/vendor/swiftmailer/lib/swift_required.php&#39;</span><span class="p">;</span>
 
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/feedback&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">];</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/feedback&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="nv">$message</span> <span class="o">=</span> <span class="nx">\Swift_Message</span><span class="o">::</span><span class="na">newInstance</span><span class="p">()</span>
         <span class="o">-&gt;</span><span class="na">setSubject</span><span class="p">(</span><span class="s1">&#39;[YourSite] Feedback&#39;</span><span class="p">)</span>
@@ -199,8 +202,7 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 </pre></div>
 </div>
 <p>かなり単純な方法です。 Swift Mailer ライブラリをインクルードしメッセージを作成しそれを送信しています。</p>
-<p>ここで <tt class="docutils literal"><span class="pre">request</span></tt> サービスは 配列のキーを使って取得しています。
-サービスのことについてもっと知りたいのであれば、 <em>Services</em> の章を参照してください。
+<p>ここで <tt class="docutils literal"><span class="pre">request</span></tt> サービスは Silex にタイプヒンティングのおかげで自動的に無名関数に注入されています。
 リクエストは <a class="reference external" href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Request.html">Request</a> のインスタンスであり,
 リクエストの <tt class="docutils literal"><span class="pre">get</span></tt> メソッドを使うことで変数を取得することができます。</p>
 <p>文字列を返す代わりに <a class="reference external" href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation/Response.html">Response</a> のインスタンスを返すことができます。
@@ -212,12 +214,19 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 </div>
 <div class="section" id="id2">
 <h3>他のメソッド<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p>ほとんどのHTTPメソッドのためのコントローラーを作ることが可能です。 ただ次の中のメソッドから1つを利用すれば良いだけです:
+<p>ほとんどのHTTPメソッドのためのコントローラーを作ることが可能です。 ただ次の中のメソッドから1つを利用すれば良いだけです::
 <tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt>, <tt class="docutils literal"><span class="pre">put</span></tt>, <tt class="docutils literal"><span class="pre">delete</span></tt>.
 また、 <tt class="docutils literal"><span class="pre">match</span></tt> メソッドを利用することもでき、この場合はすべてのメソッドに一致します。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">});</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">method</span></tt> メソッドを使うことで許可するメソッドを制限することができます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">})</span>
+<span class="o">-&gt;</span><span class="na">method</span><span class="p">(</span><span class="s1">&#39;PATCH&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -229,7 +238,7 @@ Webのドキュメントルートからの相対パスであなたのディレ�
 <div class="section" id="route-variables">
 <h3>ルーティング変数 (Route variables)<a class="headerlink" href="#route-variables" title="Permalink to this headline">¶</a></h3>
 <p>前に説明したように、次のようにルーティングにおいて変数を定義することができます:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$blogPosts</span><span class="p">)</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">});</span>
 </pre></div>
@@ -245,6 +254,21 @@ Webのドキュメントルートからの相対パスであなたのディレ�
     <span class="o">...</span>
 <span class="p">});</span>
 </pre></div>
+</div>
+<p>現在のリクエストとアプリケーションオブジェクトを次のように利用することもできます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>アプリケーションとリクエストオブジェクトについてですが、 Silex は変数名ではなく、タイプヒンティングに基づいて注入します:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Application</span> <span class="nv">$foo</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$bar</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="id3">
@@ -346,6 +370,25 @@ beforeフィルターとafterフィルターを通して処理されます。利
 <span class="p">});</span>
 </pre></div>
 </div>
+<p>beforeフィルターは現在のリクエストにアクセスします。そしてレスポンスを返却することでレンダリング全体を短絡することができます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">before</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// redirect the user to the login screen if access to the Resource is protected</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">RedirectResponse</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>afterフィルターはリクエストとレスポンスにアクセスすることができます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">after</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="nx">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// tweak the Response</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">フィルターは &#8220;マスター&#8221; のリクエストのときだけ機能します。</p>
+</div>
 </div>
 <div class="section" id="error-handlers">
 <h2>エラーハンドリング (Error handlers)<a class="headerlink" href="#error-handlers" title="Permalink to this headline">¶</a></h2>
@@ -355,23 +398,22 @@ beforeフィルターとafterフィルターを通して処理されます。利
 <p>エラーハンドラーを登録するために、 <tt class="docutils literal"><span class="pre">Exception</span></tt> を引数に持ち、レスポンスを返してくれる <tt class="docutils literal"><span class="pre">error</span></tt> メソッドにクロージャーを渡します:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;We are sorry, but something went terribly wrong.&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;We are sorry, but something went terribly wrong.&#39;</span><span class="p">,</span> <span class="nv">$code</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">instanceof</span></tt> を使うことで特定のエラーだけを確認することもできます。そしてエラーの種類で処理を変えることができます:</p>
+<p><tt class="docutils literal"><span class="pre">$code</span></tt> 引数を使うことで特定のエラーだけを確認することもできます。そしてエラーの種類で処理を変えることができます:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\HttpException</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Symfony\Component\HttpKernel\Exception\NotFoundHttpException</span><span class="p">;</span>
-
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nv">$e</span> <span class="nx">instanceof</span> <span class="nx">NotFoundHttpException</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;The requested page could not be found.&#39;</span><span class="p">,</span> <span class="mi">404</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="mi">404</span><span class="o">:</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;The requested page could not be found.&#39;</span><span class="p">;</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;We are sorry, but something went terribly wrong.&#39;</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="nv">$code</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$e</span> <span class="nx">instanceof</span> <span class="nx">HttpException</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">()</span> <span class="o">:</span> <span class="mi">500</span><span class="p">;</span>
-    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;We are sorry, but something went terribly wrong.&#39;</span><span class="p">,</span> <span class="nv">$code</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span> <span class="nv">$code</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </div>
@@ -384,12 +426,40 @@ beforeフィルターとafterフィルターを通して処理されます。利
 を利用するためのエクステンションを利用することができます。
 詳しくは <em>Extensions</em> の章を参照してください。</p>
 </div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p><strong>debug</strong> が true にすることで詳細なえらメッセージが表示される標準のエラーメッセージを制御し、代わりにシンプルなエラーメッセージを表示してくれます。
+エラーハンドラーは <tt class="docutils literal"><span class="pre">error()</span></tt> メソッドを通して登録することができますし、デバッグモードが有効のときは次のように書くことが出来ます:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// logic to handle the error and return a Response</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<p>より早い段階でリクエストを破棄するために <tt class="docutils literal"><span class="pre">abotr</span></tt> を使うときにもエラーハンドラーは呼ばれます:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/show/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$blogPosts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$blogPosts</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s2">&quot;Post </span><span class="si">$id</span><span class="s2"> does not exist.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="o">...</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="redirects">
 <h2>リダイレクト (Redirects)<a class="headerlink" href="#redirects" title="Permalink to this headline">¶</a></h2>
 <p>リダイレクト処理のレスポンスを返すことでどんなページにもリダイレクトすることができます。このリダイレクト処理は
 <tt class="docutils literal"><span class="pre">redirect</span></tt> メソッドを呼ぶことで作成することができます:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/hello&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
@@ -406,7 +476,7 @@ beforeフィルターとafterフィルターを通して処理されます。利
 <ul>
 <li><p class="first"><strong>HTMLのエスケープ処理</strong>: HTMLのエスケープ処理のために PHP は <tt class="docutils literal"><span class="pre">htmlspecialchars</span></tt> 関数　を用意してくれています。
 Silex ではこの関数へのショートカットとして <tt class="docutils literal"><span class="pre">escape</span></tt> メソッドを次のように使うことができます:</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
     <span class="k">return</span> <span class="s2">&quot;You provided the name </span><span class="si">{</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">;</span>
 <span class="p">});</span>
@@ -417,7 +487,7 @@ Silex ではこの関数へのショートカットとして <tt class="docutils
 <li><p class="first"><strong>JSONのエスケープ処理</strong>: もし JSON フォーマットのデータをアプリケーションをで提供するなら、 PHP の <tt class="docutils literal"><span class="pre">json_encode</span></tt> 関数を使います:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name.json&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name.json&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span>
         <span class="nx">json_encode</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">)),</span>
@@ -482,7 +552,7 @@ Silex version 0a243d3 2011-04-17 14:49:31 +0200
 </pre></div>
 </div>
 <p><tt class="docutils literal"><span class="pre">silex.phar</span></tt> を最新バージョンに更新するためには、 <tt class="docutils literal"><span class="pre">update</span></tt> コマンドを実行します:</p>
-<p>これで自動的に新しい <tt class="docutils literal"><span class="pre">silex.phar</span></tt> を <tt class="docutils literal"><span class="pre">silex-project.org</span></tt> からダウンロードして既存のものと置き換えてくれます。</p>
+<p>これで自動的に新しい <tt class="docutils literal"><span class="pre">silex.phar</span></tt> を <tt class="docutils literal"><span class="pre">silex.sensiolabs.org</span></tt> からダウンロードして既存のものと置き換えてくれます。</p>
 </div>
 <div class="section" id="pitfalls">
 <h2>Pitfalls<a class="headerlink" href="#pitfalls" title="Permalink to this headline">¶</a></h2>
@@ -490,14 +560,19 @@ Silex version 0a243d3 2011-04-17 14:49:31 +0200
 <div class="section" id="php">
 <h3>PHP の設定<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h3>
 <p>PHPのバージョンによってはPharの設定が制限されている場合があります。
-その場合は、次のように設定することで解決するかもしれません:</p>
+その場合は、次のように設定することで解決するかもしれません。</p>
 <div class="highlight-ini"><div class="highlight"><pre><span class="na">phar.readonly</span> <span class="o">=</span> <span class="s">Off</span>
 <span class="na">phar.require_hash</span> <span class="o">=</span> <span class="s">Off</span>
+<span class="na">detect_unicode</span> <span class="o">=</span> <span class="s">Off</span>
 </pre></div>
 </div>
 <p>もし Suhosin のPHPを使っている場合は、次の設定も行っておく必要があります:</p>
 <div class="highlight-ini"><div class="highlight"><pre><span class="na">suhosin.executor.include.whitelist</span> <span class="o">=</span> <span class="s">phar</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ubuntu の Suhosin が入った PHP を使う場合はこの変更が必要です。</p>
 </div>
 </div>
 <div class="section" id="phar-stub">
@@ -505,9 +580,18 @@ Silex version 0a243d3 2011-04-17 14:49:31 +0200
 <p>インストールされているPHPのバージョンによっては Phar をインクルードしようとすると <tt class="docutils literal"><span class="pre">PharException</span></tt> が発生する場合があります。
 そして <tt class="docutils literal"><span class="pre">Silex\Application</span></tt> が見つからないとも言われることもあります。
 この場合は回避策として次のように書くことです:</p>
-<blockquote>
-<div>require_once &#8216;phar://&#8217;.__DIR__.&#8217;/silex.phar/autoload.php&#8217;;</div></blockquote>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">require_once</span> <span class="s1">&#39;phar://&#39;</span><span class="o">.</span><span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/silex.phar/autoload.php&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
 <p>この問題の的確な原因はまだ断定されていません。</p>
+</div>
+<div class="section" id="ioncube">
+<h3>ioncube ローダーのバグ<a class="headerlink" href="#ioncube" title="Permalink to this headline">¶</a></h3>
+<p>iconcube はエンコードされたPHPファイルをデコードすることができるエクステンションです。
+残念なことに(4.0.9より前の)古いバージョンではpharアーカイブでは動作しません。そのため4.0.9より新しいバージョンにアップグレードするか php.ini ファイルでコメントアウトするか削除し無効にしなければなりません:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">zend_extension</span> <span class="o">=</span> <span class="s">/usr/lib/php5/20090626+lfs/ioncube_loader_lin_5.3.so</span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="iis">
@@ -590,6 +674,7 @@ Silex version 0a243d3 2011-04-17 14:49:31 +0200
 <li><a class="reference internal" href="#pitfalls">Pitfalls</a><ul>
 <li><a class="reference internal" href="#php">PHP の設定</a></li>
 <li><a class="reference internal" href="#phar-stub">Phar-Stub のバグ</a></li>
+<li><a class="reference internal" href="#ioncube">ioncube ローダーのバグ</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#iis">IIS での設定</a></li>

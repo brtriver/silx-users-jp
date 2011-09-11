@@ -63,7 +63,7 @@
   <div class="section" id="id1">
 <h1>サービス<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <p>Silex はマイクロフレームワークであることはもちろんのこと、マイクロサービスコンテナーでもあります。
-Silex はたったの44行(コメント抜きの行数)で書かれた <a class="reference external" href="https://github.com/fabpot/Pimple">Pimple</a>
+Silex はたったの44行(コメント抜きの行数)で書かれた <a class="reference external" href="http://pimple.sensiolabs.org">Pimple</a>
 を拡張してマイクロサービスコンテナとして動作するようになっています。</p>
 <div class="section" id="di-dependency-injection">
 <h2>DI (Dependency Injection)<a class="headerlink" href="#di-dependency-injection" title="Permalink to this headline">¶</a></h2>
@@ -73,7 +73,7 @@ Silex はたったの44行(コメント抜きの行数)で書かれた <a class=
 </div>
 <p>Dependency Injection は 外部のサービスやグローバル領域のから依存するものを作成する代わりにそれらをサービスに渡すというデザインパターンです。
 一般的にコードをカプセル化し、再利用性を高め、柔軟性がありテストを書き易くするために用いられます。</p>
-<p>ここにクラスのサンプルがあります。このクラスでは <tt class="docutils literal"><span class="pre">User</span></tt> オブジェクトを引数として必要としており、オブジェクトから取得できる属性をJSONフォーマットでファイルに書き出しています。</p>
+<p>ここにクラスのサンプルがあります。このクラスでは <tt class="docutils literal"><span class="pre">User</span></tt> オブジェクトを引数として必要としており、オブジェクトから取得できる属性をJSONフォーマットでファイルに書き出しています:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">class</span> <span class="nc">JsonUserPersister</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="nv">$basePath</span><span class="p">;</span>
@@ -139,7 +139,7 @@ SPL の ArrayAccess インターフェースを実装し、クロージャーを
 <p>サービスを定義することはパラメーターを定義することとなんら違いはありません。
 コンテナーに配列のキーでクロージャーを設定するだけです。
 サービスを取得するときにクロージャーは実行されます。
-このようにしてサービスを遅延して作成することができます</p>
+このようにしてサービスを遅延して作成することができます:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;some_service&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Service</span><span class="p">();</span>
 <span class="p">};</span>
@@ -153,7 +153,7 @@ SPL の ArrayAccess インターフェースを実装し、クロージャーを
 </div>
 <div class="section" id="shared-services">
 <h3>共有サービス (Shared services)<a class="headerlink" href="#shared-services" title="Permalink to this headline">¶</a></h3>
-<p>コード全体で共通のサービスのインスタンスを使いたいときもあるでしょう。これを実現できるようにするため、*shared* サービスを作ることができるようになっています</p>
+<p>コード全体で共通のサービスのインスタンスを使いたいときもあるでしょう。これを実現できるようにするため、 <strong>shared</strong> サービスを作ることができるようになっています</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;some_service&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Service</span><span class="p">();</span>
 <span class="p">});</span>
@@ -184,7 +184,7 @@ SPL の ArrayAccess インターフェースを実装し、クロージャーを
 <p>コンテナーはクロージャーをサービスのためのファクトリと見なすので、クロージャーを読み込むごとにこれらをつねに実行します。</p>
 <p>しかしながら、パラメーターとしてクロージャーを保存したいときがあるでしょう。
 たとえば、クロージャーを取得し、あなた自身が定義した引数で実行したいような場合です。</p>
-<p>こういった理由で Pimple は <tt class="docutils literal"><span class="pre">protect</span></tt> メソッドを使うことであなたが作成したクロージャーが実行されないようにいつも保護することができます。</p>
+<p>こういった理由で Pimple は <tt class="docutils literal"><span class="pre">protect</span></tt> メソッドを使うことであなたが作成したクロージャーが実行されないようにいつも保護することができます:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;closure_parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">protect</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$a</span><span class="p">,</span> <span class="nv">$b</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$a</span> <span class="o">+</span> <span class="nv">$b</span><span class="p">;</span>
 <span class="p">});</span>
@@ -243,6 +243,9 @@ SPL の ArrayAccess インターフェースを実装し、クロージャーを
 </li>
 <li><p class="first"><strong>request_context</strong>: リクエストのコンテクストとは Router と UrlGenerator で利用されるリクエストを簡易化したものです。</p>
 </li>
+<li><p class="first"><strong>exception_handler</strong>: Exception ハンドラーは <cite>error()</cite> メソッドを通して登録していないまたは、 レスポンスを返却しないときに利用される標準のハンドラーです。
+この動きは <cite>unset($app[&#8216;exception_handler&#8217;])</cite> で無効にすることができます。</p>
+</li>
 </ul>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -261,6 +264,12 @@ SPL の ArrayAccess インターフェースを実装し、クロージャーを
 もし現在のリクエストが HTTPS であれば、このパラメーターで現在利用しているポートを指定することができます。</p>
 <p>標準は 443 番です。</p>
 <p>このパラメーターは <tt class="docutils literal"><span class="pre">UrlGeneratorExtension</span></tt> で利用されます。</p>
+</li>
+<li><p class="first"><strong>debug</strong> (オプション): デバッグモードでアプリケーションを動作させるかどうかを返します</p>
+<p>標準は false です。</p>
+</li>
+<li><p class="first"><strong>charset</strong> (optional): レスンポンスで指定される文字コードです。</p>
+<p>標準は UTF-8 です。</p>
 </li>
 </ul>
 </div>
