@@ -34,7 +34,7 @@
       </script>
     <link rel="top" title="Silex v0.0.0 documentation" href="index.html" />
     <link rel="next" title="内部の仕組み" href="internals.html" />
-    <link rel="prev" title="エクステンション (Extensions)" href="extensions.html" /> 
+    <link rel="prev" title="プロバイダー (Providers)" href="providers.html" /> 
   </head>
   <body>
 
@@ -144,6 +144,24 @@ Silex のために用意したバージョンは <tt class="docutils literal"><s
 </pre></div>
 </div>
 </div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p>あなたのアプリケーションでセッションを使用していた際には、セッションを格納するのに
+<tt class="docutils literal"><span class="pre">FilesystemSessionStorage</span></tt> を使用しなければなりません。:</p>
+<div class="last highlight-php"><div class="highlight"><pre><span class="c1">// ...</span>
+<span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\SessionStorage\FilesystemSessionStorage</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">createApplication</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">[</span><span class="s1">&#39;session.storage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">FilesystemSessionStorage</span><span class="p">(</span><span class="nx">sys_get_temp_dir</span><span class="p">());</span>
+    <span class="p">});</span>
+    <span class="c1">// ...</span>
+</pre></div>
+</div>
+</div>
 <p>WebTestCase は　``createClient`` メソッドがあります。クライアントはブラウザのようなものであり、アプリケーションと対話することができるようになります。以下にどのように動作しているかみてみましょう:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">testInitialPage</span><span class="p">()</span>
 <span class="p">{</span>
@@ -229,7 +247,7 @@ Silex のために用意したバージョンは <tt class="docutils literal"><s
 
 
 <div id="page_prev_next">
-<a class="prev" href="extensions.html">< エクステンション (Extensions)</a>
+<a class="prev" href="providers.html">< プロバイダー (Providers)</a>
 <a class="next" href="internals.html">内部の仕組み ></a>
 </div>
 
@@ -263,8 +281,8 @@ Silex のために用意したバージョンは <tt class="docutils literal"><s
 </ul>
 
   <h4>前のドキュメント</h4>
-  <p class="topless"><a href="extensions.html"
-                        title="previous chapter">エクステンション (Extensions)</a></p>
+  <p class="topless"><a href="providers.html"
+                        title="previous chapter">プロバイダー (Providers)</a></p>
   <h4>次のドキュメント</h4>
   <p class="topless"><a href="internals.html"
                         title="next chapter">内部の仕組み</a></p>
