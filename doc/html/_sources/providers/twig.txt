@@ -20,7 +20,7 @@ TwigServiceProvider
 
 * **twig**: ``Twig_Environment`` のインスタンスです。twigと連携するのに使います。
 
-* **twig.configure**: Twig environment を引数に取る保護されたクロージャです。カスタムグローバル変数を追加するのに使います。
+* **twig.configure**: Twig environment を引数に取る :doc:`保護されたクロージャ <services#protected-closures>` です。カスタムグローバル変数を追加するのに使います。
 
 * **twig.loader**: ``twig.path`` と ``twig.templates`` の設定を利用したTwigテンプレートのローダー(loader)です。ローダー(loader)を完全に置き換えることもできます。
 
@@ -56,10 +56,19 @@ Twig extension は ``twig`` サービスを提供します::
     TwigServiceProviderは ``app`` というグローバルに登録されます。
     そのため、 View からはどこからでもサービスにアクセスすることができます。
     たとえば、 ``$app['request']->getHost()`` にアクセスするためには、テンプレートは次のように書くだけです:
- 
-    .. code-block:: jinja
 
-        {{ app.request.host }}
+.. code-block:: jinja
+
+    {{ app.request.host }}
+
+``render`` を使うことでテンプレートから異なるコントローラーの結果をレンダリングすることもできます::
+
+.. code-block:: jinja
+
+    {{ render('/sidebar') }}
+
+    {# or if you are also using UrlGeneratorServiceProvider with the SymfonyBridgesServiceProvider #}
+    {{ render(path('sidebar')) }}
 
 より詳しい情報については、 `Twig ドキュメント
 <http://twig.sensiolabs.org>`_ を参照してください.

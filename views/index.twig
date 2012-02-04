@@ -11,8 +11,8 @@
 
 <h3>基本情報</h3>
 <ul>
-	<li><a href="http://silex-project.org/">Silex 公式サイト</a></li>
-	<li><a href="http://silex-project.org/documentation">Silex ドキュメント (英語)</a></li>
+	<li><a href="http://silex.sensiolabs.org/">Silex 公式サイト</a></li>
+	<li><a href="http://silex.sensiolabs.org/documentation">Silex ドキュメント (英語)</a></li>
 	<li><a href="{{jpdoc}}">Silex ドキュメント (日本語)</a></li>
 </ul>
 
@@ -31,13 +31,14 @@
 	<li><a href="{{jpdoc}}/services.html"> サービスコンテナ</a></li>
 	<li><a href="{{jpdoc}}/extensions.html"> エクステンションの仕組み</a></li>
 	<li><a href="{{jpdoc}}/testing.html"> テスト</a></li>
+	<li><a href="{{jpdoc}}/cookbook.html"> クックブック</a></li>
 	<li><a href="{{jpdoc}}/internals.html"> 内部の仕組み</a></li>
-	<li><a href="{{jpdoc}}/extensions/index.html"> 標準のエクステンション一覧</a></li>
+	<li><a href="{{jpdoc}}/provider/index.html"> 標準のプロバイダー一覧</a></li>
 </ul>
 
 <h3>ダウンロード</h3>
 <ul>
-	<li><a href="http://silex-project.org/get/silex.phar"> silex.phar</a></li>
+	<li><a href="http://silex.sensiolabs.org/get/silex.phar"> silex.phar</a></li>
 	<li><a href="http://github.com/fabpot/Silex"> fabpot/Silex - github</a></li>
 </ul>
 
@@ -94,23 +95,24 @@
 </td>
 <td valign="top" width="25%">
 
-<h3>エクステンション</h3>
+<h3>プロバイダー(旧エクステンション)</h3>
 <ul>
-	<li><a href="{{jpdoc}}/extensions.html"> エクステンションの仕組み</a></li>
-    {% set base = "/extensions/" %}
-    <li><a href="{{jpdoc}}{{base}}doctrine.html"> DoctrineExtension(データベースアクセス)</a></li>
-    <li><a href="{{jpdoc}}{{base}}monolog.html"> MonologExtension(ロガー)</a></li>
-    <li><a href="{{jpdoc}}{{base}}session.html"> SessionExtension(セッション)</a></li>
-    <li><a href="{{jpdoc}}{{base}}twig.html"> TwigExtension(テンプレート)</a></li>
-    <li><a href="{{jpdoc}}{{base}}translation.html"> TranslationExtension(国際化)</a></li>
-    <li><a href="{{jpdoc}}{{base}}url_generator.html"> UrlGeneratorExtension(ルーティング)</a></li>
-    <li><a href="{{jpdoc}}{{base}}validator.html"> validatorExtension(バリデーター)</a></li>
-    <li><a href="{{jpdoc}}{{base}}http_cache.html"> HttpCacheExtension(キャッシュ)</a></li>
+	<li><a href="{{jpdoc}}/providers.html"> プロバイダーの仕組み</a></li>
+    {% set base = "/providers/" %}
+    <li><a href="{{jpdoc}}{{base}}doctrine.html"> DoctrineServiceProvider(データベースアクセス)</a></li>
+    <li><a href="{{jpdoc}}{{base}}monolog.html"> MonologServiceProvider(ロガー)</a></li>
+    <li><a href="{{jpdoc}}{{base}}session.html"> SessionServiceProvider(セッション)</a></li>
+    <li><a href="{{jpdoc}}{{base}}twig.html"> TwigServiceProvider(テンプレート)</a></li>
+    <li><a href="{{jpdoc}}{{base}}translation.html"> TranslationServiceProvider(国際化)</a></li>
+    <li><a href="{{jpdoc}}{{base}}url_generator.html"> UrlGeneratorServiceProvider(ルーティング)</a></li>
+    <li><a href="{{jpdoc}}{{base}}validator.html"> validatorServiceProvider(バリデーター)</a></li>
+    <li><a href="{{jpdoc}}{{base}}http_cache.html"> HttpCacheServiceProvider(キャッシュ)</a></li>
 </ul>
 <ul>
-    <p>以下は 非公式エクステンション</p>
+    <li><a href="https://github.com/fabpot/Silex/wiki/Third-Party-ServiceProviders"> 公式サイトにまとめられたサードパーティ製プロバイダー一覧</a></li>
+    <p>以下は 非公式プロバイダー</p>
     <li><a href="https://github.com/flintstones/Rest"> RestExtension</a></li>
-    <li><a href="http://d.hatena.ne.jp/brtRiver/20110417/1303005850"> PHPTALExtension</a></li>
+    <li><a href="http://d.hatena.ne.jp/brtRiver/20110417/1303005850"> PHPTALServiceProvider</a></li>
     <li><a href="https://github.com/FractalizeR/Silex/compare/SmartyExtension"> SmartyExtension</a></li>
     <li><a href="https://github.com/flintstones/DoctrineOrm"> DoctrineOrmExtension</a></li>
     <li><a href="https://github.com/docteurklein/SilexExtensions"> DoctrineOrmExtension(その2)</a></li>
@@ -123,7 +125,7 @@
     <li><a href="https://github.com/heavenshell/php-silex-zf-db">DbExtension(Zend_Db)</a></li>
     <li><p><a href="https://github.com/fate/Silex-Extensions">Silex-Extensions (@hahaitsfate)</a></p></li>
     <p>
-        以下のエクステンションを含む
+        以下のプロバイダーを含む
     </p>
 
     <ul>
@@ -147,6 +149,7 @@
 	<li><a href="https://github.com/igorw/silex-examples">エクステンションのサンプルコード (@igorwesome)</a></li>
 	<li><a href="https://github.com/brtriver/MameForm">問い合わせフォーム(MameForm)</a></li>
 	<li><a href="https://github.com/uechoco/MameForm">問い合わせフォームα(@uechoco)</a></li>
+	<li><a href="https://github.com/lyrixx/Silex-Kitchen-Edition">Silex Kitchen Edition (フル装備)</a></li>
 </ul>
 
 
@@ -163,6 +166,8 @@
 
 <h3>API リファレンス</h3>
 <ul>
+    <p>Silex API</p>
+    <li><a href="http://silex.sensiolabs.org/api/index.html">Silex の APIドキュメント</a></li>
     <p>Symfony2 Component</p>
     <li><a href="http://api.symfony.com/2.0/Symfony/Component/ClassLoader.html">ClassLoader</a></li>
     <li><a href="http://api.symfony.com/2.0/Symfony/Component/HttpFoundation.html">HttpFoundation</a></li>
