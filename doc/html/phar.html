@@ -1,0 +1,241 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Pharファイル | Japan Symfony Group</title>
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/configurationblock.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/js/jquery.corner.js"></script>
+      <script type="text/javascript" src="_static/configurationblock.js"></script>
+      <script type="text/javascript">
+      $(function(){
+          $('.section h1').corner();
+          $('.highlight-python pre').corner();
+          $('.highlight-yml pre').corner();
+          $('.highlight-json pre').corner();
+          $('.highlight').corner();
+      });
+      </script>
+    <link rel="top" title="Silex 0.0.0 documentation" href="index.html" />
+    <link rel="prev" title="チェンジログ" href="changelog.html" /> 
+  </head>
+  <body>
+
+<div id="all">
+  <div id="content">
+    <div id="content_wrapper">
+      <p class="title">Silex ユーザーガイド</title>
+      <!-- end #header -->
+      <div id="navbar">
+        <ul>
+          <li><a href="/">Silex ユーザーガイド</a></li>
+          <li><a href="index.html">日本語ドキュメント TOP (索引)</a></li>
+          <li><a href="providers/index.html">エクステンション一覧</a></li>
+          <li><a href="http://silex.sensiolabs.org/">Silex 公式サイト(英語)</a></li>
+          <li><a href="http://www.symfony.gr.jp/">日本Symfonyユーザー会</a></li>
+        </ul>
+      </div>
+      <!-- end #navbar -->
+      <div id="main">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="phar">
+<h1>Pharファイル<a class="headerlink" href="#phar" title="Permalink to this headline">¶</a></h1>
+<div class="admonition caution">
+<p class="first admonition-title">Caution</p>
+<p class="last">Silex <tt class="docutils literal"><span class="pre">phar</span></tt> ファイルを使うのは廃止されています。
+Silexや、依存関係をインストールするにはComposerを代わりに使用してください。</p>
+</div>
+<div class="section" id="installing">
+<h2>インストール(Installing)<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>Silexをインストールするには <a class="reference external" href="http://silex.sensiolabs.org/get/silex.phar">phar</a> をダウンロードして、どこかに保存してください。その後、スクリプト中でrequireしてください。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/silex.phar&#39;</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Silex\Application</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/hello/{name}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello &#39;</span><span class="o">.</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="console">
+<h2>コンソール(Console)<a class="headerlink" href="#console" title="Permalink to this headline">¶</a></h2>
+<p>Silexは最新版にアップデートするための軽量コンソールを持っています。</p>
+<p>あなたが使っているSilexのバージョンを知るためには、 コマンドラインで <tt class="docutils literal"><span class="pre">silex.phar</span></tt> を、 <tt class="docutils literal"><span class="pre">version</span></tt> という引数付きで実行してください。</p>
+<div class="highlight-text"><div class="highlight"><pre>$ php silex.phar version
+Silex version 0a243d3 2011-04-17 14:49:31 +0200
+</pre></div>
+</div>
+<p>最新版かどうか確認するためには <tt class="docutils literal"><span class="pre">check</span></tt> コマンドを使用してください。</p>
+<div class="highlight-text"><div class="highlight"><pre>$ php silex.phar check
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">silex.phar</span></tt> を最新版にするためには <tt class="docutils literal"><span class="pre">update</span></tt> コマンドを使用してください。</p>
+<div class="highlight-text"><div class="highlight"><pre>$ php silex.phar update
+</pre></div>
+</div>
+<p>これは自動で新しい <tt class="docutils literal"><span class="pre">silex.phar``　を</span> <span class="pre">``silex.sensiolabs.org</span></tt> からダウンロードし、既存のものと置き換えます。</p>
+</div>
+<div class="section" id="pitfalls">
+<h2>落とし穴（Pitfalls）<a class="headerlink" href="#pitfalls" title="Permalink to this headline">¶</a></h2>
+<p>いくつかの落とし穴があるので、よくあるものの解決方法をお見せします。</p>
+<div class="section" id="php">
+<h3>PHPの設定<a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h3>
+<p>PHPのデフォルト設定が厳しく制限されているような場合、pharに関する設定を以下のようにしてみてください。</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">detect_unicode</span> <span class="o">=</span> <span class="s">Off</span>
+<span class="na">phar.readonly</span> <span class="o">=</span> <span class="s">Off</span>
+<span class="na">phar.require_hash</span> <span class="o">=</span> <span class="s">Off</span>
+</pre></div>
+</div>
+<p>もしSuhosinを使っている場合、追加で以下の設定も必要です。</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">suhosin.executor.include.whitelist</span> <span class="o">=</span> <span class="s">phar</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">UbuntuのPHPはSuhosinです。なので、Ubuntuを使っている場合、この変更が必要です。</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Pharスタブのバグ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>いくつかのPHPの実装ではPharをインクルードする際に、 <tt class="docutils literal"><span class="pre">PharException</span></tt> 例外が投げられるというバグがあります。
+同時に <tt class="docutils literal"><span class="pre">Silex\Application</span></tt> が見つからないということも教えてくれます。
+この問題を回避するためには以下のようにインクルードを行ってください。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">require_once</span> <span class="s1">&#39;phar://&#39;</span><span class="o">.</span><span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/silex.phar/autoload.php&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>この問題の真の原因は実際には不明です。</p>
+</div>
+<div class="section" id="ioncube-loader">
+<h3>ioncube loaderのバグ<a class="headerlink" href="#ioncube-loader" title="Permalink to this headline">¶</a></h3>
+<p>Ioncube loader はPHPエンコードされたファイルをデコードするためのエクステンションです。
+これは不運にも、古いバージョン(4.0.9以前)はpharアーカイブと一緒には、うまく動作しません。
+従って、Ioncube loader を4.0.9以降にアップデートするか、php.iniの以下の行をコメントアウトして無効にする必要があります。</p>
+<div class="highlight-ini"><div class="highlight"><pre><span class="na">zend_extension</span> <span class="o">=</span> <span class="s">/usr/lib/php5/20090626+lfs/ioncube_loader_lin_5.3.so</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="page_prev_next">
+<a class="prev" href="changelog.html">< チェンジログ</a>
+</div>
+
+<div class="common_content_footer">
+<ul>
+  <li> → <a href="http://silex-project.org/doc/phar.html">公式英語ドキュメント</a></li>
+  <li> → <a href="https://github.com/fabpot/Silex/commits/master/doc/phar.rst">原文コミット履歴</a>
+  <li> → <a href="https://github.com/brtriver/silex-doc-ja/commits/master/source/phar.rst">翻訳コミット履歴</a>
+</ul>
+<br />
+翻訳の不備などは、お気軽にコメント欄にてご指摘ください！
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>このページのコンテンツ</h3>
+  <ul>
+<li><a class="reference internal" href="#">Pharファイル</a><ul>
+<li><a class="reference internal" href="#installing">インストール(Installing)</a></li>
+<li><a class="reference internal" href="#console">コンソール(Console)</a></li>
+<li><a class="reference internal" href="#pitfalls">落とし穴（Pitfalls）</a><ul>
+<li><a class="reference internal" href="#php">PHPの設定</a></li>
+<li><a class="reference internal" href="#id2">Pharスタブのバグ</a></li>
+<li><a class="reference internal" href="#ioncube-loader">ioncube loaderのバグ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>前のドキュメント</h4>
+  <p class="topless"><a href="changelog.html"
+                        title="previous chapter">チェンジログ</a></p>
+  <h3>ソース</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/phar.txt"
+           rel="nofollow">ページのソースを表示</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+      </div>
+      <!-- end #main -->
+    </div>
+    <!-- end #content_wrapper -->
+  </div>
+  <!-- end #content -->
+
+
+  <div id="footer">
+    <div id="footer_wrapper">
+      <div id="footer_content">
+        <div style=" position: relative;">
+          <div id="footer_left"></div>
+          <div id="footer_right"></div>
+        </div>
+        <div id="f_navbar">
+        <ul>
+            <li><a href="/">Silex ユーザーガイド</a></li>
+            <li><a href="index.html">日本語ドキュメント TOP (索引)</a></li>
+            <li><a href="providers/index.html">プロバイダー 一覧</a></li>
+            <li><a href="http://silex.sensiolabs.org/">Silex 公式サイト(英語)</a></li>
+            <li><a href="http://www.symfony.gr.jp/">日本Symfonyユーザー会</a></li>
+        </ul>
+      </div>
+      <!-- end #navbar -->
+      </div>
+      <!-- end #footer_content -->
+        </div>
+        <!-- end #footer_wrapper -->
+      </div>
+      <!-- end #footer -->
+    </div>
+  </body>
+</html>
