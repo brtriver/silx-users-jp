@@ -74,7 +74,8 @@
 <li><strong>monolog.logfile</strong>: ログが書き込まれるファイルの場所。</li>
 <li><strong>monolog.level</strong> (オプション): <tt class="docutils literal"><span class="pre">DEBUG</span></tt> に標準で記録するログのレベル。
 <tt class="docutils literal"><span class="pre">Logger::DEBUG</span></tt>, <tt class="docutils literal"><span class="pre">Logger::INFO</span></tt>, <tt class="docutils literal"><span class="pre">Logger::WARNING</span></tt>, <tt class="docutils literal"><span class="pre">Logger::ERROR</span></tt> のどれかを指定します。
-<tt class="docutils literal"><span class="pre">DEBUG</span></tt> はどんなものでも記録します。 <tt class="docutils literal"><span class="pre">INFO</span></tt> は <tt class="docutils literal"><span class="pre">DEBUG</span></tt> 以外のものを記録します。</li>
+<tt class="docutils literal"><span class="pre">DEBUG</span></tt> はどんなものでも記録します。 <tt class="docutils literal"><span class="pre">INFO</span></tt> は <tt class="docutils literal"><span class="pre">DEBUG</span></tt> 以外の全てのものを記録します。
+Logger::定数の代わりに各レベルの文字列を与えても構いません。例: &#8220;DEBUG&#8221;, &#8220;INFO&#8221;, &#8220;WARNING&#8221;, &#8220;ERROR&#8221;。</li>
 <li><strong>monolog.name</strong> (オプション): Monolog チャンネルの名前。　標準は <tt class="docutils literal"><span class="pre">myapp</span></tt> です。</li>
 </ul>
 </div>
@@ -101,7 +102,7 @@
 <p>Monologは&#8221;fat&#8221; Silexに付属し、標準サイズのSilexには付属しません。
 もしComposerを使用している場合には、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。:</p>
 <div class="last highlight-json"><pre>"require": {
-    "monolog/monolog": "&gt;=1.0.0",
+    "monolog/monolog": "&gt;=1.0.0"
 }</pre>
 </div>
 </div>

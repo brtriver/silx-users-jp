@@ -149,12 +149,12 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>最後に、あなたのコントローラをアプリケーション中のサービスとしてルーティング付きで定義してください。ルーティング定義の際の文法は <tt class="docutils literal"><span class="pre">サービス名：:メソッド名</span></tt> です。</p>
+<p>最後に、あなたのコントローラをアプリケーション中のサービスとしてルーティング付きで定義してください。ルーティング定義の際の文法は <tt class="docutils literal"><span class="pre">サービス名：メソッド名</span></tt> です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.controller&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PostController</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.repository&#39;</span><span class="p">]);</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/posts.json&#39;</span><span class="p">,</span> <span class="s2">&quot;posts.controller::indexJsonAction&quot;</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/posts.json&#39;</span><span class="p">,</span> <span class="s2">&quot;posts.controller:indexJsonAction&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>

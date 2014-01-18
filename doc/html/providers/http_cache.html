@@ -104,19 +104,24 @@
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p>Silexに$ipというアドレスからのリバースプロクシからの <tt class="docutils literal"><span class="pre">X-Forwarded-For*</span></tt> ヘッダを信用させたい場合、以下のようにアプリケーションを起動してください。</p>
+<p>Silexに$ipというアドレスからのリバースプロクシからの <tt class="docutils literal"><span class="pre">X-Forwarded-For*</span></tt> ヘッダを信用させたい場合、 <a class="reference external" href="http://symfony.com/doc/current/components/http_foundation/trusting_proxies.html">Trusting Proxies</a> に記述されているような形式でホワイトリストを作成する必要があります。</p>
+<blockquote>
+<div>Varnishを同一マシン上で起動させている場合の例</div></blockquote>
 <div class="last highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 
-<span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="nv">$ip</span><span class="p">));</span>
+<span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="s1">&#39;::1&#39;</span><span class="p">));</span>
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
-<p>このプロバイダー使い Silex のアプリケーションはリクエストを操作するために <cite>http_cache</cite> サービスを追加することで Symfony2 のリバースプロクシーを使うことができるようになります。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;http_cache&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+<p>このプロバイダーは <tt class="docutils literal"><span class="pre">http_cache</span></tt> サービスを用いることで、Symfony2リバースプロクシをSilexアプリケーション上で使用可能にします。Symfony2リバースプロクシは他のプロクシと同じように動作するのでホワイトリストにしたいと思うでしょう。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
+
+<span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">));</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;http_cache&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>このプロバイダー ESI もサポートしています。</p>
+<p>このプロバイダーはESIもサポートしています。:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s">&lt;&lt;&lt;EOF</span>
 <span class="s">&lt;html&gt;</span>
@@ -146,7 +151,7 @@
 <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;http_cache&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>ESIをを使わない場合、パフォーマンスを少し上げるために無効にすることが出来ます。</p>
+<p>ESIを使わない場合、パフォーマンスを少し上げるために無効にすることが出来ます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\HttpCacheServiceProvider</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
    <span class="s1">&#39;http_cache.cache_dir&#39;</span> <span class="o">=&gt;</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/cache/&#39;</span><span class="p">,</span>
    <span class="s1">&#39;http_cache.esi&#39;</span>       <span class="o">=&gt;</span> <span class="k">null</span><span class="p">,</span>
