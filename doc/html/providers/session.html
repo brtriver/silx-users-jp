@@ -68,9 +68,9 @@
 <div class="section" id="id1">
 <h2>パラメーター<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first"><strong>session.storage.save_path</strong> (オプション): <tt class="docutils literal"><span class="pre">NativeFileSessionStorage</span></tt> へのパスです。 標準は <tt class="docutils literal"><span class="pre">sys_get_temp_dir()</span></tt> の値です。</p>
+<li><p class="first"><strong>session.storage.save_path</strong> (オプション): <code class="docutils literal"><span class="pre">NativeFileSessionStorage</span></code> へのパスです。 標準は <code class="docutils literal"><span class="pre">sys_get_temp_dir()</span></code> の値です。</p>
 </li>
-<li><p class="first"><strong>session.storage.options</strong>: <tt class="docutils literal"><span class="pre">session.storage</span></tt> サービスのコンストラクタに渡されたオプションの配列です。</p>
+<li><p class="first"><strong>session.storage.options</strong>: <code class="docutils literal"><span class="pre">session.storage</span></code> サービスのコンストラクタに渡されたオプションの配列です。</p>
 <p>標準の <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Session/Storage/NativeSessionStorage.html">NativeFileSessionStorage</a> の場合の便利なオプションは以下の通りです。</p>
 <ul class="simple">
 <li><strong>name</strong>: Cookie の名前 (標準は _SESS)</li>
@@ -81,8 +81,8 @@
 <li><strong>cookie_secure</strong>: Cookie のセキュア設定 (HTTPS)</li>
 <li><strong>cookie_httponly</strong>: Cookie が httpのみかどうかの設定</li>
 </ul>
-<p>しかしながら、これらの全てはオプションです。　セッションはブラウザを開いている間保持されます。
-これを上書きするためには、 <tt class="docutils literal"><span class="pre">lifetime</span></tt> オプションを設定します。</p>
+<p>しかしながら、これらの全てはオプションです。標準のセッションのライフタイムは 1800 秒 ( 30 分) です。
+これを上書きするためには、 <code class="docutils literal"><span class="pre">lifetime</span></code> オプションを設定します。</p>
 <p>使用可能な全てのオプションについては <a class="reference external" href="http://php.net/session.configuration">PHP</a> の公式ドキュメントを見てください。</p>
 </li>
 <li><p class="first"><strong>session.test</strong>: セッションをシミュレートするかどうか(機能テストを書く際に便利です)。</p>
@@ -94,7 +94,7 @@
 <ul class="simple">
 <li><strong>session</strong>: Symfony2　の <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Session/Session.html">Session</a> のインスタンス。</li>
 <li><strong>session.storage</strong>: セッションデータの永続化のために利用されるサービス。</li>
-<li><strong>session.storage.handler</strong>: データアクセスのために <tt class="docutils literal"><span class="pre">session.storage</span></tt> によって使用されるサービス。 標準では <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.html">NativeFileSessionHandler</a>
+<li><strong>session.storage.handler</strong>: データアクセスのために <code class="docutils literal"><span class="pre">session.storage</span></code> によって使用されるサービス。 標準では <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Session/Storage/Handler/NativeFileSessionHandler.html">NativeFileSessionHandler</a>
 のストレージハンドラーに設定されています。</li>
 </ul>
 </div>
@@ -106,7 +106,7 @@
 </div>
 <div class="section" id="id4">
 <h2>使い方<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>セッションのプロバイダーは <tt class="docutils literal"><span class="pre">session</span></tt> サービスを提供します。以下はユーザーを認証しそのユーザーのためにセッションを作成するサンプルです。</p>
+<p>セッションのプロバイダーは <code class="docutils literal"><span class="pre">session</span></code> サービスを提供します。以下はユーザーを認証しそのユーザーのためにセッションを作成するサンプルです。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -136,11 +136,13 @@
 </div>
 <div class="section" id="id5">
 <h2>カスタムセッションの設定<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>もし、あなたのシステムがカスタムセッション設定を使用している場合（PHPエクステンションのredisハンドラーのようなもの）、 <tt class="docutils literal"><span class="pre">session.storage.handler</span></tt> をnullにセットすることで、NativeFileSessionHandler を無効にする必要があります。
-また <tt class="docutils literal"><span class="pre">session.save_path</span></tt> の設定を行う必要があります。</p>
+<p>もし、あなたのシステムがカスタムセッション設定を使用している場合（PHPエクステンションのredisハンドラーのようなもの）、 <code class="docutils literal"><span class="pre">session.storage.handler</span></code> をnullにセットすることで、NativeFileSessionHandler を無効にする必要があります。
+また <code class="docutils literal"><span class="pre">session.save_path</span></code> の設定を行う必要があります。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.handler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
 </pre></div>
 </div>
+<p>commit: 81a08269268e5e2adb250c4a801f021face5ab4a
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/session.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/session.rst</a></p>
 </div>
 </div>
 

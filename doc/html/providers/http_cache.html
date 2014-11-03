@@ -104,7 +104,7 @@
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p>Silexに$ipというアドレスからのリバースプロクシからの <tt class="docutils literal"><span class="pre">X-Forwarded-For*</span></tt> ヘッダを信用させたい場合、 <a class="reference external" href="http://symfony.com/doc/current/components/http_foundation/trusting_proxies.html">Trusting Proxies</a> に記述されているような形式でホワイトリストを作成する必要があります。</p>
+<p>Silexに$ipというアドレスからのリバースプロクシからの <code class="docutils literal"><span class="pre">X-Forwarded-For*</span></code> ヘッダを信用させたい場合、 <a class="reference external" href="http://symfony.com/doc/current/components/http_foundation/trusting_proxies.html">Trusting Proxies</a> に記述されているような形式でホワイトリストを作成する必要があります。</p>
 <blockquote>
 <div>Varnishを同一マシン上で起動させている場合の例</div></blockquote>
 <div class="last highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
@@ -114,7 +114,7 @@
 </pre></div>
 </div>
 </div>
-<p>このプロバイダーは <tt class="docutils literal"><span class="pre">http_cache</span></tt> サービスを用いることで、Symfony2リバースプロクシをSilexアプリケーション上で使用可能にします。Symfony2リバースプロクシは他のプロクシと同じように動作するのでホワイトリストにしたいと思うでしょう。</p>
+<p>このプロバイダーは <code class="docutils literal"><span class="pre">http_cache</span></code> サービスを用いることで、Symfony2リバースプロクシをSilexアプリケーション上で使用可能にします。Symfony2リバースプロクシは他のプロクシと同じように動作するのでホワイトリストにしたいと思うでしょう。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 
 <span class="nx">Request</span><span class="o">::</span><span class="na">setTrustedProxies</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">));</span>
@@ -160,14 +160,16 @@
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p>キャッシュの問題をデバッグするにはアプリケーションの <tt class="docutils literal"><span class="pre">debug</span></tt> をtrueにしてください。
-Symfonyは自動的にキャッシュヒットやミスに関する情報を持った <tt class="docutils literal"><span class="pre">X-Symfony-Cache</span></tt> ヘッダを全てのレスポンスに追加します。</p>
+<p>キャッシュの問題をデバッグするにはアプリケーションの <code class="docutils literal"><span class="pre">debug</span></code> をtrueにしてください。
+Symfonyは自動的にキャッシュヒットやミスに関する情報を持った <code class="docutils literal"><span class="pre">X-Symfony-Cache</span></code> ヘッダを全てのレスポンスに追加します。</p>
 <p>もしSymfony Sessionプロバイダーを使って <em>いない</em> 場合、
-PHPの標準の振舞を回避するために <tt class="docutils literal"><span class="pre">session.cash_limiter</span></tt> をからの値に設定したほうが良いです。</p>
+PHPの標準の振舞を回避するために <code class="docutils literal"><span class="pre">session.cash_limiter</span></code> をからの値に設定したほうが良いです。</p>
 <p class="last">最後に、あなたのウェブサーバーがキャッシュ戦略を上書きしないかどうか確認して下さい。</p>
 </div>
 <p>詳細については、 <a class="reference external" href="http://symfony.com/doc/current/book/http_cache.html">Symfony2 HTTP キャッシュのドキュメント</a>
 を参照してください。</p>
+<p>commit: 4b1ae82bd6e81b26c37450feefa88319ca28b162
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/http_cache.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/http_cache.rst</a></p>
 </div>
 </div>
 

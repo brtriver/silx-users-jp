@@ -15,9 +15,9 @@
     });
 
     foreach (array('auth', 'payments', 'stats') as $channel) {
-        $app['monolog.'.$channel] = $app->share(function ($app) use ($channel) {
+        $app['monolog.'.$channel] = function ($app) use ($channel) {
             return $app['monolog.factory']($channel);
-        });
+        };
     }
 
 アプリケーションが大きくなってきたり、別々の場所にログを取る必要がある際には、
@@ -27,13 +27,13 @@
 
     use Monolog\Handler\StreamHandler;
 
-    $app['monolog.payments'] = $app->share(function ($app) {
+    $app['monolog.payments'] = function ($app) {
         $log = new $app['monolog.logger.class']('payments');
         $handler = new StreamHandler($app['monolog.payments.logfile'], $app['monolog.payment.level']);
         $log->pushHandler($handler);
 
         return $log;
-    });
+    };
 
 または、ファクトリーをもっと複雑にして、
 コンテナー内のチェネル名を使ってハンドラー配列をチェックし、カスタム設定を適用するかデフォルト設定を適用するかを決定するような仕様にすることもできます。
@@ -57,10 +57,12 @@
         return $log;
     });
 
-    $app['monolog.payments.handlers'] = $app->share(function ($app) {
+    $app['monolog.payments.handlers'] = function ($app) {
         return array(
             new StreamHandler(__DIR__.'/../payments.log', Logger::DEBUG),
         );
-    });
+    };
 
 
+commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: https://github.com/silexphp/Silex/blob/master/doc/cookbook/multiple_loggers.rst

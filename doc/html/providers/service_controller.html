@@ -84,12 +84,12 @@
 </div>
 <div class="section" id="id2">
 <h2>パラメータ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>現在は <tt class="docutils literal"><span class="pre">ServiceControllerServiceProvider</span></tt> にパラメータはありません。</p>
+<p>現在は <code class="docutils literal"><span class="pre">ServiceControllerServiceProvider</span></code> にパラメータはありません。</p>
 </div>
 <div class="section" id="id3">
 <h2>サービス<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>特別なサービスは提供されません。
-<tt class="docutils literal"><span class="pre">ServiceControllerServiceProvider</span></tt> は単に、既存の <strong>resolever</strong> を拡張します。</p>
+<code class="docutils literal"><span class="pre">ServiceControllerServiceProvider</span></code> は単に、既存の <strong>resolever</strong> を拡張します。</p>
 </div>
 <div class="section" id="id4">
 <h2>登録<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
@@ -100,15 +100,15 @@
 <div class="section" id="id5">
 <h2>使用方法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>ブログAPIの少しだけ不自然な例で、
-<tt class="docutils literal"><span class="pre">/posts.json</span></tt> ルーティングがサービスとして定義されたコントローラを使うように変更したいと思います。</p>
+<code class="docutils literal"><span class="pre">/posts.json</span></code> ルーティングがサービスとして定義されたコントローラを使うように変更したいと思います。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Demo\Repository\PostRepository</span><span class="p">;</span>
 
 <span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Application</span><span class="p">();</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.repository&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.repository&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PostRepository</span><span class="p">;</span>
-<span class="p">});</span>
+<span class="p">};</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/posts.json&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.repository&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">());</span>
@@ -116,17 +116,17 @@
 </pre></div>
 </div>
 <p>コントローラをサービスに書き換える方法はとてもシンプルで、
-普通のPHPオブジェクトに、　<tt class="docutils literal"><span class="pre">PostRepository</span></tt> を依存性として注入するようにし、 <tt class="docutils literal"><span class="pre">indexJsonAction</span></tt> メソッドをリクエストを扱えるようにするために、実装するだけです。</p>
+普通のPHPオブジェクトに、　<code class="docutils literal"><span class="pre">PostRepository</span></code> を依存性として注入するようにし、 <code class="docutils literal"><span class="pre">indexJsonAction</span></code> メソッドをリクエストを扱えるようにするために、実装するだけです。</p>
 <p>下の例では示されていませんが、タイプヒンティングとパラメータの名前付けによって、
 普通のSilexのルーティングと同じようにあなたの欲しいパラメータが取得できます。</p>
 <p>もし、あなたがTDD/BDDのファンなら（そして、そうあるべきです！）、
 このコントローラが責務や依存性の面から見て、well-definedであり、テストが容易であることに気づくと思います。</p>
 <p>さらに、内部的な依存関係は、
-<tt class="docutils literal"><span class="pre">Symfony\Component\HttpFoundation\JsonResponse</span></tt> 、
+<code class="docutils literal"><span class="pre">Symfony\Component\HttpFoundation\JsonResponse</span></code> 、
 だけだということにも気づくと思います。
 これは、このコントローラは容易に、フルスタックなSymfonyや、
 他のアプリケーション、
-<a class="reference external" href="http://symfony.com/doc/master/components/http_foundation/introduction.html">Symfony/HttpFoundation</a>　の <tt class="docutils literal"><span class="pre">Response</span></tt> オブジェクトの扱い方を知っている他のフレームワーク
+<a class="reference external" href="http://symfony.com/doc/master/components/http_foundation/introduction.html">Symfony/HttpFoundation</a>　の <code class="docutils literal"><span class="pre">Response</span></code> オブジェクトの扱い方を知っている他のフレームワーク
 で使用可能であるということを意味します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">Demo\Controller</span><span class="p">;</span>
 
@@ -149,7 +149,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>最後に、あなたのコントローラをアプリケーション中のサービスとしてルーティング付きで定義してください。ルーティング定義の際の文法は <tt class="docutils literal"><span class="pre">サービス名：メソッド名</span></tt> です。</p>
+<p>最後に、あなたのコントローラをアプリケーション中のサービスとしてルーティング付きで定義してください。ルーティング定義の際の文法は <code class="docutils literal"><span class="pre">サービス名：メソッド名</span></code> です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.controller&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PostController</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;posts.repository&#39;</span><span class="p">]);</span>
 <span class="p">});</span>
@@ -157,6 +157,8 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/posts.json&#39;</span><span class="p">,</span> <span class="s2">&quot;posts.controller:indexJsonAction&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>commit: d48bcc6183b184b002a5632d8cc6108b665373da
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/service_controller.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/service_controller.rst</a></p>
 </div>
 </div>
 

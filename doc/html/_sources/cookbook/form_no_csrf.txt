@@ -29,3 +29,7 @@ CSRFプロテクションやCSRFトークンについての詳細は `Symfony2 B
 これはSymfony2の ``getDefaultOptions()`` メソッドを、あなたのformクラスで使うのと同じくらいシンプルです。 
 `詳細はこちらを参照してください
 <http://symfony.com/doc/current/book/forms.html#book-form-creating-form-classes>`_ 。
+
+
+commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: https://github.com/silexphp/Silex/blob/master/doc/cookbook/form_no_csrf.rst

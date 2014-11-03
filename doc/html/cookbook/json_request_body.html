@@ -72,7 +72,7 @@
 <div class="section" id="id1">
 <h3>リクエスト<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>リクエストでは、ブログ記事をJSONオブジェクトとして送信します。
-また、 <tt class="docutils literal"><span class="pre">Content-Type</span></tt> ヘッダを使用します。</p>
+また、 <code class="docutils literal"><span class="pre">Content-Type</span></code> ヘッダを使用します。</p>
 <div class="highlight-text"><div class="highlight"><pre>POST /blog/posts
 Accept: application/json
 Content-Type: application/json
@@ -85,7 +85,7 @@ Content-Length: 57
 <div class="section" id="id2">
 <h3>レスポンス<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>サーバーはステータスコードといて201を返し、記事が作成されたということを伝えてくれます。
-また、 <tt class="docutils literal"><span class="pre">Content-Type</span></tt> によってレスポンスがJSONであるということも教えてくれます。</p>
+また、 <code class="docutils literal"><span class="pre">Content-Type</span></code> によってレスポンスがJSONであるということも教えてくれます。</p>
 <div class="highlight-text"><div class="highlight"><pre>HTTP/1.1 201 Created
 Content-Type: application/json
 Content-Length: 65
@@ -98,9 +98,9 @@ Connection: close
 </div>
 <div class="section" id="id3">
 <h2>リクエストボディのパース<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">Content-Type</span></tt> ヘッダが <tt class="docutils literal"><span class="pre">application/json</span></tt> で始まる場合、リクエストボディはJSONとしてのみパースされるべきです。
+<p><code class="docutils literal"><span class="pre">Content-Type</span></code> ヘッダが <code class="docutils literal"><span class="pre">application/json</span></code> で始まる場合、リクエストボディはJSONとしてのみパースされるべきです。
 全てのリクエストに対して、この処理を行いたい場合、一番簡単な解は前処理アプリケーションミドルウェアを使用することです。</p>
-<p>シンプルに <tt class="docutils literal"><span class="pre">json_decode</span></tt> をリクエストの内容に対して、適用します。その後、 <tt class="docutils literal"><span class="pre">$request</span></tt> オブジェクトの内容を置換します。</p>
+<p>シンプルに <code class="docutils literal"><span class="pre">json_decode</span></code> をリクエストの内容に対して、適用します。その後、 <code class="docutils literal"><span class="pre">$request</span></code> オブジェクトの内容を置換します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\ParameterBag</span><span class="p">;</span>
 
@@ -115,7 +115,7 @@ Connection: close
 </div>
 <div class="section" id="id4">
 <h2>コントローラーの実装<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>コントローラーはリクエストデータに基づきブログ記事を生成し、 <tt class="docutils literal"><span class="pre">id</span></tt> を含んだJSONで記述されている記事のオブジェクトを返却します。</p>
+<p>コントローラーはリクエストデータに基づきブログ記事を生成し、 <code class="docutils literal"><span class="pre">id</span></code> を含んだJSONで記述されている記事のオブジェクトを返却します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
@@ -134,11 +134,13 @@ Connection: close
 </div>
 <div class="section" id="id5">
 <h2>手動テスト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>作成したAPIを手動テストするためには、HTTPリクエストを送信することができる <tt class="docutils literal"><span class="pre">curl</span></tt> コマンドラインユーティリティを使うことができます。</p>
+<p>作成したAPIを手動テストするためには、HTTPリクエストを送信することができる <code class="docutils literal"><span class="pre">curl</span></code> コマンドラインユーティリティを使うことができます。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>curl http://blog.lo/blog/posts -d <span class="s1">&#39;{&quot;title&quot;:&quot;Hello World!&quot;,&quot;body&quot;:&quot;This is my first post!&quot;}&#39;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span>
 <span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;1&quot;</span>,<span class="s2">&quot;title&quot;</span>:<span class="s2">&quot;Hello World!&quot;</span>,<span class="s2">&quot;body&quot;</span>:<span class="s2">&quot;This is my first post!&quot;</span><span class="o">}</span>
 </pre></div>
 </div>
+<p>commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/json_request_body.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/json_request_body.rst</a></p>
 </div>
 </div>
 

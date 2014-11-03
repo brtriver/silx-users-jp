@@ -11,17 +11,17 @@ Parameters
 Services
 --------
 
-* **serializer**: `Symfony\Component\Serializer\Serializer
+* **serializer**: `Symfony\\Component\\Serializer\\Serializer
   <http://api.symfony.com/master/Symfony/Component/Serializer/Serializer.html>`_ のインスタンスです。
 
-* **serializer.encoders**: `Symfony\Component\Serializer\Encoder\JsonEncoder
+* **serializer.encoders**: `Symfony\\Component\\Serializer\\Encoder\\JsonEncoder
   <http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/JsonEncoder.html>`_
-  と `Symfony\Component\Serializer\Encoder\XmlEncoder
+  と `Symfony\\Component\\Serializer\\Encoder\\XmlEncoder
   <http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/XmlEncoder.html>`_ 。
 
-* **serializer.normalizers**: `Symfony\Component\Serializer\Normalizer\CustomNormalizer
+* **serializer.normalizers**: `Symfony\\Component\\Serializer\\Normalizer\\CustomNormalizer
   <http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/CustomNormalizer.html>`_
-  と `Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+  と `Symfony\\Component\\Serializer\\Normalizer\\GetSetMethodNormalizer
   <http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.html>`_ 。
 
 登録
@@ -30,6 +30,19 @@ Services
 .. code-block:: php
 
     $app->register(new Silex\Provider\SerializerServiceProvider());
+
+.. note::
+
+    *SerializerServiceProvider* は Symfony の `Serializer Component
+    <http://symfony.com/doc/current/components/serializer.html>`_ に依存しており、 
+    "全部入り" Silex のアーカイブには含まれますが、通常版には含まれません。
+    そのため依存関係を ``composer.json`` ファイルに追記してください:
+
+    .. code-block:: json
+
+        "require": {
+            "symfony/serializer": ">=2.3,<2.5-dev",
+         }
 
 使い方
 ---------
@@ -63,3 +76,5 @@ Services
     })->assert("_format", "xml|json")
       ->assert("id", "\d+");
     
+commit: a8ab1f8bac91246f420d9ba0b151bf1f77c38f0a
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/serializer.rst

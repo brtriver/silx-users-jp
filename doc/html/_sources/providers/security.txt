@@ -135,6 +135,18 @@ HTTP認証を使用したパスのセキュリティ対策
 
 ユーザーが認証されたとき、ユーザーは `User <http://api.symfony.com/master/Symfony/Component/Security/Core/User/User.html>`_ のインスタンスとしてトークンに保存されます。
 
+.. caution::
+
+    php-cgi を Apache で利用している場合は、正しく動作するように以下の設定を追加する必要があります。
+
+    .. code-block:: apache
+
+        RewriteEngine On
+        RewriteCond %{HTTP:Authorization} ^(.+)$
+        RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ app.php [QSA,L]
+
 フォームのセキュリティ対策
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -580,3 +592,6 @@ Symfony Securityコンポーネントは、
     })->secure('ROLE_ADMIN');
 
 .. _cookbook: http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html
+
+commit: 78a9a90a18d69eaef6f3469163ed76e77bf0355d
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/security.rst

@@ -60,3 +60,7 @@
         $app->mount('/blog', include 'blog.php');
 
     ファイルをrequireする代わりに、 :ref:`コントローラプロバイダ <controller-providers>` を作成することもできます。
+
+
+commit: 5a4b0158a5f6376f0c3c6750c56fc25b868613c8
+original: https://github.com/silexphp/Silex/blob/master/doc/organizing_controllers.rst

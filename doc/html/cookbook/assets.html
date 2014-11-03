@@ -85,12 +85,12 @@
 </pre></div>
 </div>
 <p>アセットとは独立なロジックが必要なら、文字列の代わりにサービスを定義してください。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;asset_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;asset_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">function</span> <span class="p">()</span> <span class="p">{</span>
 
     <span class="c1">// アセットへのパスを決定するのに必要なロジックをここに実装する。</span>
 
     <span class="k">return</span> <span class="s1">&#39;http://assets.examples.com&#39;</span><span class="p">;</span>
-<span class="p">});</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>これも、先ほどと同様に使用することができます。</p>
@@ -98,7 +98,7 @@
 </pre></div>
 </div>
 <p>もし、アセットの場所がアセットのタイプやパスに依存する場合、さらなる抽象化が必要です。以下にTwig関数を使って、それを行った例を示します。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;twig&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$twig</span><span class="p">,</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;twig&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$twig</span><span class="p">,</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$twig</span><span class="o">-&gt;</span><span class="na">addFunction</span><span class="p">(</span><span class="k">new</span> <span class="nx">\Twig_SimpleFunction</span><span class="p">(</span><span class="s1">&#39;asset&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$asset</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// アセットへのパスを決定するのに必要なロジックをここに実装する。</span>
 
@@ -106,13 +106,15 @@
     <span class="p">}));</span>
 
     <span class="k">return</span> <span class="nv">$twig</span><span class="p">;</span>
-<span class="p">}));</span>
+<span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">asset</span></tt> 関数は以下のようにして使用可能です。</p>
+<p><code class="docutils literal"><span class="pre">asset</span></code> 関数は以下のようにして使用可能です。</p>
 <div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">asset</span><span class="o">(</span><span class="s1">&#39;/css/styles.css&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
 </pre></div>
 </div>
+<p>commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/assets.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/assets.rst</a></p>
 </div>
 
 

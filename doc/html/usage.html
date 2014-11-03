@@ -75,8 +75,8 @@
     └── index.php
 </pre></div>
 </div>
-<p>Silexをもっと柔軟に使いたい場合は、Composerを用います。
-まず以下の様な <tt class="docutils literal"><span class="pre">composer.json</span></tt> を作ってください。</p>
+<p>Silexをもっと柔軟に使いたい場合は、 <a class="reference external" href="http://getcomposer.org/">Composer</a> を用います。
+まず以下の様な <code class="docutils literal"><span class="pre">composer.json</span></code> を作ってください。</p>
 <div class="highlight-json"><div class="highlight"><pre><span class="p">{</span>
     <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;silex/silex&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.1&quot;</span>
@@ -84,29 +84,29 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>その後に、Composerを実行すればSilexと、それに関する全ての依存パッケージがインストールされます。</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>curl -s http://getcomposer.org/installer | php
+<p>その後に、 <a class="reference external" href="http://getcomposer.org/">Composer</a> を実行すればSilexと、それに関する全ての依存パッケージがインストールされます。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>curl -s http://getcomposer.org/installer <span class="p">|</span> php
 <span class="nv">$ </span>php composer.phar install
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">デフォルトでは、SilexはSymfonyの安定版のコンポーネントに依存しています。
-それらのmasterバージョンを使用したい場合は、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> に、
-<tt class="docutils literal"><span class="pre">&quot;minimum-stability&quot;:</span> <span class="pre">&quot;dev&quot;</span></tt> と付け加えてください。</p>
+それらのmasterバージョンを使用したい場合は、 <code class="docutils literal"><span class="pre">composer.json</span></code> に、
+<code class="docutils literal"><span class="pre">&quot;minimum-stability&quot;:</span> <span class="pre">&quot;dev&quot;</span></code> と付け加えてください。</p>
 </div>
 </div>
 <div class="section" id="upgrading">
 <h2>アップグレード (Upgrading)<a class="headerlink" href="#upgrading" title="Permalink to this headline">¶</a></h2>
-<p>Silexを最新版にアップグレードするには、以下の <tt class="docutils literal"><span class="pre">update</span></tt> コマンドを実行してください。</p>
+<p>Silexを最新版にアップグレードするには、以下の <code class="docutils literal"><span class="pre">update</span></code> コマンドを実行してください。</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php composer.phar update
 </pre></div>
 </div>
 </div>
 <div class="section" id="bootstrap">
 <h2>ブートストラップ (Bootstrap)<a class="headerlink" href="#bootstrap" title="Permalink to this headline">¶</a></h2>
-<p>Silexを使うのに必要なのは <tt class="docutils literal"><span class="pre">vendor/autoload.php</span></tt> をrequireし、 <tt class="docutils literal"><span class="pre">Silex\Application</span></tt> のインスタンスを生成することだけです。
-コントローラ定義の後に、 <tt class="docutils literal"><span class="pre">run</span></tt> メソッドをアプリケーション上で呼んでください。</p>
+<p>Silexを使うのに必要なのは <code class="docutils literal"><span class="pre">vendor/autoload.php</span></code> をrequireし、 <code class="docutils literal"><span class="pre">Silex\Application</span></code> のインスタンスを生成することだけです。
+コントローラ定義の後に、 <code class="docutils literal"><span class="pre">run</span></code> メソッドをアプリケーション上で呼んでください。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// web/index.php</span>
 
 <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
@@ -145,8 +145,8 @@
 <ul class="simple">
 <li><em>パターン (Pattern)</em>: ルーティングパターンであり、リソースへのパスを定義します。
 パターンは可変部分を含むことができ、正規表現を使った必須項目を設定することもできます。</li>
-<li><em>メソッド (Method)</em>: HTTPメソッド( <tt class="docutils literal"><span class="pre">GET</span></tt>, <tt class="docutils literal"><span class="pre">POST</span></tt>, <tt class="docutils literal"><span class="pre">PUT</span></tt> <tt class="docutils literal"><span class="pre">DELETE</span></tt> )のうち、どれかを指定します。  これはリソースとの相互作用を表しています。
-一般的には、 <tt class="docutils literal"><span class="pre">GET</span></tt> と <tt class="docutils literal"><span class="pre">POST</span></tt> だけが利用されますが、他のメソッドも使うことが可能です。</li>
+<li><em>メソッド (Method)</em>: HTTPメソッド( <code class="docutils literal"><span class="pre">GET</span></code>, <code class="docutils literal"><span class="pre">POST</span></code>, <code class="docutils literal"><span class="pre">PUT</span></code> <code class="docutils literal"><span class="pre">DELETE</span></code> )のうち、どれかを指定します。  これはリソースとの相互作用を表しています。
+一般的には、 <code class="docutils literal"><span class="pre">GET</span></code> と <code class="docutils literal"><span class="pre">POST</span></code> だけが利用されますが、他のメソッドも使うことが可能です。</li>
 </ul>
 <p>コントローラーはクロージャーを次のように使うことで定義できます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
@@ -160,14 +160,14 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">スコープを取り込まないクロージャーはラムダのようだと言われます。
-なぜなら PHP の無名関数はすべて <tt class="docutils literal"><span class="pre">Closure</span></tt> クラスのインスタンスであり、区別することができないからです。</p>
+なぜなら PHP の無名関数はすべて <code class="docutils literal"><span class="pre">Closure</span></code> クラスのインスタンスであり、区別することができないからです。</p>
 </div>
 <p>クロージャーの戻り値はページのコンテンツになります。</p>
 <p>クラスメソッドを利用してコントローラを定義する方法もあります。
-<tt class="docutils literal"><span class="pre">ClassName::methodName</span></tt> でのスタティックな呼び出し構文も利用可能です。</p>
+<code class="docutils literal"><span class="pre">ClassName::methodName</span></code> でのスタティックな呼び出し構文も利用可能です。</p>
 <div class="section" id="get-example-get-route">
 <h3>GET ルーティングの例 (Example GET route)<a class="headerlink" href="#get-example-get-route" title="Permalink to this headline">¶</a></h3>
-<p>ここに <tt class="docutils literal"><span class="pre">GET</span></tt> ルーティングを定義した例があります。</p>
+<p>ここに <code class="docutils literal"><span class="pre">GET</span></code> ルーティングを定義した例があります。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$blogPosts</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;date&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;2011-03-29&#39;</span><span class="p">,</span>
@@ -188,10 +188,10 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">/blog</span></tt> へアクセスすると 投稿されたブログのタイトルの一覧が返されます。
-ここで使われている <tt class="docutils literal"><span class="pre">use</span></tt> はこの文脈では別のものであることを意味します。
+<p><code class="docutils literal"><span class="pre">/blog</span></code> へアクセスすると 投稿されたブログのタイトルの一覧が返されます。
+ここで使われている <code class="docutils literal"><span class="pre">use</span></code> はこの文脈では別のものであることを意味します。
 外部スコープから $blogPosts 変数を取り込むということをクロージャーに知らせています。
-<tt class="docutils literal"><span class="pre">use</span></tt> を使うことでクロージャー内で渡した変数を使うことができるようになります。</p>
+<code class="docutils literal"><span class="pre">use</span></code> を使うことでクロージャー内で渡した変数を使うことができるようになります。</p>
 </div>
 <div class="section" id="dynamic-routing">
 <h3>動的ルーティング (Dynamic routing)<a class="headerlink" href="#dynamic-routing" title="Permalink to this headline">¶</a></h3>
@@ -208,15 +208,15 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>ルーティングはクロージャーに渡される <tt class="docutils literal"><span class="pre">{id}</span></tt> という変数を定義しています。</p>
-<p>なお、タイプヒンティングのおかげで、 <tt class="docutils literal"><span class="pre">Application</span></tt> は、 Silex によって自動的にクロージャに注入されています。</p>
-<p>POST された値がなかったとき、より早い段階でリクエストを停止するために <tt class="docutils literal"><span class="pre">abort()</span></tt> を使います。実際には例外を投げていますが、どのように扱うかは後ほど説明します。</p>
+<p>ルーティングはクロージャーに渡される <code class="docutils literal"><span class="pre">{id}</span></code> という変数を定義しています。</p>
+<p>なお、タイプヒンティングのおかげで、 <code class="docutils literal"><span class="pre">Application</span></code> は、 Silex によって自動的にクロージャに注入されています。</p>
+<p>POST された値がなかったとき、より早い段階でリクエストを停止するために <code class="docutils literal"><span class="pre">abort()</span></code> を使います。実際には例外を投げていますが、どのように扱うかは後ほど説明します。</p>
 </div>
 <div class="section" id="post-example-post-route">
 <h3>POST ルーティングの例 (Example POST route)<a class="headerlink" href="#post-example-post-route" title="Permalink to this headline">¶</a></h3>
 <p>POSTルーティングはリソースの生成を意味します。
 この例となるのがフィードバック用のフォームです。
-ここでは <tt class="docutils literal"><span class="pre">mail</span></tt> 関数を使ってメールを送信してみます。</p>
+ここでは <code class="docutils literal"><span class="pre">mail</span></code> 関数を使ってメールを送信してみます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
@@ -231,21 +231,22 @@
 <p>とても素直な実装になっています。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><tt class="docutils literal"><span class="pre">mail()</span></tt> 関数を使用する代わりに、 <a class="reference internal" href="providers/swiftmailer.html"><em>SwiftmailerServiceProvider</em></a> も使用できます。</p>
+<p class="last"><code class="docutils literal"><span class="pre">mail()</span></code> 関数を使用する代わりに、 <a class="reference internal" href="providers/swiftmailer.html"><em>SwiftmailerServiceProvider</em></a> も使用できます。</p>
 </div>
-<p>タイプヒンティングのおかげで、 <tt class="docutils literal"><span class="pre">request</span></tt> は、 Silex によって自動的にクロージャに注入されています。
-リクエストは <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Request.html">Request</a> のインスタンスです。このことによって、HTTPステータスコードを設定することが可能になります。今回の例では``201　Created`` に設定されます。</p>
-<p>リクエストの <tt class="docutils literal"><span class="pre">get</span></tt> メソッドを使うことで変数を取得することができます。</p>
+<p>タイプヒンティングのおかげで、 <code class="docutils literal"><span class="pre">request</span></code> は、 Silex によって自動的にクロージャに注入されています。
+リクエストは <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Request.html">Request</a>
+のインスタンスです。このことによって、HTTPステータスコードを設定することが可能になります。今回の例では``201　Created`` に設定されます。</p>
+<p>リクエストの <code class="docutils literal"><span class="pre">get</span></code> メソッドを使うことで変数を取得することができます。</p>
 <p>文字列を返す代わりに <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Response.html">Response</a> のインスタンスを返しています。
-また、 HTTP のステータスコードを設定することもでき、今回の場合であれば <tt class="docutils literal"><span class="pre">201</span> <span class="pre">Created</span></tt> が設定されています。</p>
+また、 HTTP のステータスコードを設定することもでき、今回の場合であれば <code class="docutils literal"><span class="pre">201</span> <span class="pre">Created</span></code> が設定されています。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Silexは、常に <tt class="docutils literal"><span class="pre">Response</span></tt> を内部で使用し、 文字列を <tt class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></tt> の HTTP のステータスコードと一緒にレスポンスオブジェクトに変換します。</p>
+<p class="last">Silexは、常に <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Response.html">Response</a> を内部で使用し、 文字列を <code class="docutils literal"><span class="pre">200</span> <span class="pre">OK</span></code> の HTTP のステータスコードと一緒にレスポンスオブジェクトに変換します。</p>
 </div>
 </div>
 <div class="section" id="other-methods">
 <h3>他のメソッド (Other methods)<a class="headerlink" href="#other-methods" title="Permalink to this headline">¶</a></h3>
-<p>アプリケーションの中で、 <tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt>, <tt class="docutils literal"><span class="pre">put</span></tt>, <tt class="docutils literal"><span class="pre">delete</span></tt> といったメソッドを呼び出せば、ほとんどの HTTP メソッドのためのコントローラーを作ることが可能です。</p>
+<p>アプリケーションの中で、 <code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">post</span></code>, <code class="docutils literal"><span class="pre">put</span></code>, <code class="docutils literal"><span class="pre">delete</span></code> といったメソッドを呼び出せば、ほとんどの HTTP メソッドのためのコントローラーを作ることが可能です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;/blog/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">});</span>
@@ -257,7 +258,7 @@
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p>ほとんどのウェブブラウザのフォームは、その他のHTTPメソッドを直接サポートしていません。GETやPOST以外のメソッドを使いたい場合は、 <tt class="docutils literal"><span class="pre">_method</span></tt> という名前を持つ特別なフォームフィールドを使うことができます。このフォームフィールドを使うときには、フォームの <tt class="docutils literal"><span class="pre">method</span></tt> 属性をPOSTに設定する必要があります。</p>
+<p>ほとんどのウェブブラウザのフォームは、その他のHTTPメソッドを直接サポートしていません。GETやPOST以外のメソッドを使いたい場合は、 <code class="docutils literal"><span class="pre">_method</span></code> という名前を持つ特別なフォームフィールドを使うことができます。このフォームフィールドを使うときには、フォームの <code class="docutils literal"><span class="pre">method</span></code> 属性をPOSTに設定する必要があります。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/my/target/route/&quot;</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span><span class="o">&gt;</span>
     <span class="o">...</span>
     <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;hidden&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;_method&quot;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;_method&quot;</span> <span class="nx">value</span><span class="o">=</span><span class="s2">&quot;PUT&quot;</span> <span class="o">/&gt;</span>
@@ -272,8 +273,8 @@
 </pre></div>
 </div>
 </div>
-<p>また、 <tt class="docutils literal"><span class="pre">match</span></tt> メソッドを利用することもでき、この場合はすべてのメソッドに一致します。
-この性質は、 <tt class="docutils literal"><span class="pre">method</span></tt> メソッドを用いることで制限することができます。</p>
+<p>また、 <code class="docutils literal"><span class="pre">match</span></code> メソッドを利用することもでき、この場合はすべてのメソッドに一致します。
+この性質は、 <code class="docutils literal"><span class="pre">method</span></code> メソッドを用いることで制限することができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">});</span>
@@ -356,7 +357,7 @@
 <span class="p">})</span><span class="o">-&gt;</span><span class="na">convert</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="nv">$userProvider</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>変換処理のコールバックは <tt class="docutils literal"><span class="pre">Request</span></tt> を第2引数として受け取ることができます。</p>
+<p>変換処理のコールバックは <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Request.html">Request</a> を第2引数として受け取ることができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$callback</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$post</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Post</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;slug&#39;</span><span class="p">));</span>
 <span class="p">};</span>
@@ -391,9 +392,9 @@
 </pre></div>
 </div>
 <p>このサービスはアプリケーションで登録されることはなく、コンバートメソッドはコンバーターとして使われます。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;converter.user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;converter.user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">UserConverter</span><span class="p">();</span>
-<span class="p">});</span>
+<span class="p">};</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/user/{user}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">User</span> <span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -403,8 +404,8 @@
 </div>
 <div class="section" id="requirements">
 <h3>必須項目 (Requirements)<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h3>
-<p>特定のパターンのみ一致させたい場合があるでしょう。そのときはルーティングメソッドによって返される <tt class="docutils literal"><span class="pre">Controller</span></tt> オブジェクトの <tt class="docutils literal"><span class="pre">assert</span></tt> メソッドを呼ぶことで正規表現による必須項目を定義することができます。</p>
-<p>次の例では <tt class="docutils literal"><span class="pre">id</span></tt> という引数が数値になるように <tt class="docutils literal"><span class="pre">\d+</span></tt> でチェックしています。</p>
+<p>特定のパターンのみ一致させたい場合があるでしょう。そのときはルーティングメソッドによって返される <code class="docutils literal"><span class="pre">Controller</span></code> オブジェクトの <code class="docutils literal"><span class="pre">assert</span></code> メソッドを呼ぶことで正規表現による必須項目を定義することができます。</p>
+<p>次の例では <code class="docutils literal"><span class="pre">id</span></code> という引数が数値になるように <code class="docutils literal"><span class="pre">\d+</span></code> でチェックしています。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">})</span>
@@ -422,20 +423,20 @@
 </div>
 <div class="section" id="default-values">
 <h3>デフォルト値 (Default values)<a class="headerlink" href="#default-values" title="Permalink to this headline">¶</a></h3>
-<p><tt class="docutils literal"><span class="pre">Controller</span></tt> オブジェクトの <tt class="docutils literal"><span class="pre">value</span></tt> メソッドを呼ぶことで、どんなルーティングの値でもデフォルト値を定義することができます。</p>
+<p><code class="docutils literal"><span class="pre">Controller</span></code> オブジェクトの <code class="docutils literal"><span class="pre">value</span></code> メソッドを呼ぶことで、どんなルーティングの値でもデフォルト値を定義することができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/{pageName}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$pageName</span><span class="p">)</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">})</span>
 <span class="o">-&gt;</span><span class="na">value</span><span class="p">(</span><span class="s1">&#39;pageName&#39;</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>この例では、 <tt class="docutils literal"><span class="pre">/</span></tt> をルーティングに一致させています。そしてその際は、 <tt class="docutils literal"><span class="pre">pageName</span></tt> 変数は <tt class="docutils literal"><span class="pre">index</span></tt> になります。</p>
+<p>この例では、 <code class="docutils literal"><span class="pre">/</span></code> をルーティングに一致させています。そしてその際は、 <code class="docutils literal"><span class="pre">pageName</span></code> 変数は <code class="docutils literal"><span class="pre">index</span></code> になります。</p>
 </div>
 <div class="section" id="named-routes">
 <h3>名前付きルーティング (Named routes)<a class="headerlink" href="#named-routes" title="Permalink to this headline">¶</a></h3>
-<p>プロバイダーの中には名前付きルーティングを使うことができるものがあります (<tt class="docutils literal"><span class="pre">UrlGeneratorProvider</span></tt> など)。
+<p>プロバイダーの中には名前付きルーティングを使うことができるものがあります (<code class="docutils literal"><span class="pre">UrlGeneratorProvider</span></code> など)。
 デフォルトでは、 Silex はあなたの代わりにルーティング名を生成してくれます。しかし、これらは利用されません。
-ルーティングメソッドによって返される <tt class="docutils literal"><span class="pre">Controller</span></tt> オブジェクトの <tt class="docutils literal"><span class="pre">bind</span></tt> メソッドを呼び出すことでルーティングに名前を付けることができます。</p>
+ルーティングメソッドによって返される <code class="docutils literal"><span class="pre">Controller</span></code> オブジェクトの <code class="docutils literal"><span class="pre">bind</span></code> メソッドを呼び出すことでルーティングに名前を付けることができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="o">...</span>
 <span class="p">})</span>
@@ -449,19 +450,19 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">使おうとしているプロバイダーが <tt class="docutils literal"><span class="pre">RouteCollection</span></tt> を利用しているときのみ名前ルーティングは意味があります。</p>
+<p class="last">使おうとしているプロバイダーが <code class="docutils literal"><span class="pre">RouteCollection</span></code> を利用しているときのみ名前ルーティングは意味があります。</p>
 </div>
 </div>
 <div class="section" id="controllers-in-classes">
 <h3>クラス内コントローラ (Controllers in classes)<a class="headerlink" href="#controllers-in-classes" title="Permalink to this headline">¶</a></h3>
 <p>無名関数を使いたくない場合、コントローラをメソッドとして定義することが出来ます。
-これは <tt class="docutils literal"><span class="pre">ControllerClass::methodName</span></tt> という文法によって実現されます。このときコントローラオブジェクトの生成を遅延させることが可能です。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;Igorw\\Foo::bar&#39;</span><span class="p">);</span>
+これは <code class="docutils literal"><span class="pre">ControllerClass::methodName</span></code> という文法によって実現されます。このときコントローラオブジェクトの生成を遅延させることが可能です。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;Acme\\Foo::bar&#39;</span><span class="p">);</span>
 
 <span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Request</span><span class="p">;</span>
 
-<span class="k">namespace</span> <span class="nx">Igorw</span>
+<span class="k">namespace</span> <span class="nx">Acme</span>
 <span class="p">{</span>
     <span class="k">class</span> <span class="nc">Foo</span>
     <span class="p">{</span>
@@ -473,13 +474,13 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>この例は レスポンスを得るために、 <tt class="docutils literal"><span class="pre">Igorw\Foo</span></tt> というクラスを要求に応じて読み込み、インスタンスを生成した後に、 <tt class="docutils literal"><span class="pre">bar</span></tt> メソッドを呼び出します。このとき、 <tt class="docutils literal"><span class="pre">$request</span></tt> と <tt class="docutils literal"><span class="pre">$app</span></tt> をクロージャに注入するために <tt class="docutils literal"><span class="pre">Request</span></tt> と <tt class="docutils literal"><span class="pre">Silex\Application</span></tt> というタイプヒンティングが使用可能です。</p>
+<p>この例は レスポンスを得るために、 <code class="docutils literal"><span class="pre">Igorw\Foo</span></code> というクラスを要求に応じて読み込み、インスタンスを生成した後に、 <code class="docutils literal"><span class="pre">bar</span></code> メソッドを呼び出します。このとき、 <code class="docutils literal"><span class="pre">$request</span></code> と <code class="docutils literal"><span class="pre">$app</span></code> をクロージャに注入するために <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Request.html">Request</a> と <code class="docutils literal"><span class="pre">Silex\Application</span></code> というタイプヒンティングが使用可能です。</p>
 <p>こうすることで、Silexとあなたのコントローラの分離度が強まるため、 <a class="reference internal" href="providers/service_controller.html"><em>コントローラをサービスとして定義することが出来ます。</em></a>.</p>
 </div>
 </div>
 <div class="section" id="global-configuration">
 <h2>全体の設定 (Global Configuration)<a class="headerlink" href="#global-configuration" title="Permalink to this headline">¶</a></h2>
-<p>あるコントローラの設定を全てのコントローラに対して適用したい場合（例えば、コンバーター、ミドルウェア、必須項目、デフォルト値など）、 全てのコントローラを保持する <tt class="docutils literal"><span class="pre">$app['controllers']</span></tt> に対して設定を行うことができます。</p>
+<p>あるコントローラの設定を全てのコントローラに対して適用したい場合（例えば、コンバーター、ミドルウェア、必須項目、デフォルト値など）、 全てのコントローラを保持する <code class="docutils literal"><span class="pre">$app['controllers']</span></code> に対して設定を行うことができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;controllers&#39;</span><span class="p">]</span>
     <span class="o">-&gt;</span><span class="na">value</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">assert</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;\d+&#39;</span><span class="p">)</span>
@@ -506,7 +507,7 @@
 <p>コードのどこかで例外が発生した際に、ユーザーにエラーページのようなものを表示したいことがあるでしょう。
 これらエラーハンドラーがやることなのです。
 ログ処理のような処理を追加してエラーハンドリングを使うことができます。</p>
-<p>エラーハンドラーを登録するために、 <tt class="docutils literal"><span class="pre">Exception</span></tt> を引数に持ち、レスポンスを返してくれる <tt class="docutils literal"><span class="pre">error</span></tt> メソッドにクロージャーを渡します。</p>
+<p>エラーハンドラーを登録するために、 <code class="docutils literal"><span class="pre">Exception</span></code> を引数に持ち、レスポンスを返してくれる <code class="docutils literal"><span class="pre">error</span></code> メソッドにクロージャーを渡します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
@@ -514,7 +515,7 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">$code</span></tt> 引数を使うことで詳細なエラーを確認することができます。そしてエラーの種類で処理を変えることができます。</p>
+<p><code class="docutils literal"><span class="pre">$code</span></code> 引数を使うことで詳細なエラーを確認することができます。そしてエラーの種類で処理を変えることができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="p">{</span>
@@ -532,7 +533,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Silexはレスポンスのステータスコードが例外に沿うような適切な物にセットされることを保証するので、例外が生じた場合、レスポンスでのステータスコードの設定が働きません。ステータスコードをオーバーライドしたい場合は（適切な理由が無い限りそうすべきではありませんが）、 <tt class="docutils literal"><span class="pre">X-Status-Code</span></tt> ヘッダをセットしてください。</p>
+<p>Silexはレスポンスのステータスコードが例外に沿うような適切な物にセットされることを保証するので、例外が生じた場合、レスポンスでのステータスコードの設定が働きません。ステータスコードをオーバーライドしたい場合は（適切な理由が無い限りそうすべきではありませんが）、 <code class="docutils literal"><span class="pre">X-Status-Code</span></code> ヘッダをセットしてください。</p>
 <div class="last highlight-php"><div class="highlight"><pre><span class="k">return</span> <span class="k">new</span> <span class="nx">Response</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="mi">404</span> <span class="cm">/* 無視されます */</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;X-Status-Code&#39;</span> <span class="o">=&gt;</span> <span class="mi">200</span><span class="p">));</span>
 </pre></div>
 </div>
@@ -555,7 +556,7 @@
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p>Silex には、デフォルトのエラーハンドラーが付いており、 <strong>debug</strong> を true にすることで、スタックトレースを含む詳細なエラーメッセージを表示します。 false の際には、シンプルなエラーメッセージを表示します。
-<tt class="docutils literal"><span class="pre">error()</span></tt> メソッドを通して登録したエラーハンドラーは常に優先されますが、デバッグモードが有効の際に表示する便利なエラーも次のようにすれば大丈夫です。</p>
+<code class="docutils literal"><span class="pre">error()</span></code> メソッドを通して登録したエラーハンドラーは常に優先されますが、デバッグモードが有効の際に表示する便利なエラーも次のようにすれば大丈夫です。</p>
 <div class="last highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">,</span> <span class="nv">$code</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -568,7 +569,7 @@
 </pre></div>
 </div>
 </div>
-<p>より早い段階でリクエストを破棄するために <tt class="docutils literal"><span class="pre">abort</span></tt> を使うときにもエラーハンドラーは呼ばれます。</p>
+<p>より早い段階でリクエストを破棄するために <code class="docutils literal"><span class="pre">abort</span></code> を使うときにもエラーハンドラーは呼ばれます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$blogPosts</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$blogPosts</span><span class="p">[</span><span class="nv">$id</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s2">&quot;Post </span><span class="si">$id</span><span class="s2"> does not exist.&quot;</span><span class="p">);</span>
@@ -581,13 +582,13 @@
 </div>
 <div class="section" id="redirects">
 <h2>リダイレクト (Redirects)<a class="headerlink" href="#redirects" title="Permalink to this headline">¶</a></h2>
-<p>リダイレクトレスポンスを返すことでどんなページにもリダイレクトすることができます。このリダイレクト処理のレスポンスは <tt class="docutils literal"><span class="pre">redirect</span></tt> メソッドで作成することができます。</p>
+<p>リダイレクトレスポンスを返すことでどんなページにもリダイレクトすることができます。このリダイレクト処理のレスポンスは <code class="docutils literal"><span class="pre">redirect</span></code> メソッドで作成することができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="s1">&#39;/hello&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>この例では <tt class="docutils literal"><span class="pre">/</span></tt> から <tt class="docutils literal"><span class="pre">/hello</span></tt> にリダイレクトします。</p>
+<p>この例では <code class="docutils literal"><span class="pre">/</span></code> から <code class="docutils literal"><span class="pre">/hello</span></code> にリダイレクトします。</p>
 </div>
 <div class="section" id="forwards">
 <h2>フォワード (Forwards)<a class="headerlink" href="#forwards" title="Permalink to this headline">¶</a></h2>
@@ -605,7 +606,7 @@
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p><tt class="docutils literal"><span class="pre">UrlGeneratorProvider</span></tt> を使っている場合、URIを生成することが出来ます。</p>
+<p><code class="docutils literal"><span class="pre">UrlGeneratorProvider</span></code> を使っている場合、URIを生成することが出来ます。</p>
 <div class="last highlight-php"><div class="highlight"><pre><span class="nv">$request</span> <span class="o">=</span> <span class="nx">Request</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;url_generator&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">),</span> <span class="s1">&#39;GET&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -614,7 +615,7 @@
 </div>
 <div class="section" id="json">
 <h2>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h2>
-<p>JSONデータを返したければ、 <tt class="docutils literal"><span class="pre">json</span></tt> ヘルパーメソッドを使うことが出来ます。
+<p>JSONデータを返したければ、 <code class="docutils literal"><span class="pre">json</span></code> ヘルパーメソッドを使うことが出来ます。
 ヘルパーメソッドに対し、単にデータ、ステータスコード、ヘッダを渡せばレスポンスのためのJSONが生成されます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/users/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$user</span> <span class="o">=</span> <span class="nx">getUser</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
@@ -645,7 +646,7 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>大きいかたまり(チャンク)で送信したい場合は、 <tt class="docutils literal"><span class="pre">ob_fluch</span></tt> と <tt class="docutils literal"><span class="pre">flush</span></tt> を全てのチャンクの後で呼んでください。</p>
+<p>大きいかたまり(チャンク)で送信したい場合は、 <code class="docutils literal"><span class="pre">ob_fluch</span></code> と <code class="docutils literal"><span class="pre">flush</span></code> を全てのチャンクの後で呼んでください。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$stream</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nv">$fh</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">&#39;http://www.example.com/&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nb">feof</span><span class="p">(</span><span class="nv">$fh</span><span class="p">))</span> <span class="p">{</span>
@@ -660,7 +661,7 @@
 </div>
 <div class="section" id="sending-a-file">
 <h2>ファイル送信 (Sending a file)<a class="headerlink" href="#sending-a-file" title="Permalink to this headline">¶</a></h2>
-<p>もしファイルを返したければ、 <tt class="docutils literal"><span class="pre">sendFile</span></tt> というヘルパーメソッドが使えます。これによって、公に利用可能でないかもしれないファイルを返すことが容易になります。単にファイルパスとステータスコードとヘッダとコンテンツの位置をヘルパーメソッドに渡すと、 <tt class="docutils literal"><span class="pre">BinaryFileResponse</span></tt> に基づいたレスポンスが生成されます。</p>
+<p>もしファイルを返したければ、 <code class="docutils literal"><span class="pre">sendFile</span></code> というヘルパーメソッドが使えます。これによって、公に利用可能でないかもしれないファイルを返すことが容易になります。単にファイルパスとステータスコードとヘッダとコンテンツの位置をヘルパーメソッドに渡すと、 <code class="docutils literal"><span class="pre">BinaryFileResponse</span></code> に基づいたレスポンスが生成されます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/files/{path}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$path</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">file_exists</span><span class="p">(</span><span class="s1">&#39;/base/path/&#39;</span> <span class="o">.</span> <span class="nv">$path</span><span class="p">))</span> <span class="p">{</span>
         <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">abort</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
@@ -713,7 +714,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>新しく定義したルーティングクラスを使うためには <tt class="docutils literal"><span class="pre">$app['route_class']</span></tt>
+<p>新しく定義したルーティングクラスを使うためには <code class="docutils literal"><span class="pre">$app['route_class']</span></code>
 をオーバーライドしてください。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;route_class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;MyRoute&#39;</span><span class="p">;</span>
 </pre></div>
@@ -728,8 +729,8 @@
 <p>ルーティング変数や、リクエストから受け取るされる GET/POST の変数など、ユーザーが入力した値を出力するときはいつでも、正しくエスケープ処理を行う必要があります。
 そうすることでクロスサイトスクリプティング(XSS)を防ぐことができます。</p>
 <ul>
-<li><p class="first"><strong>HTML のエスケープ処理</strong>: HTML のエスケープ処理のために PHP は <tt class="docutils literal"><span class="pre">htmlspecialchars</span></tt> 関数 を用意してくれています。
-Silex ではこの関数へのショートカットとして <tt class="docutils literal"><span class="pre">escape</span></tt> メソッドを次のように使うことができます。</p>
+<li><p class="first"><strong>HTML のエスケープ処理</strong>: HTML のエスケープ処理のために PHP は <code class="docutils literal"><span class="pre">htmlspecialchars</span></code> 関数 を用意してくれています。
+Silex ではこの関数へのショートカットとして <code class="docutils literal"><span class="pre">escape</span></code> メソッドを次のように使うことができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
     <span class="k">return</span> <span class="s2">&quot;You provided the name </span><span class="si">{</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">;</span>
@@ -738,7 +739,7 @@ Silex ではこの関数へのショートカットとして <tt class="docutils
 </div>
 <p>もし Twig テンプレートを使うのであれば、 Twig が用意してくれているエスケープのための記述を使ったり、自動エスケープ機能を使うべきです。</p>
 </li>
-<li><p class="first"><strong>JSON のエスケープ処理</strong>: もし JSON フォーマットのデータをアプリケーションをで提供するなら、 Silexの <tt class="docutils literal"><span class="pre">json</span></tt> 関数を使うべきです。</p>
+<li><p class="first"><strong>JSON のエスケープ処理</strong>: もし JSON フォーマットのデータをアプリケーションをで提供するなら、 Silexの <code class="docutils literal"><span class="pre">json</span></code> 関数を使うべきです。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/name.json&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Silex\Application</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
     <span class="k">return</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">));</span>
@@ -747,6 +748,8 @@ Silex ではこの関数へのショートカットとして <tt class="docutils
 </div>
 </li>
 </ul>
+<p>commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/usage.rst">https://github.com/silexphp/Silex/blob/master/doc/usage.rst</a></p>
 </div>
 </div>
 </div>

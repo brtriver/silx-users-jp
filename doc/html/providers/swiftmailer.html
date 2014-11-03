@@ -66,7 +66,7 @@
 <h1>SwiftmailerServiceProvider<a class="headerlink" href="#swiftmailerserviceprovider" title="Permalink to this headline">¶</a></h1>
 <p><em>SwiftmailerServiceProvider</em> は <a class="reference external" href="http://swiftmailer.org">Swift Mailer</a> ライブラリを使用した
 メール送信のためのサービスを提供します。</p>
-<p><tt class="docutils literal"><span class="pre">mailer</span></tt> サービスを使用し、簡単にメールを送信することができます。
+<p><code class="docutils literal"><span class="pre">mailer</span></code> サービスを使用し、簡単にメールを送信することができます。
 デフォルトでは、SMTP プロトコルでのメール送信を試みます。</p>
 <div class="section" id="id1">
 <h2>パラメーター<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
@@ -109,7 +109,7 @@
 </div>
 </li>
 <li><p class="first"><strong>swiftmailer.transport</strong>: メール送信のトランスポートです。
-デフォルトは、 <tt class="docutils literal"><span class="pre">Swift_Transport_EsmtpTransport</span></tt> 。</p>
+デフォルトは、 <code class="docutils literal"><span class="pre">Swift_Transport_EsmtpTransport</span></code> 。</p>
 </li>
 <li><p class="first"><strong>swiftmailer.transport.buffer</strong>: トランスポートで使用される
 ストリームバッファ。</p>
@@ -129,16 +129,17 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>SwiftMailerは&#8221;fat&#8221; Silexに付属し、標準サイズのSilexには付属しません。
-もしComposerを使用している場合には、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。</p>
-<div class="last highlight-json"><pre>"require": {
-    "swiftmailer/swiftmailer": "&gt;=4.1.2,&lt;4.2-dev"
-}</pre>
+もしComposerを使用している場合には、 <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに依存関係を記述してください。</p>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;swiftmailer/swiftmailer&quot;: &quot;&gt;=4.1.2,&lt;4.2-dev&quot;
+}
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>使用方法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>Swiftmaielr プロバイダーは、 <tt class="docutils literal"><span class="pre">mailer</span></tt> サービスを提供します。</p>
+<p>Swiftmaielr プロバイダーは、 <code class="docutils literal"><span class="pre">mailer</span></code> サービスを提供します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/feedback&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;request&#39;</span><span class="p">];</span>
 
@@ -154,10 +155,22 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-</div>
 <div class="section" id="id5">
-<h2>トレイト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">Silex\Application\SwiftmailerTrait</span></tt> は以下のショートカットを追加します。</p>
+<h3>コマンドでの使用方法<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Swiftmailer プロバイダーは <code class="docutils literal"><span class="pre">KernelEvents::TERMINATE</span></code> を使ってメールを送信します。
+これはレスポンスが送信された後に発火します。しかしながら、コンソールコマンドからではこのイベントが発火しないため、メールが送信されません。</p>
+<p>このような理由で、コマンドコンソールからメールを送信する場合は、手動でコマンドが終了する前にメッセージスプールをフラッシュさせてください。そうするためには、次のようなコードを利用します:</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;swiftmailer.spooltransport&#39;</span><span class="p">]</span>
+    <span class="o">-&gt;</span><span class="na">getSpool</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">flushQueue</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;swiftmailer.transport&#39;</span><span class="p">])</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>トレイト<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">Silex\Application\SwiftmailerTrait</span></code> は以下のショートカットを追加します。</p>
 <ul class="simple">
 <li><strong>mail</strong>: メールを送信します。</li>
 </ul>
@@ -170,6 +183,8 @@
 </div>
 <p>詳細は、 <a class="reference external" href="http://swiftmailer.org">Swift Mailer documentation</a>
 を参照してください。</p>
+<p>commit: 09e21e66d79d856be90016bb39b82cf32b18b36e
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/swiftmailer">https://github.com/silexphp/Silex/blob/master/doc/providers/swiftmailer</a>.rst&lt;</p>
 </div>
 </div>
 
@@ -201,8 +216,11 @@
 <li><a class="reference internal" href="#id1">パラメーター</a></li>
 <li><a class="reference internal" href="#id2">サービス</a></li>
 <li><a class="reference internal" href="#id3">登録</a></li>
-<li><a class="reference internal" href="#id4">使用方法</a></li>
-<li><a class="reference internal" href="#id5">トレイト</a></li>
+<li><a class="reference internal" href="#id4">使用方法</a><ul>
+<li><a class="reference internal" href="#id5">コマンドでの使用方法</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">トレイト</a></li>
 </ul>
 </li>
 </ul>

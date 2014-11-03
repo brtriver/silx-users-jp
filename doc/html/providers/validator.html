@@ -79,12 +79,12 @@
 <li><p class="first"><strong>validator.mapping.class_metadata_factory</strong>: メタデータ読み込みのためのファクトリー。
 バリデーション制約情報をクラスから読み込むことができます。
 標準では StaticMethodLoader&#8211;ClassMetadataFactory 。</p>
-<p>これを利用することでデータクラスに静的な <tt class="docutils literal"><span class="pre">loadValidatorMetadata</span></tt> を定義できるということです。
+<p>これを利用することでデータクラスに静的な <code class="docutils literal"><span class="pre">loadValidatorMetadata</span></code> を定義できるということです。
 このメソッドは ClassMetadata を引数として取ります。
 そして ClassMetadata インスタンス上に制約を設定することができるようになります。</p>
 </li>
 <li><p class="first"><strong>validator.validator_factory</strong>: ConstraintValidators のためのファクトリー。
-標準は <tt class="docutils literal"><span class="pre">ConstraintValidatorFactory</span></tt> 。
+標準は <code class="docutils literal"><span class="pre">ConstraintValidatorFactory</span></code> 。
 ほとんどが Validator の内部で利用されます。</p>
 </li>
 </ul>
@@ -97,19 +97,20 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Symfony Validator Componentは&#8221;fat&#8221; Silexに付属し、標準サイズのSilexには付属しません。
-もしComposerを使用している場合には、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。</p>
-<div class="last highlight-json"><pre>"require": {
-    "symfony/validator": "~2.3"
-}</pre>
+もしComposerを使用している場合には、 <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに依存関係を記述してください。</p>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/validator&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>使い方<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>Validator プロバイダーは <tt class="docutils literal"><span class="pre">validator</span></tt> サービスを提供します。</p>
+<p>Validator プロバイダーは <code class="docutils literal"><span class="pre">validator</span></code> サービスを提供します。</p>
 <div class="section" id="id5">
 <h3>値のバリデーション<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>直接 <tt class="docutils literal"><span class="pre">validateValue</span></tt> バリデーターメソッドを使うことで値の検証が行えます。</p>
+<p>直接 <code class="docutils literal"><span class="pre">validateValue</span></code> バリデーターメソッドを使うことで値の検証が行えます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/validate/{email}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$email</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
@@ -128,18 +129,6 @@
 <h3>連想配列のバリデーション<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>連想配列のバリデーションは複数の制約を持つ値のバリデーションに似ています。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Book</span>
-
-    <span class="k">public</span> <span class="nv">$title</span><span class="p">;</span>
-    <span class="k">public</span> <span class="nv">$author</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Author</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$first_name</span><span class="p">;</span>
-    <span class="k">public</span> <span class="nv">$last_name</span><span class="p">;</span>
-<span class="p">}</span>
 
 <span class="nv">$book</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Book&#39;</span><span class="p">,</span>
@@ -170,8 +159,20 @@
 </div>
 <div class="section" id="id7">
 <h3>オブジェクトのバリデーション<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
-<p>もしクラスにバリデーションを追加したいなら、クラスのプロパティやゲッターに対する制約を定義し、 <tt class="docutils literal"><span class="pre">validate</span></tt> メソッドをコールできます。</p>
+<p>もしクラスにバリデーションを追加したいなら、クラスのプロパティやゲッターに対する制約を定義し、 <code class="docutils literal"><span class="pre">validate</span></code> メソッドをコールできます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Book</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$title</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$author</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Author</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$first_name</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$last_name</span><span class="p">;</span>
+<span class="p">}</span>
 
 <span class="nv">$author</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Author</span><span class="p">();</span>
 <span class="nv">$author</span><span class="o">-&gt;</span><span class="na">first_name</span> <span class="o">=</span> <span class="s1">&#39;Fabien&#39;</span><span class="p">;</span>
@@ -201,7 +202,7 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>クラスに対する制約を静的な <tt class="docutils literal"><span class="pre">loadValidatorMetadata</span></tt> メソッドとしてあなたのクラスに追加することで宣言することも出来ます。</p>
+<p>クラスに対する制約を静的な <code class="docutils literal"><span class="pre">loadValidatorMetadata</span></code> メソッドとしてあなたのクラスに追加することで宣言することも出来ます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Validator\Mapping\ClassMetadata</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\Validator\Constraints</span> <span class="k">as</span> <span class="nx">Assert</span><span class="p">;</span>
 
@@ -253,12 +254,12 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">ゲッターへ制約を与えるには <tt class="docutils literal"><span class="pre">addGetterConstraint()</span></tt> を使ってください。クラス自身に制約を与えるには <tt class="docutils literal"><span class="pre">addConstraint()</span></tt> を使ってください。</p>
+<p class="last">ゲッターへ制約を与えるには <code class="docutils literal"><span class="pre">addGetterConstraint()</span></code> を使ってください。クラス自身に制約を与えるには <code class="docutils literal"><span class="pre">addConstraint()</span></code> を使ってください。</p>
 </div>
 </div>
 <div class="section" id="id8">
 <h3>翻訳<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<p>エラーメッセージを翻訳可能にするためには、translator providerを使い、 <tt class="docutils literal"><span class="pre">validators</span></tt> にメッセージを登録してください。</p>
+<p>エラーメッセージを翻訳可能にするためには、translator providerを使い、 <code class="docutils literal"><span class="pre">validators</span></code> にメッセージを登録してください。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;translator.domains&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;validators&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;fr&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -269,6 +270,8 @@
 </pre></div>
 </div>
 <p>詳細については、 <a class="reference external" href="http://symfony.com/doc/2.0/book/validation.html">Symfony2 Validation のドキュメント</a> を参照してください。</p>
+<p>commit: 6d03fe4107485fca92f6d6da9152f190b8a1e52a
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/validator.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/validator.rst</a></p>
 </div>
 </div>
 </div>

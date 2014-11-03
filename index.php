@@ -1,23 +1,19 @@
 <?php
-// 1-1. phar が利用できる環境の場合は silex.phar を読み込み
-require_once __DIR__.'/silex.phar';
-// 1-2. phar が利用できない環境の場合は ソースを直接読み込み
-//require_once __DIR__.'/Silex.git/autoload.php';
+// 1. autoloader
+require_once __DIR__.'/vendor/autoload.php';
 
-// 2. use で追加で利用する名前空間の指定。ここではエラー処理をerrorメソッドで行っているので追加
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-// 3. Silexのアプリケーションを作成
+// 2. Silexのアプリケーションを作成
 $app = new Silex\Application();
 
-// 4. アプリケーションにエクステンションを登録
-$app->register(new Silex\Extension\TwigExtension(), array(
-    'twig.path'       => __DIR__.'/views',
-    'twig.class_path' => __DIR__.'/vendor/Twig/lib',
+// 3. アプリケーションにエクステンションを登録
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views',
 ));
-$app->register(new Silex\Extension\UrlGeneratorExtension());
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // 5-1. ユーザーガイドのTOPページを表示
 //      '/' にGETメソッドででアクセスされた場合にこの部分が処理されます。

@@ -39,3 +39,6 @@ Silexも理論的には、これを自動実行することが可能です。し
     use Symfony\Component\Debug\ExceptionHandler;
 
     ExceptionHandler::register(false);
+
+commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: https://github.com/silexphp/Silex/blob/master/doc/cookbook/error_handler.rst

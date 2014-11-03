@@ -74,9 +74,9 @@
 <span class="p">});</span>
 
 <span class="k">foreach</span> <span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="s1">&#39;payments&#39;</span><span class="p">,</span> <span class="s1">&#39;stats&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$channel</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.&#39;</span><span class="o">.</span><span class="nv">$channel</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$channel</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.&#39;</span><span class="o">.</span><span class="nv">$channel</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$channel</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.factory&#39;</span><span class="p">](</span><span class="nv">$channel</span><span class="p">);</span>
-    <span class="p">});</span>
+    <span class="p">};</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -84,13 +84,13 @@
 サービスごとに設定しましょう。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Monolog\Handler\StreamHandler</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$log</span> <span class="o">=</span> <span class="k">new</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.logger.class&#39;</span><span class="p">](</span><span class="s1">&#39;payments&#39;</span><span class="p">);</span>
     <span class="nv">$handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">StreamHandler</span><span class="p">(</span><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payments.logfile&#39;</span><span class="p">],</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payment.level&#39;</span><span class="p">]);</span>
     <span class="nv">$log</span><span class="o">-&gt;</span><span class="na">pushHandler</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$log</span><span class="p">;</span>
-<span class="p">});</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 <p>または、ファクトリーをもっと複雑にして、
@@ -112,13 +112,15 @@
     <span class="k">return</span> <span class="nv">$log</span><span class="p">;</span>
 <span class="p">});</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payments.handlers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;monolog.payments.handlers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">array</span><span class="p">(</span>
         <span class="k">new</span> <span class="nx">StreamHandler</span><span class="p">(</span><span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../payments.log&#39;</span><span class="p">,</span> <span class="nx">Logger</span><span class="o">::</span><span class="na">DEBUG</span><span class="p">),</span>
     <span class="p">);</span>
-<span class="p">});</span>
+<span class="p">};</span>
 </pre></div>
 </div>
+<p>commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/multiple_loggers.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/multiple_loggers.rst</a></p>
 </div>
 
 

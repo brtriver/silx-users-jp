@@ -68,7 +68,7 @@
 <div class="section" id="id1">
 <h2>パラメータ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>form.secret</strong>: この秘密の値は特定のページでのCSRFトークンとして生成され、バリデーションされます。この値を静的かつランダムに生成された値にすることはフォームのハイジャック対策として重要です。デフォルトでは <tt class="docutils literal"><span class="pre">md5(__DIR__)</span></tt> になっています。</li>
+<li><strong>form.secret</strong>: この秘密の値は特定のページでのCSRFトークンとして生成され、バリデーションされます。この値を静的かつランダムに生成された値にすることはフォームのハイジャック対策として重要です。デフォルトでは <code class="docutils literal"><span class="pre">md5(__DIR__)</span></code> になっています。</li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -94,34 +94,38 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Symfony Form Component と、それの全ての依存関係(オプションや必須を含む) はは&#8221;fat&#8221; Silexに付属し、標準サイズのSilexには付属しません。
-もしComposerを使用している場合には、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。</p>
-<div class="highlight-json"><pre>"require": {
-    "symfony/form": "~2.3"
-}</pre>
+もしComposerを使用している場合には、 <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに依存関係を記述してください。</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/form&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
-<p>バリデーションエクステンションも使用したい場合、それらの依存関係として <tt class="docutils literal"><span class="pre">symfony/config</span></tt> と <tt class="docutils literal"><span class="pre">`symfony/translation</span></tt> が必要です。</p>
-<div class="highlight-json"><pre>"require": {
-    "symfony/validator": "~2.3",
-    "symfony/config": "~2.3",
-    "symfony/translation": "~2.3"
-}</pre>
+<p>バリデーションエクステンションも使用したい場合、それらの依存関係として <code class="docutils literal"><span class="pre">symfony/config</span></code> と <code class="docutils literal"><span class="pre">`symfony/translation</span></code> が必要です。</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/validator&quot;: &quot;~2.3&quot;,
+    &quot;symfony/config&quot;: &quot;~2.3&quot;,
+    &quot;symfony/translation&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
 <p>Symfony FormコンポーネントはPHP intl エクステンションに依存しています。
 もし持っていなかったら、Symfony Localeコンポーネントをインストールして置換してください。</p>
-<div class="highlight-json"><pre>"require": {
-    "symfony/locale": "~2.3"
-}</pre>
+<div class="highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/locale&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
 <p>Twigテンプレートでフォームを使用したい場合はSymfony Twig Bridgeをインストールしてください。</p>
-<div class="last highlight-json"><pre>"require": {
-    "symfony/twig-bridge": "~2.3"
-}</pre>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/twig-bridge&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>使用方法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>FormServiceProviderは <tt class="docutils literal"><span class="pre">form.factory</span></tt> サービスを提供します。以下は使用例です。</p>
+<p>FormServiceProviderは <code class="docutils literal"><span class="pre">form.factory</span></code> サービスを提供します。以下は使用例です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">match</span><span class="p">(</span><span class="s1">&#39;/form&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// フォームの初回表示時用のデフォルトデータ</span>
     <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
@@ -154,8 +158,8 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>以下が <tt class="docutils literal"><span class="pre">index.twig</span></tt> フォームテンプレートです。( <tt class="docutils literal"><span class="pre">symfony/twig-</span>
-<span class="pre">bridge</span></tt> が必要です。)</p>
+<p>以下が <code class="docutils literal"><span class="pre">index.twig</span></code> フォームテンプレートです。( <code class="docutils literal"><span class="pre">symfony/twig-</span>
+<span class="pre">bridge</span></code> が必要です。)</p>
 <div class="highlight-jinja"><div class="highlight"><pre><span class="x">&lt;form action=&quot;#&quot; method=&quot;post&quot;&gt;</span>
 <span class="x">    </span><span class="cp">{{</span> <span class="nv">form_widget</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
 
@@ -186,34 +190,42 @@
     <span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">form.extensions</span></tt> を拡張することでフォームエクステンションを登録することができます。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;form.extensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.extensions&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$extensions</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<p><code class="docutils literal"><span class="pre">form.types</span></code> を拡張することでフォームタイプを登録することができます。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.types&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$types</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$types</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourFormType</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nv">$types</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">form.extensions</span></code> を拡張することでフォームエクステンションを登録することができます。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.extensions&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$extensions</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$extensions</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourTopFormExtension</span><span class="p">();</span>
 
     <span class="k">return</span> <span class="nv">$extensions</span><span class="p">;</span>
-<span class="p">}));</span>
+<span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">form.type.extensions</span></tt> を拡張することでフォームタイプエクステンションを登録することができます。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;form.type.extensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.type.extensions&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$extensions</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<p><code class="docutils literal"><span class="pre">form.type.extensions</span></code> を拡張することでフォームタイプエクステンションを登録することができます。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.type.extensions&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$extensions</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$extensions</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourFormTypeExtension</span><span class="p">();</span>
 
     <span class="k">return</span> <span class="nv">$extensions</span><span class="p">;</span>
-<span class="p">}));</span>
+<span class="p">});</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">form.type.guessers</span></tt> を拡張することでフォームタイプ推測器を登録することができます。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;form.type.guessers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.type.guessers&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$guessers</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<p><code class="docutils literal"><span class="pre">form.type.guessers</span></code> を拡張することでフォームタイプ推測器を登録することができます。</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;form.type.guessers&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$guessers</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$guessers</span><span class="p">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YourFormTypeGuesser</span><span class="p">();</span>
 
     <span class="k">return</span> <span class="nv">$guessers</span><span class="p">;</span>
-<span class="p">}));</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>トレイト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">Silex\Application\FormTrait</span></tt> は以下のショートカットを追加します。</p>
+<p><code class="docutils literal"><span class="pre">Silex\Application\FormTrait</span></code> は以下のショートカットを追加します。</p>
 <ul class="simple">
 <li><strong>form</strong>: フォームビルダーインスタンスを生成します。</li>
 </ul>
@@ -221,6 +233,8 @@
 </pre></div>
 </div>
 <p>より詳しい情報については、 <a class="reference external" href="http://symfony.com/doc/2.3/book/forms.html">Symfony2 Forms ドキュメント</a> を参照してください.</p>
+<p>commit: d74cb1f9b415356c598de181612eb251246c9408
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/form.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/form.rst</a></p>
 </div>
 </div>
 

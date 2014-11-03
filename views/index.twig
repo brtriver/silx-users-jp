@@ -12,11 +12,42 @@
 <h3>基本情報</h3>
 <ul>
 	<li><a href="http://silex.sensiolabs.org/">Silex 公式サイト</a></li>
-	<li><a href="http://silex.sensiolabs.org/documentation">Silex ドキュメント (英語)</a></li>
-	<li><a href="{{jpdoc}}">Silex ドキュメント (日本語)</a></li>
+	<li><a href="http://silex.sensiolabs.org/documentation">Silex ドキュメント 1.2 (英語)</a></li>
+	<li><a href="{{jpdoc}}">Silex ドキュメント 1.2 (日本語)</a></li>
+	<li><a href="https://github.com/silexphp/Silex/tree/1.1/doc">Silex ドキュメント 1.1 (英語)</a></li>
+</ul>
+
+<h3>Silexのバージョンの注意</h3>
+<p>Pimple のバージョンに注意</p>
+  <ul>
+    <li><a href="http://iakio.hatenablog.com/entry/2014/02/13/233610">Pimple 2.0がリリースされたのでPimpleについて復習してみる</a></li>
+    <li><a href="https://github.com/fabpot/Pimple/tree/1.1">Pimple 1.1 ドキュメント</a></li>
+    <li><a href="http://pimple.sensiolabs.org/">Pimple 2 ドキュメント</a></li>
+  </ul>
+
+<h3>公式ドキュメント</h3>
+<ul>
+	<li><a href="{{jpdoc}}/intro.html"> Silex って何？</a></li>
+	<li><a href="{{jpdoc}}/usage.html"> 使い方</a></li>
+	<li><a href="{{jpdoc}}/middlewares.html"> ミドルウェア</a></li>
+	<li><a href="{{jpdoc}}/organizing_controllers.html"> コントローラーの組織化</a></li>
+	<li><a href="{{jpdoc}}/services.html"> サービス</a></li>
+	<li><a href="{{jpdoc}}/providers.html"> プロバイダー</a></li>
+	<li><a href="{{jpdoc}}/testing.html"> テスト</a></li>
+	<li><a href="{{jpdoc}}/cookbook/index.html"> クックブック</a></li>
+	<li><a href="{{jpdoc}}/internals.html"> 内部の仕組み</a></li>
+	<li><a href="{{jpdoc}}/web_servers.html"> ウェブサーバーの設定</a></li>
+	<li><a href="{{jpdoc}}/providers/index.html"> 標準のプロバイダー一覧</a></li>
+</ul>
+
+<h3>ダウンロード</h3>
+<ul>
+	<li><a href="http://silex.sensiolabs.org/download"> ダウンロードとインストール (composer, .zip or .tgz)</a></li>
+	<li><a href="https://github.com/silexphp/Silex">silexphp/Silex (github)</a></li>
 </ul>
 
 <h3> silex.pharが動作しない場合</h3>
+<h5 style="color:red"> 現在の Silex は phar で配布されていません。composerまたはアーカイブからのインストールが推奨です</h5>
 <ul>
 	<li><a href="{{jpdoc}}/usage.html#php"> PHPの設定(公式ドキュメント)</a></li>
 	<li><a href="http://groups.google.com/group/symfony-users-ja/browse_thread/thread/aa92681ee68f7fa8"> Suhosin適用済みのPHPでSilexを動かすと真っ白なページが返される場合の対処法 </a></li>
@@ -24,23 +55,7 @@
 
 </ul>
 
-<h3>公式ドキュメント</h3>
-<ul>
-	<li><a href="{{jpdoc}}/intro.html"> Silex って何？</a></li>
-	<li><a href="{{jpdoc}}/usage.html"> 使い方</a></li>
-	<li><a href="{{jpdoc}}/services.html"> サービスコンテナ</a></li>
-	<li><a href="{{jpdoc}}/extensions.html"> エクステンションの仕組み</a></li>
-	<li><a href="{{jpdoc}}/testing.html"> テスト</a></li>
-	<li><a href="{{jpdoc}}/cookbook.html"> クックブック</a></li>
-	<li><a href="{{jpdoc}}/internals.html"> 内部の仕組み</a></li>
-	<li><a href="{{jpdoc}}/provider/index.html"> 標準のプロバイダー一覧</a></li>
-</ul>
 
-<h3>ダウンロード</h3>
-<ul>
-	<li><a href="http://silex.sensiolabs.org/get/silex.phar"> silex.phar</a></li>
-	<li><a href="http://github.com/fabpot/Silex"> fabpot/Silex - github</a></li>
-</ul>
 
 </td>
 <td valign="top" width="25%">
@@ -52,21 +67,29 @@
     <li><a href="{{jpdoc}}{{base}}routing"> ルーティングの書き方</a></li>
     <li><a href="{{jpdoc}}{{base}}route-variables"> ルーティングから変数を取得</a></li>
     <li><a href="{{jpdoc}}{{base}}named-routes"> ルーティングに名前をつける</a></li>
-    <li><a href="{{jpdoc}}{{base}}before-and-after-filters"> 前処理と後処理</a></li>
+    <li>
+      <ul>
+      <li><a href="{{jpdoc}}/middlewares.html#before-middleware"> 前処理ミドルウェア(before)</a></li>
+      <li><a href="{{jpdoc}}/middlewares.html#after-middleware"> 後処理ミドルウェア(after)</a></li>
+      <li><a href="{{jpdoc}}/middlewares.html#finish-middleware"> 完了ミドルウェア(finish)</a></li>
+      </ul>
+    </li>
     <li><a href="{{jpdoc}}{{base}}error-handlers"> エラーハンドリング</a></li>
     <li><a href="{{jpdoc}}{{base}}redirects"> リダイレクト処理</a></li>
     <li><a href="{{jpdoc}}{{base}}escaping"> エスケープ処理(XSS対策)</a></li>
-    <li><a href="{{jpdoc}}{{base}}reusing-applications"> アプリケーションの外部化</a></li>
+    <li><a href="{{jpdoc}}/organizing_controllers.html"> コントローラーのグループ化</a></li>
     {% set base = "/services.html#" %}
+    <li><a href="{{jpdoc}}{{base}}id2"> サービスコンテナ Pimple</a></li>
     <li><a href="{{jpdoc}}{{base}}parameters"> サービスコンテナに変数をセット(define)</a></li>
     <li><a href="{{jpdoc}}{{base}}service-definitions"> サービスの定義(遅延読み込み)</a></li>
-    <li><a href="{{jpdoc}}{{base}}shared-services"> 共有サービスの定義(shared service)</a></li>
     <li><a href="{{jpdoc}}{{base}}protected-closures"> パラメータとしてクロージャを保存(Protected closures)</a></li>
     <li><a href="{{jpdoc}}{{base}}core-services"> パラメータにアクセス(Request サービス)</a></li>
     {% set base = "/providers.html#" %}
     <li><a href="{{jpdoc}}{{base}}loading-extensions"> プロバイダーの読み込み</a></li>
+    <li><a href="{{jpdoc}}{{base}}id3"> プロバイダーの作成</a></li>
+    <li><a href="{{jpdoc}}{{base}}controllers-providers"> プロバイダーの作成</a></li>
     {% set base = "/testing.html#" %}
-    <li><a href="{{jpdoc}}{{base}}phpunit-test"> PHPUnit</a></li>
+    <li><a href="{{jpdoc}}{{base}}id2"> PHPUnit</a></li>
     <li><a href="{{jpdoc}}{{base}}web"> Webテストケース</a></li>
     {% set base = "/internals.html#" %}
     <li><a href="{{jpdoc}}{{base}}symfony2"> Silex が利用している Symfony2 のコンポーネント</a></li>
@@ -77,18 +100,26 @@
 </h3>
 <ul>
     {% set base = "/usage.html#" %}
-    <li><a href="{{jpdoc}}{{base}}get"> $app->get()</a></li>
-    <li><a href="{{jpdoc}}{{base}}post"> $app->post()</a></li>
-    <li><a href="{{jpdoc}}{{base}}id2"> $app->match() ..他</a></li>
-    <li><a href="{{jpdoc}}{{base}}id3"> $app->convert()</a></li>
-    <li><a href="{{jpdoc}}{{base}}id4"> $app->assert()</a></li>
-    <li><a href="{{jpdoc}}{{base}}id5"> $app->value()</a></li>
+    <li><a href="{{jpdoc}}{{base}}get-example-get-route"> $app->get()</a></li>
+    <li><a href="{{jpdoc}}{{base}}post-example-post-route"> $app->post()</a></li>
+    <li><a href="{{jpdoc}}{{base}}other-methods"> $app->put(), $app->delete()</a></li>
+    <li><a href="{{jpdoc}}{{base}}other-methods"> $app->match() ..他</a></li>
+    <li><a href="{{jpdoc}}{{base}}route-variables-converters"> $app->convert()</a></li>
+    <li><a href="{{jpdoc}}{{base}}requirements"> $app->assert()</a></li>
+    <li><a href="{{jpdoc}}{{base}}default-values"> $app->value()</a></li>
     <li><a href="{{jpdoc}}{{base}}named-routes"> $app->bind()</a></li>
-    <li><a href="{{jpdoc}}{{base}}before-and-after-filters"> $app->before(), $app->after()</a></li>
+    <li><a href="{{jpdoc}}/middlewares.html#before-middleware"> $app->before()</a></li>
+    <li><a href="{{jpdoc}}/middlewares.html#after-middleware"> $app->after()</a></li>
+    <li><a href="{{jpdoc}}/middlewares.html#finish-middleware"> $app->finish()</a></li>
     <li><a href="{{jpdoc}}{{base}}error-handlers"> $app->error()</a></li>
-    <li><a href="{{jpdoc}}{{base}}reusing-applications"> $app->mount()</a></li>
+    <li><a href="{{jpdoc}}{{base}}redirects"> $app->redirect()</a></li>
+    <li><a href="{{jpdoc}}{{base}}forwards"> $app->forwards()</a></li>
+    <li><a href="{{jpdoc}}{{base}}json"> $app->json()</a></li>
+    <li><a href="{{jpdoc}}{{base}}streaming"> $app->stream()</a></li>
+    <li><a href="{{jpdoc}}{{base}}sending-a-file"> $app->sendFile()</a></li>
+    <li><a href="{{jpdoc}}{{base}}traits"> トレイト(>= PHP5.4)</a></li>
     {% set base = "/services.html#" %}
-    <li><a href="{{jpdoc}}{{base}}shared-services"> $app->share()</a></li>
+    <li><a href="{{jpdoc}}{{base}}id3"> クロージャをコンテナに追加 </a></li>
     <li><a href="{{jpdoc}}{{base}}protected-closures"> $app->protect()</a></li>
     <li><a href="{{jpdoc}}{{base}}core-services"> $app['request']->get()</a></li>
 </ul>
@@ -102,17 +133,23 @@
     <li><a href="{{jpdoc}}{{base}}doctrine.html"> DoctrineServiceProvider(データベースアクセス)</a></li>
     <li><a href="{{jpdoc}}{{base}}monolog.html"> MonologServiceProvider(ロガー)</a></li>
     <li><a href="{{jpdoc}}{{base}}session.html"> SessionServiceProvider(セッション)</a></li>
-    <li><a href="{{jpdoc}}{{base}}twig.html"> TwigServiceProvider(テンプレート)</a></li>
+    <li><a href="{{jpdoc}}{{base}}swiftmailer.html"> SwiftmailerProvider(メール送信)</a></li>
     <li><a href="{{jpdoc}}{{base}}translation.html"> TranslationServiceProvider(国際化)</a></li>
+    <li><a href="{{jpdoc}}{{base}}twig.html"> TwigServiceProvider(テンプレート)</a></li>
     <li><a href="{{jpdoc}}{{base}}url_generator.html"> UrlGeneratorServiceProvider(ルーティング)</a></li>
-    <li><a href="{{jpdoc}}{{base}}validator.html"> validatorServiceProvider(バリデーター)</a></li>
+    <li><a href="{{jpdoc}}{{base}}form.html"> FormServiceProvider(フォーム)</a></li>
     <li><a href="{{jpdoc}}{{base}}http_cache.html"> HttpCacheServiceProvider(キャッシュ)</a></li>
+    <li><a href="{{jpdoc}}{{base}}http_fragment.html"> HttpFragmentServiceProvider(HTML断片化)</a></li>
+    <li><a href="{{jpdoc}}{{base}}security.html"> SecurityServiceProvider(セキュリティ)</a></li>
+    <li><a href="{{jpdoc}}{{base}}serialize.html"> SecurityServiceProvider(シリアライズ)</a></li>
+    <li><a href="{{jpdoc}}{{base}}remember_me.html"> RememberMeServiceProvider(認証)</a></li>
+    <li><a href="{{jpdoc}}{{base}}validator.html"> validatorServiceProvider(バリデーター)</a></li>
 </ul>
 <ul>
-    <li><a href="https://github.com/fabpot/Silex/wiki/Third-Party-ServiceProviders"> 公式サイトにまとめられたサードパーティ製プロバイダー一覧</a></li>
+    <li><a href="https://github.com/silexphp/Silex/wiki/Third-Party-ServiceProviders"> 公式サイトにまとめられたサードパーティ製プロバイダー一覧</a></li>
     <p>以下は 非公式プロバイダー</p>
     <li><a href="https://github.com/flintstones/Rest"> RestExtension</a></li>
-    <li><a href="http://d.hatena.ne.jp/brtRiver/20110417/1303005850"> PHPTALServiceProvider</a></li>
+    <li><a href="https://github.com/brtriver/PHPTALServiceProvider"> PHPTALServiceProvider</a></li>
     <li><a href="https://github.com/FractalizeR/Silex/compare/SmartyExtension"> SmartyExtension</a></li>
     <li><a href="https://github.com/flintstones/DoctrineOrm"> DoctrineOrmExtension</a></li>
     <li><a href="https://github.com/docteurklein/SilexExtensions"> DoctrineOrmExtension(その2)</a></li>
@@ -142,6 +179,20 @@
 
 </td>
 <td valign="top" width="25%">
+
+  <h3>Cookbook</h3>
+    {% set base = "/cookbook/" %}
+<ul>
+  <li><a href="{{jpdoc}}{{base}}assets.html">テンプレートでのアセット管理</a></li>
+  <li><a href="{{jpdoc}}{{base}}error_handler.html">エラーを例外に変換する方法</a></li>
+  <li><a href="{{jpdoc}}{{base}}form_no_csrf.html">FormExtensionを使用したフォームのCSRF保護の無効化</a></li>
+  <li><a href="{{jpdoc}}{{base}}json_request_body.html">JSON リクエストの受け入れ</a></li>
+  <li><a href="{{jpdoc}}{{base}}translating_validation_messages.html">バリデーションメッセージの翻訳</a></li>
+  <li><a href="{{jpdoc}}{{base}}session_storage.html">PdoSessionStorageを使ったデータベース上でのセッションの保存</a></li>
+  <li><a href="{{jpdoc}}{{base}}validator_yaml.html">YAMLを使用してバリデーションを設定</a></li>
+  <li><a href="{{jpdoc}}{{base}}sub_requests.html">サブリクエストの作成</a></li>
+  <li><a href="{{jpdoc}}{{base}}multiple_loggers.html">複数のモノログの使用</a></li>
+</ul>
 
 <h3>サンプル</h3>
 <ul>

@@ -73,7 +73,7 @@
 <div class="section" id="id1">
 <h2>パラメータ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>fragment.path</strong>: ESIおよびHInclude URLsのために生成されたURLに使うためのパス (標準では <tt class="docutils literal"><span class="pre">/_fragment</span></tt> )。</li>
+<li><strong>fragment.path</strong>: ESIおよびHInclude URLsのために生成されたURLに使うためのパス (標準では <code class="docutils literal"><span class="pre">/_fragment</span></code> )。</li>
 <li><strong>uri_signer.secret</strong>: URI  signerサービスで使うためのsecret (HInclude rendererで使用します)。</li>
 <li><strong>fragment.renderers.hinclude.global_template</strong>: HInclude rendererを使用した際の標準のコンテンツに使用するための、コンテンツかTwigテンプレート。</li>
 </ul>
@@ -99,7 +99,7 @@
 </div>
 <p>一つのリクエスト/コントローラー/テンプレートからページを構築する代わりに、
 フラグメントフレームワークは <strong>fragments</strong> を利用して、複数のコントローラ/サブリクエスト/サブテンプレートを使ってページを構築する機能を提供してくれます。</p>
-<p>&#8220;sub-pages&#8221; をインクルードするにはTwigの <tt class="docutils literal"><span class="pre">render()</span></tt> 関数を使いましょう。</p>
+<p>&#8220;sub-pages&#8221; をインクルードするにはTwigの <code class="docutils literal"><span class="pre">render()</span></code> 関数を使いましょう。</p>
 <div class="highlight-jinja"><div class="highlight"><pre><span class="x">ページのメインコンテンツ</span>
 
 <span class="cp">{{</span> <span class="nv">render</span><span class="o">(</span><span class="s1">&#39;/foo&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
@@ -107,7 +107,7 @@
 <span class="x">メインコンテンツの残り</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">render()</span></tt> は <tt class="docutils literal"><span class="pre">/foo</span></tt> URLにあるコンテンツで置き換えられます。(内部的には、サブリクエストがSilexによってハンドリングされてサブページがレンダリングされます。)</p>
+<p><code class="docutils literal"><span class="pre">render()</span></code> は <code class="docutils literal"><span class="pre">/foo</span></code> URLにあるコンテンツで置き換えられます。(内部的には、サブリクエストがSilexによってハンドリングされてサブページがレンダリングされます。)</p>
 <p>サブリクエストを内部で作成する代わりに、ESI(この場合、サブリクエストはリバースプロクシによってハンドリングされます。)や、HInclude strategies(この場合サブリクエストはウェブブラウザーによってハンドリングされます。)を使用することもできます。</p>
 <div class="highlight-jinja"><div class="highlight"><pre><span class="cp">{{</span> <span class="nv">render</span><span class="o">(</span><span class="nv">url</span><span class="o">(</span><span class="s1">&#39;route_name&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="x"></span>
 
@@ -116,6 +116,8 @@
 <span class="cp">{{</span> <span class="nv">render_hinclude</span><span class="o">(</span><span class="nv">url</span><span class="o">(</span><span class="s1">&#39;route_name&#39;</span><span class="o">))</span> <span class="cp">}}</span><span class="x"></span>
 </pre></div>
 </div>
+<p>commit: 21bf9c08280c4142752a5b1b8d452147183b4253
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/http_fragment.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/http_fragment.rst</a></p>
 </div>
 </div>
 

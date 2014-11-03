@@ -72,11 +72,11 @@
 <div class="section" id="services">
 <h2>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>serializer</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Serializer.html">SymfonyComponentSerializerSerializer</a> のインスタンスです。</li>
-<li><strong>serializer.encoders</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/JsonEncoder.html">SymfonyComponentSerializerEncoderJsonEncoder</a>
-と <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/XmlEncoder.html">SymfonyComponentSerializerEncoderXmlEncoder</a> 。</li>
-<li><strong>serializer.normalizers</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/CustomNormalizer.html">SymfonyComponentSerializerNormalizerCustomNormalizer</a>
-と <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.html">SymfonyComponentSerializerNormalizerGetSetMethodNormalizer</a> 。</li>
+<li><strong>serializer</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Serializer.html">Symfony\Component\Serializer\Serializer</a> のインスタンスです。</li>
+<li><strong>serializer.encoders</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/JsonEncoder.html">Symfony\Component\Serializer\Encoder\JsonEncoder</a>
+と <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Encoder/XmlEncoder.html">Symfony\Component\Serializer\Encoder\XmlEncoder</a> 。</li>
+<li><strong>serializer.normalizers</strong>: <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/CustomNormalizer.html">Symfony\Component\Serializer\Normalizer\CustomNormalizer</a>
+と <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Serializer/Normalizer/GetSetMethodNormalizer.html">Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer</a> 。</li>
 </ul>
 </div>
 <div class="section" id="id1">
@@ -84,10 +84,21 @@
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\SerializerServiceProvider</span><span class="p">());</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><em>SerializerServiceProvider</em> は Symfony の <a class="reference external" href="http://symfony.com/doc/current/components/serializer.html">Serializer Component</a> に依存しており、
+&#8220;全部入り&#8221; Silex のアーカイブには含まれますが、通常版には含まれません。
+そのため依存関係を <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに追記してください:</p>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/serializer&quot;: &quot;&gt;=2.3,&lt;2.5-dev&quot;,
+ }
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="id2">
 <h2>使い方<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">SerializerServiceProvider</span></tt> プロバイダーは <tt class="docutils literal"><span class="pre">serializer</span></tt> サービスを提供します。:</p>
+<p><code class="docutils literal"><span class="pre">SerializerServiceProvider</span></code> プロバイダーは <code class="docutils literal"><span class="pre">serializer</span></code> サービスを提供します。:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Silex\Provider\SerializerServiceProvider</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Response</span><span class="p">;</span>
@@ -114,6 +125,8 @@
   <span class="o">-&gt;</span><span class="na">assert</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;\d+&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>commit: a8ab1f8bac91246f420d9ba0b151bf1f77c38f0a
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/serializer.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/serializer.rst</a></p>
 </div>
 </div>
 

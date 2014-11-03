@@ -65,7 +65,7 @@
 <h1>ウェブサーバーの設定<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="apache">
 <h2>Apache<a class="headerlink" href="#apache" title="Permalink to this headline">¶</a></h2>
-<p>もしApacheを使うなら、 <tt class="docutils literal"><span class="pre">mod_rewrite</span></tt> を有効にして、以下の <tt class="docutils literal"><span class="pre">.htaccess</span></tt> ファイルを使ってください。</p>
+<p>もしApacheを使うなら、 <code class="docutils literal"><span class="pre">mod_rewrite</span></code> を有効にして、以下の <code class="docutils literal"><span class="pre">.htaccess</span></code> ファイルを使ってください。</p>
 <div class="highlight-apache"><div class="highlight"><pre><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
     <span class="nb">Options</span> -MultiViews
 
@@ -78,7 +78,7 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">もし、あなたのサイトがウェブルートレベルでない場合は、 <tt class="docutils literal"><span class="pre">RewriteBase</span></tt> 文のコメントを外し、あなたのディレクトリへのパスをウェブルートからの相対パスで記述してください。</p>
+<p class="last">もし、あなたのサイトがウェブルートレベルでない場合は、 <code class="docutils literal"><span class="pre">RewriteBase</span></code> 文のコメントを外し、あなたのディレクトリへのパスをウェブルートからの相対パスで記述してください。</p>
 </div>
 <p>Apache 2.2.16以降を使っているなら <a class="reference external" href="http://www.adayinthelifeof.nl/2012/01/21/apaches-fallbackresource-your-new-htaccess-command/">FallbackResource directive</a> が使えるので、.htaccessが以下のように簡単にできます。</p>
 <div class="highlight-apache"><div class="highlight"><pre><span class="nb">FallbackResource</span> <span class="sx">/index.php</span>
@@ -91,7 +91,7 @@
 </div>
 <div class="section" id="nginx">
 <h2>nginx<a class="headerlink" href="#nginx" title="Permalink to this headline">¶</a></h2>
-<p>もしnginxを使っているなら、存在しないリソースを <tt class="docutils literal"><span class="pre">index.php</span></tt> へフォワードするためにvhostを設定してください。</p>
+<p>もしnginxを使っているなら、存在しないリソースを <code class="docutils literal"><span class="pre">index.php</span></code> へフォワードするためにvhostを設定してください。</p>
 <div class="highlight-nginx"><div class="highlight"><pre><span class="k">server</span> <span class="p">{</span>
     <span class="c1">#サイトルートはアプリのブートスクリプトへリダイレクトされます</span>
     <span class="kn">location</span> <span class="p">=</span> <span class="s">/</span> <span class="p">{</span>
@@ -121,7 +121,7 @@
 </div>
 <div class="section" id="iis">
 <h2>IIS<a class="headerlink" href="#iis" title="Permalink to this headline">¶</a></h2>
-<p>もしWindowsからInternet Information Servicesを使っているなら、次のサンプルの <tt class="docutils literal"><span class="pre">web.config</span></tt> ファイルを使ってください。</p>
+<p>もしWindowsからInternet Information Servicesを使っているなら、次のサンプルの <code class="docutils literal"><span class="pre">web.config</span></code> ファイルを使ってください。</p>
 <div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
 <span class="nt">&lt;configuration&gt;</span>
     <span class="nt">&lt;system.webServer&gt;</span>
@@ -149,7 +149,7 @@
 </div>
 <div class="section" id="lighttpd">
 <h2>Lighttpd<a class="headerlink" href="#lighttpd" title="Permalink to this headline">¶</a></h2>
-<p>もしlighttpdを使っているなら、以下のサンプルの <tt class="docutils literal"><span class="pre">simple-vhost</span></tt> をスターティングポイントに使ってください。</p>
+<p>もしlighttpdを使っているなら、以下のサンプルの <code class="docutils literal"><span class="pre">simple-vhost</span></code> をスターティングポイントに使ってください。</p>
 <div class="highlight-lighttpd"><div class="highlight"><pre><span class="k">server.document-root</span> <span class="o">=</span> <span class="s2">&quot;/path/to/app&quot;</span>
 
 <span class="k">url.rewrite-once</span> <span class="o">=</span> <span class="p">(</span>
@@ -176,15 +176,17 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>フロントコントローラが <tt class="docutils literal"><span class="pre">web/index.php</span></tt> にあるとすると、サーバーを以下のコマンドラインで立ち上げることができます。:</p>
+<p>フロントコントローラが <code class="docutils literal"><span class="pre">web/index.php</span></code> にあるとすると、サーバーを以下のコマンドラインで立ち上げることができます。:</p>
 <div class="highlight-text"><div class="highlight"><pre>$ php -S localhost:8080 -t web web/index.php
 </pre></div>
 </div>
-<p>アプリケーションは <tt class="docutils literal"><span class="pre">http://localhost:8080</span></tt> で起動します。</p>
+<p>アプリケーションは <code class="docutils literal"><span class="pre">http://localhost:8080</span></code> で起動します。</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">このサーバーは開発のみに使用してください。プロダクション環境で使用するべきは <strong>ありません</strong> 。</p>
 </div>
+<p>commit: 1cbb20e1bd0c155ea5b50c0fb50c0ffe6ff1e668
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/web_servers.rst">https://github.com/silexphp/Silex/blob/master/doc/web_servers.rst</a></p>
 </div>
 </div>
 

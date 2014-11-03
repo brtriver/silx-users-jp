@@ -75,16 +75,16 @@
 <li><p class="first"><strong>db.options</strong>: Doctrine DBAL のオプションを指定する配列</p>
 <p>以下のオプションが利用できます:</p>
 <ul class="simple">
-<li><strong>driver</strong>: 利用するデータベースドライバ。 標準では <tt class="docutils literal"><span class="pre">pdo_mysql</span></tt> です。
-次のどれかを指定できます: <tt class="docutils literal"><span class="pre">pdo_mysql</span></tt> 、 <tt class="docutils literal"><span class="pre">pdo_sqlite</span></tt> 、 <tt class="docutils literal"><span class="pre">pdo_pgsql</span></tt> 、
-<tt class="docutils literal"><span class="pre">pdo_oci</span></tt> 、 <tt class="docutils literal"><span class="pre">oci8</span></tt> 、 <tt class="docutils literal"><span class="pre">ibm_db2</span></tt> 、 <tt class="docutils literal"><span class="pre">pdo_ibm</span></tt> 、 <tt class="docutils literal"><span class="pre">pdo_sqlsrv</span></tt> 。</li>
+<li><strong>driver</strong>: 利用するデータベースドライバ。 標準では <code class="docutils literal"><span class="pre">pdo_mysql</span></code> です。
+次のどれかを指定できます: <code class="docutils literal"><span class="pre">pdo_mysql</span></code> 、 <code class="docutils literal"><span class="pre">pdo_sqlite</span></code> 、 <code class="docutils literal"><span class="pre">pdo_pgsql</span></code> 、
+<code class="docutils literal"><span class="pre">pdo_oci</span></code> 、 <code class="docutils literal"><span class="pre">oci8</span></code> 、 <code class="docutils literal"><span class="pre">ibm_db2</span></code> 、 <code class="docutils literal"><span class="pre">pdo_ibm</span></code> 、 <code class="docutils literal"><span class="pre">pdo_sqlsrv</span></code> 。</li>
 <li><strong>dbname</strong>: 接続先のデータベース名。</li>
 <li><strong>host</strong>: 接続先のホスト名。 標準は localhost。</li>
 <li><strong>user</strong>: 接続先のデータベースのユーザー名。　標準は root。</li>
 <li><strong>password</strong>: 接続先のデータベースのパスワード。</li>
-<li><strong>charset</strong>: <tt class="docutils literal"><span class="pre">pdo_mysql</span></tt> と <tt class="docutils literal"><span class="pre">pdo_oci</span></tt> と <tt class="docutils literal"><span class="pre">oci8</span></tt> にだけ必要な項目で、データベースに接続する際に使用する文字コードを指定。</li>
-<li><strong>path</strong>: <tt class="docutils literal"><span class="pre">pdo_sqlite</span></tt> だけに必要な項目で SQLite のデータベースのパスを指定。</li>
-<li><strong>port</strong>: <tt class="docutils literal"><span class="pre">pdo_mysql</span></tt> と <tt class="docutils literal"><span class="pre">pdo_pgsql</span></tt> と <tt class="docutils literal"><span class="pre">pdo_oci/oci8</span></tt> にだけ必要な項目で、データベースに接続する際に使用するポートを指定。</li>
+<li><strong>charset</strong>: <code class="docutils literal"><span class="pre">pdo_mysql</span></code> と <code class="docutils literal"><span class="pre">pdo_oci/oci8</span></code> にだけ必要な項目で、データベースに接続する際に使用する文字コードを指定。</li>
+<li><strong>path</strong>: <code class="docutils literal"><span class="pre">pdo_sqlite</span></code> だけに必要な項目で SQLite のデータベースのパスを指定。</li>
+<li><strong>port</strong>: <code class="docutils literal"><span class="pre">pdo_mysql</span></code> と <code class="docutils literal"><span class="pre">pdo_pgsql</span></code> と <code class="docutils literal"><span class="pre">pdo_oci/oci8</span></code> にだけ必要な項目で、データベースに接続する際に使用するポートを指定。</li>
 </ul>
 <p>これらのオプションの詳細については <a class="reference external" href="http://www.doctrine-project.org/docs/dbal/2.0/en/reference/configuration.html">Doctrine DBAL 設定についてのドキュメント</a> を参照してください。</p>
 </li>
@@ -93,8 +93,8 @@
 <div class="section" id="id3">
 <h2>サービス<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><strong>db</strong>: データベースコネクション、　<tt class="docutils literal"><span class="pre">Doctrine\DBAL\Connection</span></tt> のインスタンス。</li>
-<li><strong>db.config</strong>: Doctrine のための設定オブジェクト。　標準は空の <tt class="docutils literal"><span class="pre">Doctrine\DBAL\Configuration</span></tt>  。</li>
+<li><strong>db</strong>: データベースコネクション、　<code class="docutils literal"><span class="pre">Doctrine\DBAL\Connection</span></code> のインスタンス。</li>
+<li><strong>db.config</strong>: Doctrine のための設定オブジェクト。　標準は空の <code class="docutils literal"><span class="pre">Doctrine\DBAL\Configuration</span></code>  。</li>
 <li><strong>db.event_manager</strong>: Doctrine のためのイベントマネージャー。</li>
 </ul>
 </div>
@@ -110,16 +110,17 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>Doctrine DBALは &#8220;fat&#8221; Silexアーカイブに付属します。レギュラーサイズのSilexには付属しません。もしComposerを使っているのならば <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。</p>
-<div class="last highlight-json"><pre>"require": {
-    "doctrine/dbal": "2.2.*",
- }</pre>
+<p>Doctrine DBALは &#8220;fat&#8221; Silexアーカイブに付属します。レギュラーサイズのSilexには付属しません。もしComposerを使っているのならば <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに依存関係を記述してください。</p>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;doctrine/dbal&quot;: &quot;2.2.*&quot;,
+ }
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>使い方<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>Doctrine プロバイダーは <tt class="docutils literal"><span class="pre">db</span></tt> サービスを提供します。以下が使い方のサンプルです。</p>
+<p>Doctrine プロバイダーは <code class="docutils literal"><span class="pre">db</span></code> サービスを提供します。以下が使い方のサンプルです。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/blog/{id}&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$id</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM posts WHERE id = ?&quot;</span><span class="p">;</span>
     <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="k">array</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span> <span class="nv">$id</span><span class="p">));</span>
@@ -159,9 +160,9 @@
 </pre></div>
 </div>
 <p>標準では、最初に登録された接続がデフォルトになります。つまり1つしか接続先を登録していないときと同じようにアクセスされます。さきほど書いた設定では以下の2行は同意です。</p>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbs&#39;</span><span class="p">][</span><span class="s1">&#39;mysql_read&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAssoc</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;dbs&#39;</span><span class="p">][</span><span class="s1">&#39;mysql_read&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM table&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>複数接続を使った例</p>
@@ -179,6 +180,8 @@
 </div>
 <p>より詳細については、 <a class="reference external" href="http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/">Doctrine DBAL documentation</a>
 を見てください。</p>
+<p>commit: 038392643681171f5ee72bbcdf3d852f69863871
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/doctrine.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/doctrine.rst</a></p>
 </div>
 </div>
 

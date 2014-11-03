@@ -63,7 +63,7 @@
             
   <div class="section" id="providers">
 <h1>プロバイダー (Providers)<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h1>
-<p>プロバイダーは、開発者が、アプリケーションの一部を他のアプリケーションでも再利用できるようにします。 Silex は２つのインタフェースによって定義された二種類のプロバイダーを提供しています。１つは、サービスのためのインタフェース <tt class="docutils literal"><span class="pre">ServiceProviderInterface</span></tt> で、もう１つは、コントローラーのためのインタフェース  <tt class="docutils literal"><span class="pre">ControllerProviderInterface</span></tt> です。</p>
+<p>プロバイダーは、開発者が、アプリケーションの一部を他のアプリケーションでも再利用できるようにします。 Silex は２つのインタフェースによって定義された二種類のプロバイダーを提供しています。１つは、サービスのためのインタフェース <code class="docutils literal"><span class="pre">ServiceProviderInterface</span></code> で、もう１つは、コントローラーのためのインタフェース  <code class="docutils literal"><span class="pre">ControllerProviderInterface</span></code> です。</p>
 <div class="section" id="service-providers">
 <h2>サービスプロバイダー (Service Providers)<a class="headerlink" href="#service-providers" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="loading-extensions">
@@ -102,7 +102,7 @@
 <div class="section" id="id1">
 <h2>プロバイダーのインクルード<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>標準で用意されているプロバイダーは以下の通りです。
-これらすべてのプロバイダーの名前空間は <tt class="docutils literal"><span class="pre">Silex\Provider</span></tt> になります。</p>
+これらすべてのプロバイダーの名前空間は <code class="docutils literal"><span class="pre">Silex\Provider</span></code> になります。</p>
 <ul class="simple">
 <li><a class="reference internal" href="providers/doctrine.html"><em>DoctrineServiceProvider</em></a></li>
 <li><a class="reference internal" href="providers/monolog.html"><em>MonologServiceProvider</em></a></li>
@@ -128,7 +128,7 @@
 </div>
 <div class="section" id="id3">
 <h2>プロバイダーの作成<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>プロバイダーは <tt class="docutils literal"><span class="pre">Silex\ServiceProviderInterface</span></tt> を実装しなければなりません。</p>
+<p>プロバイダーは <code class="docutils literal"><span class="pre">Silex\Api\ServiceProviderInterface</span></code> を実装しなければなりません。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="p">{</span>
     <span class="k">function</span> <span class="nf">register</span><span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">);</span>
 
@@ -136,13 +136,13 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>単に二つのメソッドを実装したクラスを作成するだけです。 <tt class="docutils literal"><span class="pre">register()</span></tt>
-メソッドでは、他のサービスやパラメータを利用するようなアプリケーション上にサービスを定義することができます。 <tt class="docutils literal"><span class="pre">boot()</span></tt> メソッドでは、アプリケーションがリクエストをハンドリングする前にアプリケーションの設定を行えます。</p>
+<p>単に二つのメソッドを実装したクラスを作成するだけです。 <code class="docutils literal"><span class="pre">register()</span></code>
+メソッドでは、他のサービスやパラメータを利用するようなアプリケーション上にサービスを定義することができます。 <code class="docutils literal"><span class="pre">boot()</span></code> メソッドでは、アプリケーションがリクエストをハンドリングする前にアプリケーションの設定を行えます。</p>
 <p>次がそのようなプロバイダーのサンプルです。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">Acme</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Silex\ServiceProviderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Silex\Api\ServiceProviderInterface</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">HelloServiceProvider</span> <span class="k">implements</span> <span class="nx">ServiceProviderInterface</span>
 <span class="p">{</span>
@@ -162,8 +162,8 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>このクラスは <tt class="docutils literal"><span class="pre">hello</span></tt> サービスを提供します。このサービスは保護されたクロージャーです。
-<tt class="docutils literal"><span class="pre">name</span></tt> を引数として取り、 <tt class="docutils literal"><span class="pre">name</span></tt> が与えられていない場合 <tt class="docutils literal"><span class="pre">hello.default_name</span></tt> を返してくれます。
+<p>このクラスは <code class="docutils literal"><span class="pre">hello</span></code> サービスを提供します。このサービスは保護されたクロージャーです。
+<code class="docutils literal"><span class="pre">name</span></code> を引数として取り、 <code class="docutils literal"><span class="pre">name</span></code> が与えられていない場合 <code class="docutils literal"><span class="pre">hello.default_name</span></code> を返してくれます。
 初期値を与えられていない場合は空の文字列を使います。</p>
 <p>このプロバイダーは次のように使うことができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Silex\Application</span><span class="p">();</span>
@@ -179,8 +179,8 @@
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>このサンプルでは <tt class="docutils literal"><span class="pre">name</span></tt> パラメーターの値をクエリーストリングから取得しています。
-そのため <tt class="docutils literal"><span class="pre">/hello?name=Fabien</span></tt> のようなパスでリクエストします。</p>
+<p>このサンプルでは <code class="docutils literal"><span class="pre">name</span></code> パラメーターの値をクエリーストリングから取得しています。
+そのため <code class="docutils literal"><span class="pre">/hello?name=Fabien</span></code> のようなパスでリクエストします。</p>
 </div>
 <div class="section" id="controllers-providers">
 <span id="controller-providers"></span><h2>コントロラープロバイダー(Controllers providers)<a class="headerlink" href="#controllers-providers" title="Permalink to this headline">¶</a></h2>
@@ -196,7 +196,7 @@
 </div>
 <div class="section" id="id5">
 <h3>プロバイダーの作成<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>プロバイダーは <tt class="docutils literal"><span class="pre">Silex\ControllerProviderInterface</span></tt> を実装しなければなりません。</p>
+<p>プロバイダーは <code class="docutils literal"><span class="pre">Silex\ControllerProviderInterface</span></code> を実装しなければなりません。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">interface</span> <span class="nx">ControllerProviderInterface</span>
 <span class="p">{</span>
     <span class="k">function</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">Application</span> <span class="nv">$app</span><span class="p">);</span>
@@ -207,7 +207,7 @@
 <div class="highlight-php"><div class="highlight"><pre><span class="k">namespace</span> <span class="nx">Acme</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">Silex\Application</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Silex\ControllerProviderInterface</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Silex\Api\ControllerProviderInterface</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">HelloControllerProvider</span> <span class="k">implements</span> <span class="nx">ControllerProviderInterface</span>
 <span class="p">{</span>
@@ -225,11 +225,11 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">connect</span></tt> メソッドは、 <tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> クラスのインスタンスを返さなければなりません。
-<tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> は、<tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt>,  <tt class="docutils literal"><span class="pre">match</span></tt> などのメソッドが定義されたコントローラーのクラスです。</p>
+<p><code class="docutils literal"><span class="pre">connect</span></code> メソッドは、 <code class="docutils literal"><span class="pre">ControllerCollection</span></code> クラスのインスタンスを返さなければなりません。
+<code class="docutils literal"><span class="pre">ControllerCollection</span></code> は、<code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">post</span></code>,  <code class="docutils literal"><span class="pre">match</span></code> などのメソッドが定義されたコントローラーのクラスです。</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last"><tt class="docutils literal"><span class="pre">Application</span></tt> クラスは、実際はこれらのメソッドへのプロクシとして振る舞います。</p>
+<p class="last"><code class="docutils literal"><span class="pre">Application</span></code> クラスは、実際はこれらのメソッドへのプロクシとして振る舞います。</p>
 </div>
 <p>これで以下のようにプロバイダーを使うことができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Silex\Application</span><span class="p">();</span>
@@ -237,11 +237,13 @@
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">mount</span><span class="p">(</span><span class="s1">&#39;/blog&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Acme\HelloControllerProvider</span><span class="p">());</span>
 </pre></div>
 </div>
-<p>この例では、 <tt class="docutils literal"><span class="pre">/blog/</span></tt> のパスは、プロバイダーで定義されたコントローラーを参照するようになります。</p>
+<p>この例では、 <code class="docutils literal"><span class="pre">/blog/</span></code> のパスは、プロバイダーで定義されたコントローラーを参照するようになります。</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
 <p class="last">サービスプロバイダーインタフェースとコントローラープロバイダーインタフェースの両方を実装したプロバイダーも定義することができ、コントローラの動作に必要なサービスと同じクラスの中で、そのプロバイダをパッケージ化できます。</p>
 </div>
+<p>commit: 1ba15a1769979083b19d775237fa0cfefb1475fe
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers.rst">https://github.com/silexphp/Silex/blob/master/doc/providers.rst</a></p>
 </div>
 </div>
 </div>

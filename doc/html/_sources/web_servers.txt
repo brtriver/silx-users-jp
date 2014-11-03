@@ -139,3 +139,7 @@ PHP 5.4 のビルトインサーバーを開発用に使いたい場合は設定
 .. note::
 
     このサーバーは開発のみに使用してください。プロダクション環境で使用するべきは **ありません** 。
+
+
+commit: 1cbb20e1bd0c155ea5b50c0fb50c0ffe6ff1e668
+original: https://github.com/silexphp/Silex/blob/master/doc/web_servers.rst

@@ -31,3 +31,7 @@ YAMLを使用してバリデーションを設定
           - NotBlank: ~
         body:
           - Min: 100
+
+
+commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: https://github.com/silexphp/Silex/blob/master/doc/cookbook/validator_yaml.rst

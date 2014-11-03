@@ -69,8 +69,8 @@
 <h2>パラメーター<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><strong>translator.domains</strong> (オプション): ドメインとロケールとメッセージのマップ。このパラメータは全ての言語とドメインの翻訳データを含みます。</li>
-<li><strong>locale</strong> (オプション): 翻訳のために使用するロケール。 リクエストパラメーターに基づいて設定するようになるでしょう。　標準は <tt class="docutils literal"><span class="pre">en</span></tt> です。</li>
-<li><strong>locale_fallback</strong> (オプション): 翻訳のために使用する代替のためのロケール。　現在のロケールでメッセージが設定されていないときに利用されます。</li>
+<li><strong>locale</strong> (オプション): 翻訳のために使用するロケール。 リクエストパラメーターに基づいて設定するようになるでしょう。　標準は <code class="docutils literal"><span class="pre">en</span></code> です。</li>
+<li><strong>locale_fallbacks</strong> (オプション): 翻訳のために使用する代替のためのロケール。　現在のロケールでメッセージが設定されていないときに利用されます。</li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -87,7 +87,8 @@
 </div>
 <div class="section" id="id3">
 <h2>登録<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\TranslationServiceProvider</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\LocaleServiceProvider</span><span class="p">());</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\TranslationServiceProvider</span><span class="p">(),</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;locale_fallbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">),</span>
 <span class="p">));</span>
 </pre></div>
@@ -95,16 +96,17 @@
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Symfony Translation Componentは&#8221;fat&#8221; Silexに付属し、標準サイズのSilexには付属しません。
-もしComposerを使用している場合には、 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルに依存関係を記述してください。</p>
-<div class="last highlight-json"><pre>"require": {
-    "symfony/translation": "~2.3"
-}</pre>
+もしComposerを使用している場合には、 <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルに依存関係を記述してください。</p>
+<div class="last highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/translation&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>使い方<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>Translation プロバイダーは <tt class="docutils literal"><span class="pre">translator</span></tt> サービスを提供し、 <tt class="docutils literal"><span class="pre">translator.domains</span></tt> パラメーターを利用します。</p>
+<p>Translation プロバイダーは <code class="docutils literal"><span class="pre">translator</span></code> サービスを提供し、 <code class="docutils literal"><span class="pre">translator.domains</span></code> パラメーターを利用します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;translator.domains&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">&#39;messages&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
         <span class="s1">&#39;en&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
@@ -134,15 +136,15 @@
 </div>
 <p>上のサンプルは次のようなルーティングにおいて示すような結果になるでしょう。</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">/en/hello/igor</span></tt> は <tt class="docutils literal"><span class="pre">Hello</span> <span class="pre">igor</span></tt> を返す。</li>
-<li><tt class="docutils literal"><span class="pre">/de/hello/igor</span></tt> は <tt class="docutils literal"><span class="pre">Hallo</span> <span class="pre">igor</span></tt> を返す。</li>
-<li><tt class="docutils literal"><span class="pre">/fr/hello/igor</span></tt> は <tt class="docutils literal"><span class="pre">Bonjour</span> <span class="pre">igor</span></tt> を返す。</li>
-<li><tt class="docutils literal"><span class="pre">/it/hello/igor</span></tt> は <tt class="docutils literal"><span class="pre">Hello</span> <span class="pre">igor</span></tt> を返す。 (代替設定のため).</li>
+<li><code class="docutils literal"><span class="pre">/en/hello/igor</span></code> は <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">igor</span></code> を返す。</li>
+<li><code class="docutils literal"><span class="pre">/de/hello/igor</span></code> は <code class="docutils literal"><span class="pre">Hallo</span> <span class="pre">igor</span></code> を返す。</li>
+<li><code class="docutils literal"><span class="pre">/fr/hello/igor</span></code> は <code class="docutils literal"><span class="pre">Bonjour</span> <span class="pre">igor</span></code> を返す。</li>
+<li><code class="docutils literal"><span class="pre">/it/hello/igor</span></code> は <code class="docutils literal"><span class="pre">Hello</span> <span class="pre">igor</span></code> を返す。 (代替設定のため).</li>
 </ul>
 </div>
 <div class="section" id="id5">
 <h2>トレイト<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">Silex\Application\TranslationTrait</span></tt> は以下のショートカットを追加します。</p>
+<p><code class="docutils literal"><span class="pre">Silex\Application\TranslationTrait</span></code> は以下のショートカットを追加します。</p>
 <ul class="simple">
 <li><strong>trans</strong>: 与えられたメッセージを翻訳します。</li>
 <li><strong>transChoice</strong>:　数字によって翻訳を選ぶことにより与えられた選択メッセージを翻訳します。</li>
@@ -159,22 +161,23 @@
 <h3>YAMLでの言語ファイル<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h3>
 <p>PHPファイルで翻訳ファイルを用意することは不便でしょう。
 このレシピで外部に用意したYAMLファイルから翻訳データを読み込む方法について説明します。</p>
-<p>まず最初にSymfony2の <tt class="docutils literal"><span class="pre">Config</span></tt> と <tt class="docutils literal"><span class="pre">Yaml</span></tt> コンポーネントをcomposerファイルに追加します。</p>
-<div class="highlight-json"><pre>"require": {
-    "symfony/config": "~2.3",
-    "symfony/yaml": "~2.3"
-}</pre>
+<p>まず最初にSymfony2の <code class="docutils literal"><span class="pre">Config</span></code> と <code class="docutils literal"><span class="pre">Yaml</span></code> コンポーネントをcomposerファイルに追加します。</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/config&quot;: &quot;~2.3&quot;,
+    &quot;symfony/yaml&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
-<p>次に、YAMLファイルで言語のマッピングを作らなければなりません。マッピングファイルは <tt class="docutils literal"><span class="pre">locals/en.yml</span></tt> のような名前を使います。
+<p>次に、YAMLファイルで言語のマッピングを作らなければなりません。マッピングファイルは <code class="docutils literal"><span class="pre">locals/en.yml</span></code> のような名前を使います。
 マッピングは以下のようなファイルで用意するだけです。</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">hello</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Hello %name%</span>
 <span class="l-Scalar-Plain">goodbye</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Goodbye %name%</span>
 </pre></div>
 </div>
-<p>そして <tt class="docutils literal"><span class="pre">translator</span></tt> に <tt class="docutils literal"><span class="pre">YamlFileLoader</span></tt> と全ての翻訳ファイルを登録します。</p>
+<p>そして <code class="docutils literal"><span class="pre">translator</span></code> に <code class="docutils literal"><span class="pre">YamlFileLoader</span></code> と全ての翻訳ファイルを登録します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Translation\Loader\YamlFileLoader</span><span class="p">;</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;translator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;translator&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$translator</span><span class="p">,</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;translator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">extend</span><span class="p">(</span><span class="s1">&#39;translator&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$translator</span><span class="p">,</span> <span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addLoader</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="k">new</span> <span class="nx">YamlFileLoader</span><span class="p">());</span>
 
     <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addResource</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/locales/en.yml&#39;</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">);</span>
@@ -182,13 +185,13 @@
     <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addResource</span><span class="p">(</span><span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/locales/fr.yml&#39;</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="nv">$translator</span><span class="p">;</span>
-<span class="p">}));</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="xliff">
 <h3>XLIFFに基づいた言語ファイル<a class="headerlink" href="#xliff" title="Permalink to this headline">¶</a></h3>
-<p>YAMLで翻訳ファイルを作成するのと同じように、Symfony2 <tt class="docutils literal"><span class="pre">Config</span></tt> コンポーネントを追加するために、依存関係をcomposerに追加した後に、 XLIFFファイルをロケールディレクトリに配置し、トランスレーターに渡します。</p>
+<p>YAMLで翻訳ファイルを作成するのと同じように、Symfony2 <code class="docutils literal"><span class="pre">Config</span></code> コンポーネントを追加するために、依存関係をcomposerに追加した後に、 XLIFFファイルをロケールディレクトリに配置し、トランスレーターに渡します。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addResource</span><span class="p">(</span><span class="s1">&#39;xliff&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/locales/en.xlf&#39;</span><span class="p">,</span> <span class="s1">&#39;en&#39;</span><span class="p">);</span>
 <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addResource</span><span class="p">(</span><span class="s1">&#39;xliff&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/locales/de.xlf&#39;</span><span class="p">,</span> <span class="s1">&#39;de&#39;</span><span class="p">);</span>
 <span class="nv">$translator</span><span class="o">-&gt;</span><span class="na">addResource</span><span class="p">(</span><span class="s1">&#39;xliff&#39;</span><span class="p">,</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/locales/fr.xlf&#39;</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">);</span>
@@ -212,6 +215,8 @@
 <span class="cp">{%</span> <span class="k">trans</span> <span class="cp">%}</span><span class="x">translation_key</span><span class="cp">{%</span> <span class="k">endtrans</span> <span class="cp">%}</span><span class="x"></span>
 </pre></div>
 </div>
+<p>commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/translation.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/translation.rst</a></p>
 </div>
 </div>
 </div>

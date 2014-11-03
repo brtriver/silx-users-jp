@@ -70,7 +70,7 @@
 は複数のストレージハンドラを持っています。そのうちの一つである
 <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Session/Storage/Handler/PdoSessionHandler.html">PdoSessionHandler</a>
 は、セッションの保存にPDOを使用します。
-これを使うためには、次に示す例のようにアプリケーション中の <tt class="docutils literal"><span class="pre">session.storage.handler</span></tt> サービスを置き換えます。</p>
+これを使うためには、次に示す例のようにアプリケーション中の <code class="docutils literal"><span class="pre">session.storage.handler</span></code> サービスを置き換えます。</p>
 <div class="section" id="pdo">
 <h2>専用のPDO サービスの使用<a class="headerlink" href="#pdo" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p">;</span>
@@ -88,27 +88,27 @@
     <span class="s1">&#39;db_time_col&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;session_time&#39;</span><span class="p">,</span>
 <span class="p">);</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo.dsn&#39;</span><span class="p">],</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo.user&#39;</span><span class="p">],</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo.password&#39;</span><span class="p">]</span>
     <span class="p">);</span>
-<span class="p">});</span>
+<span class="p">};</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.handler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.handler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PdoSessionHandler</span><span class="p">(</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;pdo&#39;</span><span class="p">],</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.db_options&#39;</span><span class="p">],</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.options&#39;</span><span class="p">]</span>
     <span class="p">);</span>
-<span class="p">});</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="doctrineserviceprovider">
 <h2>DoctrineServiceProviderの使用<a class="headerlink" href="#doctrineserviceprovider" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference internal" href="../providers/doctrine.html"><em>DoctrineServiceProvider</em></a> を使うなら、別のDBコネクションを生成する必要はありません。単に、 <tt class="docutils literal"><span class="pre">getWrappedConnection</span></tt> メソッドを渡すだけで大丈夫です。</p>
+<p><a class="reference internal" href="../providers/doctrine.html"><em>DoctrineServiceProvider</em></a> を使うなら、別のDBコネクションを生成する必要はありません。単に、 <code class="docutils literal"><span class="pre">getWrappedConnection</span></code> メソッドを渡すだけで大丈夫です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler</span><span class="p">;</span>
 
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\SessionServiceProvider</span><span class="p">());</span>
@@ -120,13 +120,13 @@
     <span class="s1">&#39;db_time_col&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;session_time&#39;</span><span class="p">,</span>
 <span class="p">);</span>
 
-<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.handler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">share</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+<span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.handler&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">PdoSessionHandler</span><span class="p">(</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;db&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">getWrappedConnection</span><span class="p">(),</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.db_options&#39;</span><span class="p">],</span>
         <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;session.storage.options&#39;</span><span class="p">]</span>
     <span class="p">);</span>
-<span class="p">});</span>
+<span class="p">};</span>
 </pre></div>
 </div>
 </div>
@@ -134,12 +134,14 @@
 <h2>データベースの構造<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>PdoSessionStorageを使用するには3カラムで構成されるデータベーステーブルが必要です。:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">session_id</span></tt>: ID column (VARCHAR(255) or larger)</li>
-<li><tt class="docutils literal"><span class="pre">session_value</span></tt>: Value column (TEXT or CLOB)</li>
-<li><tt class="docutils literal"><span class="pre">session_time</span></tt>: Time column (INTEGER)</li>
+<li><code class="docutils literal"><span class="pre">session_id</span></code>: ID column (VARCHAR(255) or larger)</li>
+<li><code class="docutils literal"><span class="pre">session_value</span></code>: Value column (TEXT or CLOB)</li>
+<li><code class="docutils literal"><span class="pre">session_time</span></code>: Time column (INTEGER)</li>
 </ul>
 <p>セッションテーブルを作成するためのSQLステートメントの例は
 <a class="reference external" href="http://symfony.com/doc/current/cookbook/configuration/pdo_session_storage.html#example-sql-statements">Symfony2 cookbook</a> にあります。</p>
+<p>commit: fc8bbb623f33ce448c8bf1d4a95aa26360032de1
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/session_storage.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/session_storage.rst</a></p>
 </div>
 </div>
 

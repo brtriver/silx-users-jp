@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>組み込みのプロバイダー | Japan Symfony Group</title>
+    <title>LocaleServiceProvider | Japan Symfony Group</title>
     <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/configurationblock.css" type="text/css" />
@@ -33,9 +33,7 @@
           $('.highlight').corner();
       });
       </script>
-    <link rel="top" title="Silex 0.0.0 documentation" href="../index.html" />
-    <link rel="next" title="DoctrineServiceProvider" href="doctrine.html" />
-    <link rel="prev" title="プロジェクトへの貢献" href="../contributing.html" /> 
+    <link rel="top" title="Silex 0.0.0 documentation" href="../index.html" /> 
   </head>
   <body>
 
@@ -48,7 +46,7 @@
         <ul>
           <li><a href="/">Silex ユーザーガイド</a></li>
           <li><a href="../index.html">日本語ドキュメント TOP (索引)</a></li>
-          <li><a href="#">エクステンション一覧</a></li>
+          <li><a href="index.html">エクステンション一覧</a></li>
           <li><a href="http://silex.sensiolabs.org/">Silex 公式サイト(英語)</a></li>
           <li><a href="http://www.symfony.gr.jp/">日本Symfonyユーザー会</a></li>
         </ul>
@@ -61,42 +59,40 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="id1">
-<h1>組み込みのプロバイダー<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="doctrine.html">DoctrineServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="monolog.html">MonologServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="session.html">SessionServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="swiftmailer.html">SwiftmailerServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="translation.html">TranslationServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="twig.html">TwigServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="url_generator.html">UrlGeneratorServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="validator.html">ValidatorServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="form.html">FormServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_cache.html">HttpCacheServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_fragment.html">HttpFragmentServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">SecurityServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="remember_me.html">RememberMeServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="serializer.html">SerializerServiceProvider</a></li>
-<li class="toctree-l1"><a class="reference internal" href="service_controller.html">ServiceControllerServiceProvider</a></li>
+  <div class="section" id="localeserviceprovider">
+<h1>LocaleServiceProvider<a class="headerlink" href="#localeserviceprovider" title="Permalink to this headline">¶</a></h1>
+<p><em>LocaleServiceProvider</em> はアプリケーションのロケールを管理します。</p>
+<div class="section" id="id1">
+<h2>パラメータ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><strong>locale</strong>: ユーザーのロケール。 リクエストをハンドリングする前にセットすることで、デフォルトのロケールを定義します(標準では <code class="docutils literal"><span class="pre">en</span></code>)。 リクエストがハンドリングされると現在のルーティングの <code class="docutils literal"><span class="pre">__locale</span></code> リクエスト属性によって自動的にセットされます。</li>
 </ul>
 </div>
-<p>commit: 5a4b0158a5f6376f0c3c6750c56fc25b868613c8
-original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/index.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/index.rst</a></p>
+<div class="section" id="id2">
+<h2>サービス<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>n/a</li>
+</ul>
+</div>
+<div class="section" id="registering">
+<h2>Registering<a class="headerlink" href="#registering" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">Silex\Provider\LocaleServiceProvider</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>commit: d6243e37fcf78aadf679141ecb96b8eefed7a203
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/providers/locale.rst">https://github.com/silexphp/Silex/blob/master/doc/providers/locale.rst</a></p>
+</div>
 </div>
 
 
 <div id="page_prev_next">
-<a class="prev" href="../contributing.html">< プロジェクトへの貢献</a>
-<a class="next" href="doctrine.html">DoctrineServiceProvider ></a>
 </div>
 
 <div class="common_content_footer">
 <ul>
-  <li> → <a href="http://silex-project.org/doc/providers/index.html">公式英語ドキュメント</a></li>
-  <li> → <a href="https://github.com/fabpot/Silex/commits/master/doc/providers/index.rst">原文コミット履歴</a>
-  <li> → <a href="https://github.com/brtriver/silex-doc-ja/commits/master/source/providers/index.rst">翻訳コミット履歴</a>
+  <li> → <a href="http://silex-project.org/doc/providers/locale.html">公式英語ドキュメント</a></li>
+  <li> → <a href="https://github.com/fabpot/Silex/commits/master/doc/providers/locale.rst">原文コミット履歴</a>
+  <li> → <a href="https://github.com/brtriver/silex-doc-ja/commits/master/source/providers/locale.rst">翻訳コミット履歴</a>
 </ul>
 <br />
 翻訳の不備などは、お気軽にコメント欄にてご指摘ください！
@@ -108,15 +104,19 @@ original: <a class="reference external" href="https://github.com/silexphp/Silex/
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>前のドキュメント</h4>
-  <p class="topless"><a href="../contributing.html"
-                        title="previous chapter">プロジェクトへの貢献</a></p>
-  <h4>次のドキュメント</h4>
-  <p class="topless"><a href="doctrine.html"
-                        title="next chapter">DoctrineServiceProvider</a></p>
+  <h3>このページのコンテンツ</h3>
+  <ul>
+<li><a class="reference internal" href="#">LocaleServiceProvider</a><ul>
+<li><a class="reference internal" href="#id1">パラメータ</a></li>
+<li><a class="reference internal" href="#id2">サービス</a></li>
+<li><a class="reference internal" href="#registering">Registering</a></li>
+</ul>
+</li>
+</ul>
+
   <h3>ソース</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/providers/index.txt"
+    <li><a href="../_sources/providers/locale.txt"
            rel="nofollow">ページのソースを表示</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -155,7 +155,7 @@ original: <a class="reference external" href="https://github.com/silexphp/Silex/
         <ul>
             <li><a href="/">Silex ユーザーガイド</a></li>
             <li><a href="../index.html">日本語ドキュメント TOP (索引)</a></li>
-            <li><a href="#">プロバイダー 一覧</a></li>
+            <li><a href="index.html">プロバイダー 一覧</a></li>
             <li><a href="http://silex.sensiolabs.org/">Silex 公式サイト(英語)</a></li>
             <li><a href="http://www.symfony.gr.jp/">日本Symfonyユーザー会</a></li>
         </ul>

@@ -153,3 +153,7 @@ Silexでは、とても強力なサブリクエストが使用可能であるた
 * リクエストを注入(inject)しない。 リスナーで代用し、リクエストを保存しなくともにアクセス可能な状態にする。
 
 * Silexアプリケーションを注入(inject)し、そこからリクエストをフェッチする。
+
+
+commit: 6d9e3fe4d7d9ed563800ee8b4559bd51c13457e5
+original: https://github.com/silexphp/Silex/blob/master/doc/cookbook/sub_requests.rst

@@ -63,3 +63,6 @@ RememberMeServiceProvider
 
 * **remember_me_parameter**: remember_meをログイン時に有効にするためのリクエストパラメーターの名前
   ログインフォームにチェックボックスを追加するためのものです。より詳しい情報については、 `Symfonyクックブック <http://symfony.com/doc/current/cookbook/security/remember_me.html>`_ を参照してください。 (標準では、 ``_remember_me`` です。)
+
+commit: 6e374c0ed61bec69c021b6f35113875149c4d234
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/remember_me.rst

@@ -63,3 +63,7 @@ HttpFragmentServiceProvider
     {{ render_esi(url('route_name')) }}
 
     {{ render_hinclude(url('route_name')) }}
+
+
+commit: 21bf9c08280c4142752a5b1b8d452147183b4253
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/http_fragment.rst

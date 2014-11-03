@@ -53,9 +53,9 @@ Silexのアプリケーションが大きくると、コントローラのグル
 
     $app = new Application();
 
-    $app['posts.repository'] = $app->share(function() {
+    $app['posts.repository'] = function() {
         return new PostRepository;
-    });
+    };
 
     $app->get('/posts.json', function() use ($app) {
         return $app->json($app['posts.repository']->findAll());
@@ -110,3 +110,7 @@ Silexのアプリケーションが大きくると、コントローラのグル
     });
 
     $app->get('/posts.json', "posts.controller:indexJsonAction");
+
+
+commit: d48bcc6183b184b002a5632d8cc6108b665373da
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/service_controller.rst

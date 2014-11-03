@@ -65,12 +65,13 @@
   <div class="section" id="yaml">
 <h1>YAMLを使用してバリデーションを設定<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h1>
 <p>シンプルであることはSilexは心臓部であるので、YAMLファイルをバリデーションに使うための独創的な方法はありません。しかし、不可能ではありませんので方法を見てみましょう。</p>
-<p>まず、YAMLコンポーネントをインストールします。 <tt class="docutils literal"><span class="pre">composer.json</span></tt> ファイルで以下のように依存関係を宣言してください。</p>
-<div class="highlight-json"><pre>"require": {
-    "symfony/yaml": "~2.3"
-}</pre>
+<p>まず、YAMLコンポーネントをインストールします。 <code class="docutils literal"><span class="pre">composer.json</span></code> ファイルで以下のように依存関係を宣言してください。</p>
+<div class="highlight-json"><div class="highlight"><pre>&quot;require&quot;: {
+    &quot;symfony/yaml&quot;: &quot;~2.3&quot;
+}
+</pre></div>
 </div>
-<p>次にバリデーションサービスに、あなたのクラスメタデータではなくYAMLファイルをロードするために <tt class="docutils literal"><span class="pre">StaticMethodLoader</span></tt> を使用しないことを伝えてください。</p>
+<p>次にバリデーションサービスに、あなたのクラスメタデータではなくYAMLファイルをロードするために <code class="docutils literal"><span class="pre">StaticMethodLoader</span></code> を使用しないことを伝えてください。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="k">new</span> <span class="nx">ValidatorServiceProvider</span><span class="p">());</span>
 
 <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;validator.mapping.class_metadata_factory&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Symfony\Component\Validator\Mapping\ClassMetadataFactory</span><span class="p">(</span>
@@ -78,7 +79,7 @@
 <span class="p">);</span>
 </pre></div>
 </div>
-<p>これで、全てのスタティックメソッドの使い方を置き換え、バリデーションルールを <tt class="docutils literal"><span class="pre">validation.yml</span></tt> に記述することができるようになります。</p>
+<p>これで、全てのスタティックメソッドの使い方を置き換え、バリデーションルールを <code class="docutils literal"><span class="pre">validation.yml</span></code> に記述することができるようになります。</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span class="c1"># validation.yml</span>
 <span class="l-Scalar-Plain">Post</span><span class="p-Indicator">:</span>
   <span class="l-Scalar-Plain">properties</span><span class="p-Indicator">:</span>
@@ -89,6 +90,8 @@
       <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">Min</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">100</span>
 </pre></div>
 </div>
+<p>commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/validator_yaml.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/validator_yaml.rst</a></p>
 </div>
 
 

@@ -88,17 +88,17 @@
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><tt class="docutils literal"><span class="pre">$app['controllers_factory']</span></tt> は使われた場合、 <tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> の新しいインスタンスを返すファクトリーです。</p>
+<p class="last"><code class="docutils literal"><span class="pre">$app['controllers_factory']</span></code> は使われた場合、 <code class="docutils literal"><span class="pre">ControllerCollection</span></code> の新しいインスタンスを返すファクトリーです。</p>
 </div>
-<p><tt class="docutils literal"><span class="pre">mount()</span></tt> は全てのルーティングに対し与えられた接頭辞を付け加え、メインアプリケーションに組み込みます。なので、 <tt class="docutils literal"><span class="pre">/</span></tt> はメインのホームページに、 <tt class="docutils literal"><span class="pre">/blog/</span></tt> はブログのホームページに、 <tt class="docutils literal"><span class="pre">/forum/</span></tt> はフォーラムのホームページにルーティングされます。</p>
+<p><code class="docutils literal"><span class="pre">mount()</span></code> は全てのルーティングに対し与えられた接頭辞を付け加え、メインアプリケーションに組み込みます。なので、 <code class="docutils literal"><span class="pre">/</span></code> はメインのホームページに、 <code class="docutils literal"><span class="pre">/blog/</span></code> はブログのホームページに、 <code class="docutils literal"><span class="pre">/forum/</span></code> はフォーラムのホームページにルーティングされます。</p>
 <div class="admonition caution">
 <p class="first admonition-title">Caution</p>
-<p class="last"><tt class="docutils literal"><span class="pre">/blog</span></tt> 以下にルーティングコレクションをマウントする場合、 <tt class="docutils literal"><span class="pre">/blog</span></tt> というURLでルーティングを定義することは不可能です。一番短い可能なURLは
-<tt class="docutils literal"><span class="pre">/blog/</span></tt> です。</p>
+<p class="last"><code class="docutils literal"><span class="pre">/blog</span></code> 以下にルーティングコレクションをマウントする場合、 <code class="docutils literal"><span class="pre">/blog</span></code> というURLでルーティングを定義することは不可能です。一番短い可能なURLは
+<code class="docutils literal"><span class="pre">/blog/</span></code> です。</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last"><tt class="docutils literal"><span class="pre">get()</span></tt> や、 <tt class="docutils literal"><span class="pre">match()</span></tt> や、その他のHTTPメソッドをアプリケーションで呼ぶ際、実際には <tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> のデフォルトインスタンス( <tt class="docutils literal"><span class="pre">$app['controllers']</span></tt> に保存されています。)を呼び出しています。</p>
+<p class="last"><code class="docutils literal"><span class="pre">get()</span></code> や、 <code class="docutils literal"><span class="pre">match()</span></code> や、その他のHTTPメソッドをアプリケーションで呼ぶ際、実際には <code class="docutils literal"><span class="pre">ControllerCollection</span></code> のデフォルトインスタンス( <code class="docutils literal"><span class="pre">$app['controllers']</span></code> に保存されています。)を呼び出しています。</p>
 </div>
 <p>コントローラー分割の、他のメリットとしては、複数のコントローラーに対しての設定を、簡単に適用できるようになることが挙げられます。以下はミドルウェアの章から持ってきた、バックエンドコレクションに対して、コントローラーが扱う全ルートにセキュリティ設定を施す方法の例です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$backend</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;controllers_factory&#39;</span><span class="p">];</span>
@@ -122,6 +122,8 @@
 </div>
 <p class="last">ファイルをrequireする代わりに、 <a class="reference internal" href="providers.html#controller-providers"><em>コントローラプロバイダ</em></a> を作成することもできます。</p>
 </div>
+<p>commit: 5a4b0158a5f6376f0c3c6750c56fc25b868613c8
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/organizing_controllers.rst">https://github.com/silexphp/Silex/blob/master/doc/organizing_controllers.rst</a></p>
 </div>
 
 

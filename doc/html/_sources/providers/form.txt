@@ -144,30 +144,37 @@ bridge`` が必要です。)
         ))
         ->getForm();
 
+``form.types`` を拡張することでフォームタイプを登録することができます。 ::
+
+    $app->extend('form.types', function ($types) use ($app) {
+        $types[] = new YourFormType();
+
+        return $types;
+    });
+
 ``form.extensions`` を拡張することでフォームエクステンションを登録することができます。 ::
 
-    $app['form.extensions'] = $app->share($app->extend('form.extensions', function ($extensions) use ($app) {
+    $app->extend('form.extensions', function ($extensions) use ($app) {
         $extensions[] = new YourTopFormExtension();
 
         return $extensions;
-    }));
-
+    });
 
 ``form.type.extensions`` を拡張することでフォームタイプエクステンションを登録することができます。 ::
 
-    $app['form.type.extensions'] = $app->share($app->extend('form.type.extensions', function ($extensions) use ($app) {
+    $app->extend('form.type.extensions', function ($extensions) use ($app) {
         $extensions[] = new YourFormTypeExtension();
 
         return $extensions;
-    }));
+    });
 
 ``form.type.guessers`` を拡張することでフォームタイプ推測器を登録することができます。 ::
 
-    $app['form.type.guessers'] = $app->share($app->extend('form.type.guessers', function ($guessers) use ($app) {
+    $app->extend('form.type.guessers', function ($guessers) use ($app) {
         $guessers[] = new YourFormTypeGuesser();
 
         return $guessers;
-    }));
+    });
 
 トレイト
 --------
@@ -182,3 +189,7 @@ bridge`` が必要です。)
 
 より詳しい情報については、 `Symfony2 Forms ドキュメント
 <http://symfony.com/doc/2.3/book/forms.html>`_ を参照してください.
+
+
+commit: d74cb1f9b415356c598de181612eb251246c9408
+original: https://github.com/silexphp/Silex/blob/master/doc/providers/form.rst

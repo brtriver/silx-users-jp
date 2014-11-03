@@ -70,12 +70,13 @@ Silex には次のような目的があります。</p>
 <li><em>簡潔</em>: Silex は直感的であり、使っていて楽しくなる簡潔なAPIが用意されています。</li>
 <li><em>高い拡張性</em>: Silex は Pimple というマイクロサービスコンテナーを利用した拡張機能を備えています。
 Pimple によって簡単にサードパーティーのライブラリを利用できます。</li>
-<li><em>テスト</em>: Silex は Symfony2　の リクエストとレスポンスを抽象化しているHttpKernelコンポーネントを利用しています。
+<li><em>テスト容易性</em>: Silex は Symfony2 の リクエストとレスポンスを抽象化しているHttpKernelコンポーネントを利用しています。
 このおかげで、アプリケーションやフレームワーク自身をテストすることが、とても簡単になっています。
 また、HTTPの仕様書を順守し適切な利用を促進します。</li>
 </ul>
 <p>一言で言えば、コントローラーを定義しそれらをルーティングにマップする作業のすべてを、たった1ステップで行うことができるのです。</p>
-<p><strong>使ってみましょう!</strong></p>
+<div class="section" id="id1">
+<h2>利用方法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-php"><div class="highlight"><pre><span class="c1">// web/index.php</span>
 
 <span class="k">require_once</span> <span class="nx">__DIR__</span><span class="o">.</span><span class="s1">&#39;/../vendor/autoload.php&#39;</span><span class="p">;</span>
@@ -89,12 +90,15 @@ Pimple によって簡単にサードパーティーのライブラリを利用�
 <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>フレームワークを利用するために必要なことは <tt class="docutils literal"><span class="pre">autoload.php</span></tt> をインクルードするだけです。</p>
-<p>次に、 <tt class="docutils literal"><span class="pre">GET</span></tt> リクエストに対し、 <tt class="docutils literal"><span class="pre">/hello/{name}</span></tt> へマッチするようなルーティングを定義します。
+<p>フレームワークを利用するために必要なことは <code class="docutils literal"><span class="pre">autoload.php</span></code> をインクルードするだけです。</p>
+<p>次に、 <code class="docutils literal"><span class="pre">GET</span></code> リクエストに対し、 <code class="docutils literal"><span class="pre">/hello/{name}</span></code> へマッチするようなルーティングを定義します。
 リクエストがルーティングにマッチした場合は、所定の関数が実行され、returnされた値がクライアントに対して送信されます。</p>
-<p>最後に、アプリケーションを実行(run)します。　結果を見るために <tt class="docutils literal"><span class="pre">hello/world</span></tt> へアクセスしてみましょう。
+<p>最後に、アプリケーションを実行(run)します。　結果を見るために <code class="docutils literal"><span class="pre">hello/world</span></code> へアクセスしてみましょう。
 本当に簡単でしょ!!</p>
 <p>Silex のインストールは Silex をダウンロードしてくるのと同じぐらい簡単です。 Silex のアーカイブファイルをダウンロードし、展開すれば完了です!</p>
+<p>commit: c119f90e6e1a7a46ba6c15d440dd80f55d4ee4ca
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/intro.rst">https://github.com/silexphp/Silex/blob/master/doc/intro.rst</a></p>
+</div>
 </div>
 
 
@@ -119,6 +123,14 @@ Pimple によって簡単にサードパーティーのライブラリを利用�
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3>このページのコンテンツ</h3>
+  <ul>
+<li><a class="reference internal" href="#">イントロダクション (Introduction)</a><ul>
+<li><a class="reference internal" href="#id1">利用方法</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>前のドキュメント</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Silex ドキュメント (日本語)</a></p>

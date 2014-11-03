@@ -72,14 +72,14 @@
 Symfony2 の <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpKernel/HttpKernelInterface.html">HttpKernelInterface</a>,
 を実装しています。
 そのため、 <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Request.html">Request</a>
-を <tt class="docutils literal"><span class="pre">handle</span></tt> メソッドに渡すことで <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Response.html">Response</a>
+を <code class="docutils literal"><span class="pre">handle</span></code> メソッドに渡すことで <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpFoundation/Response.html">Response</a>
 が返されます.</p>
-<p>これは <tt class="docutils literal"><span class="pre">Pimple</span></tt> サービスコンテナを拡張して実現されています。
+<p>これは <code class="docutils literal"><span class="pre">Pimple</span></code> サービスコンテナを拡張して実現されています。
 そのため、内部から扱うのと同じぐらい外部からでも柔軟性をもって利用することができます。
 つまりどのサービスも置き換えることができ、それらを読み込むことができます。</p>
 <p>アプリケーションは Symfony2 <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/HttpKernel/HttpKernel.html">HttpKernel</a> イベントをフックするために <a class="reference external" href="http://api.symfony.com/master/Symfony/Component/EventDispatcher/EventDispatcher.html">EventDispatcher</a>
 を使っています。
-イベントディスパッチャーのおかげで <tt class="docutils literal"><span class="pre">Request</span></tt> を取得し文字列のレスポンスを <tt class="docutils literal"><span class="pre">Response</span></tt> オブジェクトに変換したり例外をハンドリングしたりすることができます。
+イベントディスパッチャーのおかげで <code class="docutils literal"><span class="pre">Request</span></code> を取得し文字列のレスポンスを <code class="docutils literal"><span class="pre">Response</span></code> オブジェクトに変換したり例外をハンドリングしたりすることができます。
 この他にも before/after ミドルウェアやエラーなどの独自のイベントを通知するためにイベントディスパッチャーを使っています。</p>
 </div>
 <div class="section" id="controller">
@@ -88,40 +88,42 @@ Symfony2 の <a class="reference external" href="http://api.symfony.com/master/S
 は本当に強力な機能です。</p>
 <p>ルーティングに名前が付けることができ、そのルーティング名でURLを生成することができます。
 URL の可変部分を必須項目にすることもできます。
-すばらしいインターフェースを通してこれらの設定を行えるようにするために、(<tt class="docutils literal"><span class="pre">get</span></tt>, <tt class="docutils literal"><span class="pre">post</span></tt> メソッドなどから呼び出される) <tt class="docutils literal"><span class="pre">match</span></tt> メソッド  は <tt class="docutils literal"><span class="pre">Controller</span></tt> のインスタンスを返してくれます。
-そして、この <tt class="docutils literal"><span class="pre">Controller</span></tt> がルーティングを包み込んでいます。</p>
+すばらしいインターフェースを通してこれらの設定を行えるようにするために、(<code class="docutils literal"><span class="pre">get</span></code>, <code class="docutils literal"><span class="pre">post</span></code> メソッドなどから呼び出される) <code class="docutils literal"><span class="pre">match</span></code> メソッド  は <code class="docutils literal"><span class="pre">Controller</span></code> のインスタンスを返してくれます。
+そして、この <code class="docutils literal"><span class="pre">Controller</span></code> がルーティングを包み込んでいます。</p>
 </div>
 <div class="section" id="controllercollection">
 <h3>コントローラーコレクション (ControllerCollection)<a class="headerlink" href="#controllercollection" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://api.symfony.com/master/Symfony/Component/Routing/RouteCollection.html">ルーティングコレクション (RouteCollection)</a>
 を見えるようにした目的の1つは変更できるようにするためでした。その結果、プロバイダーで要素をルーティングコレクションに追加できるようになりました。
 この試みはルーティングが自分たちの名前を全くしらないということが本当のところです。
-名前は <tt class="docutils literal"><span class="pre">RouteCollection</span></tt> の前後関係においてのみ意味を持っていて、その名前は変えることができません。</p>
+名前は <code class="docutils literal"><span class="pre">RouteCollection</span></code> の前後関係においてのみ意味を持っていて、その名前は変えることができません。</p>
 <p>この試みを解決するために、私たちはルーティングのための中間の準備領域を用意することを思いつきました。
-<tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> は <tt class="docutils literal"><span class="pre">flush</span></tt> が呼ばれるまでコントローラーを保持しています。
-そして <tt class="docutils literal"><span class="pre">flush</span></tt> が呼ばれた時点でルーティングを <tt class="docutils literal"><span class="pre">ルーティングコレクション</span> <span class="pre">(RouteCollection)</span></tt> に追加します。
+<code class="docutils literal"><span class="pre">ControllerCollection</span></code> は <code class="docutils literal"><span class="pre">flush</span></code> が呼ばれるまでコントローラーを保持しています。
+そして <code class="docutils literal"><span class="pre">flush</span></code> が呼ばれた時点でルーティングを <code class="docutils literal"><span class="pre">ルーティングコレクション</span> <span class="pre">(RouteCollection)</span></code> に追加します。
 そしてコントローラーは凍結(freeze)されます。
 これが意味することは凍結されるとルーティング名を変更することはできず、もし変更しようとすると例外を投げるということです。</p>
 <p>あいにく flush 以外の良い方法が思いつきませんでした。なぜなら flush を呼ぶということに曖昧さがないからです。
-アプリケーションは flush を自動で呼び出しますが、リクエストが処理される前に <tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> を読みたいのなら、あなた自身で flush を呼ぶ必要があります。</p>
-<p><tt class="docutils literal"><span class="pre">Application</span></tt> には <tt class="docutils literal"><span class="pre">ControllerCollection</span></tt> を flush するための <tt class="docutils literal"><span class="pre">flush</span></tt> というショートカットメソッドが用意されています。</p>
+アプリケーションは flush を自動で呼び出しますが、リクエストが処理される前に <code class="docutils literal"><span class="pre">ControllerCollection</span></code> を読みたいのなら、あなた自身で flush を呼ぶ必要があります。</p>
+<p><code class="docutils literal"><span class="pre">Application</span></code> には <code class="docutils literal"><span class="pre">ControllerCollection</span></code> を flush するための <code class="docutils literal"><span class="pre">flush</span></code> というショートカットメソッドが用意されています。</p>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p class="last"><tt class="docutils literal"><span class="pre">RouteCollection</span></tt> のインスタンスを自分で生成する代わりに、
-<tt class="docutils literal"><span class="pre">$app['controllers_factory']</span></tt> ファクトリーを使いましょう。</p>
+<p class="last"><code class="docutils literal"><span class="pre">RouteCollection</span></code> のインスタンスを自分で生成する代わりに、
+<code class="docutils literal"><span class="pre">$app['controllers_factory']</span></code> ファクトリーを使いましょう。</p>
 </div>
 </div>
 </div>
 <div class="section" id="symfony2">
 <h2>Symfony2<a class="headerlink" href="#symfony2" title="Permalink to this headline">¶</a></h2>
-<p>以下の Symfony2 コンポーネントが Silex　で利用されています:</p>
+<p>以下の Symfony2 コンポーネントが Silex で利用されています:</p>
 <ul class="simple">
-<li><strong>HttpFoundation</strong>: <tt class="docutils literal"><span class="pre">Request</span></tt> と <tt class="docutils literal"><span class="pre">Response</span></tt> のため.</li>
+<li><strong>HttpFoundation</strong>: <code class="docutils literal"><span class="pre">Request</span></code> と <code class="docutils literal"><span class="pre">Response</span></code> のため.</li>
 <li><strong>HttpKernel</strong>: なぜなら中枢部分が必要だから</li>
 <li><strong>Routing</strong>: 定義したルーティングと一致するかどうかを確認するため</li>
 <li><strong>EventDispatcher</strong>: HttpKernelにフックするため</li>
 </ul>
 <p>より多くの情報を知りたい場合は、 <a class="reference external" href="http://symfony.com/">Symfony のサイトをチェックしてみてください</a>.</p>
+<p>commit: a38db51ad653544e738a16d840fc6dca77d1b0db
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/internals.rst">https://github.com/silexphp/Silex/blob/master/doc/internals.rst</a></p>
 </div>
 </div>
 

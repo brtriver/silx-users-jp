@@ -69,7 +69,7 @@
 悪意のあるユーザがあなたの正当なユーザになることを試み、送信するつもりでないデータを送信させようとする攻撃手法です。</p>
 <p>CSRFプロテクションやCSRFトークンについての詳細は <a class="reference external" href="http://symfony.com/doc/current/book/forms.html#csrf-protection">Symfony2 Book</a> にあります。</p>
 <p>いくつかのケースで（htmlメールにフォームを埋め込みたい場合など）、これを無効化したい場合があります。
-一番簡単な方法は <tt class="docutils literal"><span class="pre">createBuilder()</span></tt> メソッドを使ってフォームビルダーに詳細なオプションを設定する方法です。</p>
+一番簡単な方法は <code class="docutils literal"><span class="pre">createBuilder()</span></code> メソッドを使ってフォームビルダーに詳細なオプションを設定する方法です。</p>
 <div class="section" id="id1">
 <h2>例<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-php"><div class="highlight"><pre><span class="nv">$form</span> <span class="o">=</span> <span class="nv">$app</span><span class="p">[</span><span class="s1">&#39;form.factory&#39;</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">createBuilder</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;csrf_protection&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
@@ -79,10 +79,12 @@
 </div>
 <div class="section" id="id2">
 <h2>さらに<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>この詳細な例は、<tt class="docutils literal"><span class="pre">createBuilder()</span></tt> メソッドの <tt class="docutils literal"><span class="pre">$options</span></tt> パラメータ
-によって <tt class="docutils literal"><span class="pre">csrf_protection</span></tt> を変更するための方法を示唆しています。</p>
-<p>これはSymfony2の <tt class="docutils literal"><span class="pre">getDefaultOptions()</span></tt> メソッドを、あなたのformクラスで使うのと同じくらいシンプルです。
+<p>この詳細な例は、<code class="docutils literal"><span class="pre">createBuilder()</span></code> メソッドの <code class="docutils literal"><span class="pre">$options</span></code> パラメータ
+によって <code class="docutils literal"><span class="pre">csrf_protection</span></code> を変更するための方法を示唆しています。</p>
+<p>これはSymfony2の <code class="docutils literal"><span class="pre">getDefaultOptions()</span></code> メソッドを、あなたのformクラスで使うのと同じくらいシンプルです。
 <a class="reference external" href="http://symfony.com/doc/current/book/forms.html#book-form-creating-form-classes">詳細はこちらを参照してください</a> 。</p>
+<p>commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/form_no_csrf.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/form_no_csrf.rst</a></p>
 </div>
 </div>
 

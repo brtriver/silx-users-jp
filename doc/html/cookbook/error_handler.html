@@ -73,30 +73,32 @@ errorやnoticeを例外に変換することで、それらを捕捉すること
 </div>
 <div class="section" id="id2">
 <h2>エラーハンドラーの登録<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>幸運にも、 <tt class="docutils literal"><span class="pre">Symfony/Debug</span></tt> パッケージが <tt class="docutils literal"><span class="pre">ErrorHandler</span></tt> クラスを持っています。
+<p>幸運にも、 <code class="docutils literal"><span class="pre">Symfony/Debug</span></code> パッケージが <code class="docutils literal"><span class="pre">ErrorHandler</span></code> クラスを持っています。
 このクラスは、全てのエラーを例外に変換することで、問題を解決してくれます。例外はSilexが捕捉してくれます。</p>
-<p><tt class="docutils literal"><span class="pre">register</span></tt> というスタティックメソッドを呼ぶことで、これを登録可能です。</p>
+<p><code class="docutils literal"><span class="pre">register</span></code> というスタティックメソッドを呼ぶことで、これを登録可能です。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Debug\ErrorHandler</span><span class="p">;</span>
 
 <span class="nx">ErrorHandler</span><span class="o">::</span><span class="na">register</span><span class="p">();</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">web/index.php</span></tt> のようなフロントコントローラで、この処理を行うことが推奨されます。</p>
+<p><code class="docutils literal"><span class="pre">web/index.php</span></code> のようなフロントコントローラで、この処理を行うことが推奨されます。</p>
 </div>
 <div class="section" id="id3">
 <h2>致命的なエラーのハンドリング<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>致命的なエラーをハンドルするために、さらにグローバルな <tt class="docutils literal"><span class="pre">ExceptionHandler</span></tt> を追加登録することができます。</p>
+<p>致命的なエラーをハンドルするために、さらにグローバルな <code class="docutils literal"><span class="pre">ExceptionHandler</span></code> を追加登録することができます。</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Debug\ExceptionHandler</span><span class="p">;</span>
 
 <span class="nx">ExceptionHandler</span><span class="o">::</span><span class="na">register</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>プロダクション環境では、デバッグ出力をオフにしたいと思います。この設定は <tt class="docutils literal"><span class="pre">$debug</span></tt> 引数に <tt class="docutils literal"><span class="pre">false</span></tt> を渡すことで可能です。:</p>
+<p>プロダクション環境では、デバッグ出力をオフにしたいと思います。この設定は <code class="docutils literal"><span class="pre">$debug</span></code> 引数に <code class="docutils literal"><span class="pre">false</span></code> を渡すことで可能です。:</p>
 <div class="highlight-php"><div class="highlight"><pre><span class="k">use</span> <span class="nx">Symfony\Component\Debug\ExceptionHandler</span><span class="p">;</span>
 
 <span class="nx">ExceptionHandler</span><span class="o">::</span><span class="na">register</span><span class="p">(</span><span class="k">false</span><span class="p">);</span>
 </pre></div>
 </div>
+<p>commit: 34fe312a89e1cbc1d696bba419b2466305b55316
+original: <a class="reference external" href="https://github.com/silexphp/Silex/blob/master/doc/cookbook/error_handler.rst">https://github.com/silexphp/Silex/blob/master/doc/cookbook/error_handler.rst</a></p>
 </div>
 </div>
 
