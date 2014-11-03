@@ -5,6 +5,10 @@
 {% block content %}
 <h1>　Silex ユーザーガイド</h1>
 <p>　PHPマイクロフレームワークである Silex のまとめサイト</p>
+<p style="font-size: 10px; color: red;">【注意】$app->share()を使うのが 1.1で 使わないのが 2.0です。日本語のドキュメントは master を追随しているため share の記述がない2.0のバージョンのドキュメントになります。正しいサンプルコードは各バージョンの英語のドキュメントを参照してください
+  <br>
+  この違いはPimpleのバージョンの違いによるものです。詳しくは <a href="http://iakio.hatenablog.com/entry/2014/02/13/233610">iakioさんの Pimple 2.0がリリースされたのでPimpleについて復習してみる</a> がとてもわかり易いです。
+</p>
 <table cellpadding="0" cellspacing="10" border="0" width="100%">
 <tr>
 <td valign="top" width="25%">
@@ -12,9 +16,11 @@
 <h3>基本情報</h3>
 <ul>
 	<li><a href="http://silex.sensiolabs.org/">Silex 公式サイト</a></li>
-	<li><a href="http://silex.sensiolabs.org/documentation">Silex ドキュメント 1.2 (英語)</a></li>
-	<li><a href="{{jpdoc}}">Silex ドキュメント 1.2 (日本語)</a></li>
 	<li><a href="https://github.com/silexphp/Silex/tree/1.1/doc">Silex ドキュメント 1.1 (英語)</a></li>
+	<li><a href="http://silex.sensiolabs.org/documentation">Silex ドキュメント 1.2 (英語)</a></li>
+	<li>
+	  <a href="{{jpdoc}}">Silex ドキュメント 2.0 (日本語)</a>
+	</li>
 </ul>
 
 <h3>Silexのバージョンの注意</h3>
